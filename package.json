@@ -1,0 +1,30 @@
+{
+  "name": "volume-change-scanner-ts",
+  "version": "0.1.0",
+  "private": true,
+  "standard": "ignore",
+  "author": "Vadim Kulikov <dennis.nedry.from.jurassic.park@gmail.com>",
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "ts-node ./src/connect.ts"
+  },
+  "dependencies": {
+    "@grpc/proto-loader": "^0.6.9",
+    "@protobuf-ts/grpc-transport": "^2.2.2",
+    "@protobuf-ts/plugin": "^2.2.2",
+    "dotenv": "^10.0.0",
+    "google-auth-library": "^6.1.6",
+    "google-protobuf": "^3.19.4",
+    "google-spreadsheet": "^3.1.15",
+    "googleapis": "^82.0.0",
+    "moment": "^2.29.1",
+    "ts-node": "^10.2.1",
+    "ts-proto": "^1.104.0"
+  },
+  "devDependencies": {
+    "@types/node": "16.4.0",
+    "eslint": "7.31.0",
+    "eslint-config-next": "11.0.1",
+    "typescript": "^4.3.5"
+  }
+}
