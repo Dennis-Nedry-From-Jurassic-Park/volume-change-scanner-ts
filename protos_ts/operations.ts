@@ -247,7 +247,7 @@ export interface PortfolioPosition {
     /**
      * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.MoneyValue average_position_price = 4;
      */
-    averagePositionPrice?: MoneyValue; // Средняя цена лота в позиции
+    averagePositionPrice?: MoneyValue; // Средневзвешенная цена позиции
     /**
      * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation expected_yield = 5;
      */
@@ -264,6 +264,14 @@ export interface PortfolioPosition {
      * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.MoneyValue current_price = 8;
      */
     currentPrice?: MoneyValue; // Текущая цена инструмента
+    /**
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.MoneyValue average_position_price_fifo = 9;
+     */
+    averagePositionPriceFifo?: MoneyValue; // Средняя цена лота в позиции по методу FIFO
+    /**
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation quantity_lots = 10;
+     */
+    quantityLots?: Quotation; // Количество лотов в портфеле
 }
 /**
  * Баланс позиции ценной бумаги.
@@ -302,6 +310,225 @@ export interface PositionsFutures {
      * @generated from protobuf field: int64 balance = 3;
      */
     balance: bigint; // Текущий баланс
+}
+/**
+ * @generated from protobuf message tinkoff.public.invest.api.contract.v1.BrokerReportRequest
+ */
+export interface BrokerReportRequest {
+    /**
+     * @generated from protobuf oneof: payload
+     */
+    payload: {
+        oneofKind: "generateBrokerReportRequest";
+        /**
+         * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.GenerateBrokerReportRequest generate_broker_report_request = 1;
+         */
+        generateBrokerReportRequest: GenerateBrokerReportRequest;
+    } | {
+        oneofKind: "getBrokerReportRequest";
+        /**
+         * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.GetBrokerReportRequest get_broker_report_request = 2;
+         */
+        getBrokerReportRequest: GetBrokerReportRequest;
+    } | {
+        oneofKind: undefined;
+    };
+}
+/**
+ * @generated from protobuf message tinkoff.public.invest.api.contract.v1.BrokerReportResponse
+ */
+export interface BrokerReportResponse {
+    /**
+     * @generated from protobuf oneof: payload
+     */
+    payload: {
+        oneofKind: "generateBrokerReportResponse";
+        /**
+         * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.GenerateBrokerReportResponse generate_broker_report_response = 1;
+         */
+        generateBrokerReportResponse: GenerateBrokerReportResponse;
+    } | {
+        oneofKind: "getBrokerReportResponse";
+        /**
+         * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.GetBrokerReportResponse get_broker_report_response = 2;
+         */
+        getBrokerReportResponse: GetBrokerReportResponse;
+    } | {
+        oneofKind: undefined;
+    };
+}
+/**
+ * @generated from protobuf message tinkoff.public.invest.api.contract.v1.GenerateBrokerReportRequest
+ */
+export interface GenerateBrokerReportRequest {
+    /**
+     * @generated from protobuf field: string account_id = 1;
+     */
+    accountId: string; // Идентификатор счёта клиента
+    /**
+     * @generated from protobuf field: google.protobuf.Timestamp from = 2;
+     */
+    from?: Timestamp; // Начало периода в часовом поясе UTC.
+    /**
+     * @generated from protobuf field: google.protobuf.Timestamp to = 3;
+     */
+    to?: Timestamp; // Окончание периода в часовом поясе UTC.
+}
+/**
+ * @generated from protobuf message tinkoff.public.invest.api.contract.v1.GenerateBrokerReportResponse
+ */
+export interface GenerateBrokerReportResponse {
+    /**
+     * @generated from protobuf field: string task_id = 1;
+     */
+    taskId: string; // Идентификатор задачи формирования брокерского отчёта
+}
+/**
+ * @generated from protobuf message tinkoff.public.invest.api.contract.v1.GetBrokerReportRequest
+ */
+export interface GetBrokerReportRequest {
+    /**
+     * @generated from protobuf field: string task_id = 1;
+     */
+    taskId: string; // Идентификатор задачи формирования брокерского отчёта
+    /**
+     * @generated from protobuf field: int32 page = 2;
+     */
+    page: number; // Номер страницы отчета (начинается с 1), значение по умолчанию: 0
+}
+/**
+ * @generated from protobuf message tinkoff.public.invest.api.contract.v1.GetBrokerReportResponse
+ */
+export interface GetBrokerReportResponse {
+    /**
+     * @generated from protobuf field: repeated tinkoff.public.invest.api.contract.v1.BrokerReport broker_report = 1;
+     */
+    brokerReport: BrokerReport[];
+    /**
+     * @generated from protobuf field: int32 itemsCount = 2;
+     */
+    itemsCount: number; // Количество записей в отчете
+    /**
+     * @generated from protobuf field: int32 pagesCount = 3;
+     */
+    pagesCount: number; // Количество страниц с данными отчета (начинается с 0)
+    /**
+     * @generated from protobuf field: int32 page = 4;
+     */
+    page: number; // Текущая страница (начинается с 0)
+}
+/**
+ * @generated from protobuf message tinkoff.public.invest.api.contract.v1.BrokerReport
+ */
+export interface BrokerReport {
+    /**
+     * @generated from protobuf field: string trade_id = 1;
+     */
+    tradeId: string; // Номер сделки
+    /**
+     * @generated from protobuf field: string order_id = 2;
+     */
+    orderId: string; // Номер поручения
+    /**
+     * @generated from protobuf field: string figi = 3;
+     */
+    figi: string; // Figi-идентификатор инструмента
+    /**
+     * @generated from protobuf field: string execute_sign = 4;
+     */
+    executeSign: string; // Признак исполнения
+    /**
+     * @generated from protobuf field: google.protobuf.Timestamp trade_datetime = 5;
+     */
+    tradeDatetime?: Timestamp; // Дата и время заключения в часовом поясе UTC.
+    /**
+     * @generated from protobuf field: string exchange = 6;
+     */
+    exchange: string; // Торговая площадка
+    /**
+     * @generated from protobuf field: string class_code = 7;
+     */
+    classCode: string; // Режим торгов
+    /**
+     * @generated from protobuf field: string direction = 8;
+     */
+    direction: string; // Вид сделки
+    /**
+     * @generated from protobuf field: string name = 9;
+     */
+    name: string; // Сокращённое наименование актива
+    /**
+     * @generated from protobuf field: string ticker = 10;
+     */
+    ticker: string; // Код актива
+    /**
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.MoneyValue price = 11;
+     */
+    price?: MoneyValue; // Цена за единицу
+    /**
+     * @generated from protobuf field: int64 quantity = 12;
+     */
+    quantity: bigint; // Количество
+    /**
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.MoneyValue order_amount = 13;
+     */
+    orderAmount?: MoneyValue; // Сумма (без НКД)
+    /**
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation aci_value = 14;
+     */
+    aciValue?: Quotation; // НКД
+    /**
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.MoneyValue total_order_amount = 15;
+     */
+    totalOrderAmount?: MoneyValue; // Сумма сделки
+    /**
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.MoneyValue broker_commission = 16;
+     */
+    brokerCommission?: MoneyValue; // Комиссия брокера
+    /**
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.MoneyValue exchange_commission = 17;
+     */
+    exchangeCommission?: MoneyValue; // Комиссия биржи
+    /**
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.MoneyValue exchange_clearing_commission = 18;
+     */
+    exchangeClearingCommission?: MoneyValue; // Комиссия клир. центра
+    /**
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation repo_rate = 19;
+     */
+    repoRate?: Quotation; // Ставка РЕПО (%)
+    /**
+     * @generated from protobuf field: string party = 20;
+     */
+    party: string; // Контрагент/Брокер
+    /**
+     * @generated from protobuf field: google.protobuf.Timestamp clear_value_date = 21;
+     */
+    clearValueDate?: Timestamp; // Дата расчётов в часовом поясе UTC.
+    /**
+     * @generated from protobuf field: google.protobuf.Timestamp sec_value_date = 22;
+     */
+    secValueDate?: Timestamp; // Дата поставки в часовом поясе UTC.
+    /**
+     * @generated from protobuf field: string broker_status = 23;
+     */
+    brokerStatus: string; // Статус брокера
+    /**
+     * @generated from protobuf field: string separate_agreement_type = 24;
+     */
+    separateAgreementType: string; // Тип дог.
+    /**
+     * @generated from protobuf field: string separate_agreement_number = 25;
+     */
+    separateAgreementNumber: string; // Номер дог.
+    /**
+     * @generated from protobuf field: string separate_agreement_date = 26;
+     */
+    separateAgreementDate: string; // Дата дог.
+    /**
+     * @generated from protobuf field: string delivery_type = 27;
+     */
+    deliveryType: string; // Тип расчёта по сделке
 }
 /**
  * Статус запрашиваемых операций
@@ -1229,7 +1456,9 @@ class PortfolioPosition$Type extends MessageType<PortfolioPosition> {
             { no: 5, name: "expected_yield", kind: "message", T: () => Quotation },
             { no: 6, name: "current_nkd", kind: "message", T: () => MoneyValue },
             { no: 7, name: "average_position_price_pt", kind: "message", T: () => Quotation },
-            { no: 8, name: "current_price", kind: "message", T: () => MoneyValue }
+            { no: 8, name: "current_price", kind: "message", T: () => MoneyValue },
+            { no: 9, name: "average_position_price_fifo", kind: "message", T: () => MoneyValue },
+            { no: 10, name: "quantity_lots", kind: "message", T: () => Quotation }
         ]);
     }
     create(value?: PartialMessage<PortfolioPosition>): PortfolioPosition {
@@ -1268,6 +1497,12 @@ class PortfolioPosition$Type extends MessageType<PortfolioPosition> {
                 case /* tinkoff.public.invest.api.contract.v1.MoneyValue current_price */ 8:
                     message.currentPrice = MoneyValue.internalBinaryRead(reader, reader.uint32(), options, message.currentPrice);
                     break;
+                case /* tinkoff.public.invest.api.contract.v1.MoneyValue average_position_price_fifo */ 9:
+                    message.averagePositionPriceFifo = MoneyValue.internalBinaryRead(reader, reader.uint32(), options, message.averagePositionPriceFifo);
+                    break;
+                case /* tinkoff.public.invest.api.contract.v1.Quotation quantity_lots */ 10:
+                    message.quantityLots = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.quantityLots);
+                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -1304,6 +1539,12 @@ class PortfolioPosition$Type extends MessageType<PortfolioPosition> {
         /* tinkoff.public.invest.api.contract.v1.MoneyValue current_price = 8; */
         if (message.currentPrice)
             MoneyValue.internalBinaryWrite(message.currentPrice, writer.tag(8, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.MoneyValue average_position_price_fifo = 9; */
+        if (message.averagePositionPriceFifo)
+            MoneyValue.internalBinaryWrite(message.averagePositionPriceFifo, writer.tag(9, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation quantity_lots = 10; */
+        if (message.quantityLots)
+            Quotation.internalBinaryWrite(message.quantityLots, writer.tag(10, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -1436,6 +1677,585 @@ class PositionsFutures$Type extends MessageType<PositionsFutures> {
  * @generated MessageType for protobuf message tinkoff.public.invest.api.contract.v1.PositionsFutures
  */
 export const PositionsFutures = new PositionsFutures$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class BrokerReportRequest$Type extends MessageType<BrokerReportRequest> {
+    constructor() {
+        super("tinkoff.public.invest.api.contract.v1.BrokerReportRequest", [
+            { no: 1, name: "generate_broker_report_request", kind: "message", oneof: "payload", T: () => GenerateBrokerReportRequest },
+            { no: 2, name: "get_broker_report_request", kind: "message", oneof: "payload", T: () => GetBrokerReportRequest }
+        ]);
+    }
+    create(value?: PartialMessage<BrokerReportRequest>): BrokerReportRequest {
+        const message = { payload: { oneofKind: undefined } };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<BrokerReportRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: BrokerReportRequest): BrokerReportRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* tinkoff.public.invest.api.contract.v1.GenerateBrokerReportRequest generate_broker_report_request */ 1:
+                    message.payload = {
+                        oneofKind: "generateBrokerReportRequest",
+                        generateBrokerReportRequest: GenerateBrokerReportRequest.internalBinaryRead(reader, reader.uint32(), options, (message.payload as any).generateBrokerReportRequest)
+                    };
+                    break;
+                case /* tinkoff.public.invest.api.contract.v1.GetBrokerReportRequest get_broker_report_request */ 2:
+                    message.payload = {
+                        oneofKind: "getBrokerReportRequest",
+                        getBrokerReportRequest: GetBrokerReportRequest.internalBinaryRead(reader, reader.uint32(), options, (message.payload as any).getBrokerReportRequest)
+                    };
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: BrokerReportRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* tinkoff.public.invest.api.contract.v1.GenerateBrokerReportRequest generate_broker_report_request = 1; */
+        if (message.payload.oneofKind === "generateBrokerReportRequest")
+            GenerateBrokerReportRequest.internalBinaryWrite(message.payload.generateBrokerReportRequest, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.GetBrokerReportRequest get_broker_report_request = 2; */
+        if (message.payload.oneofKind === "getBrokerReportRequest")
+            GetBrokerReportRequest.internalBinaryWrite(message.payload.getBrokerReportRequest, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message tinkoff.public.invest.api.contract.v1.BrokerReportRequest
+ */
+export const BrokerReportRequest = new BrokerReportRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class BrokerReportResponse$Type extends MessageType<BrokerReportResponse> {
+    constructor() {
+        super("tinkoff.public.invest.api.contract.v1.BrokerReportResponse", [
+            { no: 1, name: "generate_broker_report_response", kind: "message", oneof: "payload", T: () => GenerateBrokerReportResponse },
+            { no: 2, name: "get_broker_report_response", kind: "message", oneof: "payload", T: () => GetBrokerReportResponse }
+        ]);
+    }
+    create(value?: PartialMessage<BrokerReportResponse>): BrokerReportResponse {
+        const message = { payload: { oneofKind: undefined } };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<BrokerReportResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: BrokerReportResponse): BrokerReportResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* tinkoff.public.invest.api.contract.v1.GenerateBrokerReportResponse generate_broker_report_response */ 1:
+                    message.payload = {
+                        oneofKind: "generateBrokerReportResponse",
+                        generateBrokerReportResponse: GenerateBrokerReportResponse.internalBinaryRead(reader, reader.uint32(), options, (message.payload as any).generateBrokerReportResponse)
+                    };
+                    break;
+                case /* tinkoff.public.invest.api.contract.v1.GetBrokerReportResponse get_broker_report_response */ 2:
+                    message.payload = {
+                        oneofKind: "getBrokerReportResponse",
+                        getBrokerReportResponse: GetBrokerReportResponse.internalBinaryRead(reader, reader.uint32(), options, (message.payload as any).getBrokerReportResponse)
+                    };
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: BrokerReportResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* tinkoff.public.invest.api.contract.v1.GenerateBrokerReportResponse generate_broker_report_response = 1; */
+        if (message.payload.oneofKind === "generateBrokerReportResponse")
+            GenerateBrokerReportResponse.internalBinaryWrite(message.payload.generateBrokerReportResponse, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.GetBrokerReportResponse get_broker_report_response = 2; */
+        if (message.payload.oneofKind === "getBrokerReportResponse")
+            GetBrokerReportResponse.internalBinaryWrite(message.payload.getBrokerReportResponse, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message tinkoff.public.invest.api.contract.v1.BrokerReportResponse
+ */
+export const BrokerReportResponse = new BrokerReportResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class GenerateBrokerReportRequest$Type extends MessageType<GenerateBrokerReportRequest> {
+    constructor() {
+        super("tinkoff.public.invest.api.contract.v1.GenerateBrokerReportRequest", [
+            { no: 1, name: "account_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "from", kind: "message", T: () => Timestamp },
+            { no: 3, name: "to", kind: "message", T: () => Timestamp }
+        ]);
+    }
+    create(value?: PartialMessage<GenerateBrokerReportRequest>): GenerateBrokerReportRequest {
+        const message = { accountId: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<GenerateBrokerReportRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GenerateBrokerReportRequest): GenerateBrokerReportRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string account_id */ 1:
+                    message.accountId = reader.string();
+                    break;
+                case /* google.protobuf.Timestamp from */ 2:
+                    message.from = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.from);
+                    break;
+                case /* google.protobuf.Timestamp to */ 3:
+                    message.to = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.to);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: GenerateBrokerReportRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string account_id = 1; */
+        if (message.accountId !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.accountId);
+        /* google.protobuf.Timestamp from = 2; */
+        if (message.from)
+            Timestamp.internalBinaryWrite(message.from, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.Timestamp to = 3; */
+        if (message.to)
+            Timestamp.internalBinaryWrite(message.to, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message tinkoff.public.invest.api.contract.v1.GenerateBrokerReportRequest
+ */
+export const GenerateBrokerReportRequest = new GenerateBrokerReportRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class GenerateBrokerReportResponse$Type extends MessageType<GenerateBrokerReportResponse> {
+    constructor() {
+        super("tinkoff.public.invest.api.contract.v1.GenerateBrokerReportResponse", [
+            { no: 1, name: "task_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+    create(value?: PartialMessage<GenerateBrokerReportResponse>): GenerateBrokerReportResponse {
+        const message = { taskId: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<GenerateBrokerReportResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GenerateBrokerReportResponse): GenerateBrokerReportResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string task_id */ 1:
+                    message.taskId = reader.string();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: GenerateBrokerReportResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string task_id = 1; */
+        if (message.taskId !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.taskId);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message tinkoff.public.invest.api.contract.v1.GenerateBrokerReportResponse
+ */
+export const GenerateBrokerReportResponse = new GenerateBrokerReportResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class GetBrokerReportRequest$Type extends MessageType<GetBrokerReportRequest> {
+    constructor() {
+        super("tinkoff.public.invest.api.contract.v1.GetBrokerReportRequest", [
+            { no: 1, name: "task_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "page", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
+        ]);
+    }
+    create(value?: PartialMessage<GetBrokerReportRequest>): GetBrokerReportRequest {
+        const message = { taskId: "", page: 0 };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<GetBrokerReportRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetBrokerReportRequest): GetBrokerReportRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string task_id */ 1:
+                    message.taskId = reader.string();
+                    break;
+                case /* int32 page */ 2:
+                    message.page = reader.int32();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: GetBrokerReportRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string task_id = 1; */
+        if (message.taskId !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.taskId);
+        /* int32 page = 2; */
+        if (message.page !== 0)
+            writer.tag(2, WireType.Varint).int32(message.page);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message tinkoff.public.invest.api.contract.v1.GetBrokerReportRequest
+ */
+export const GetBrokerReportRequest = new GetBrokerReportRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class GetBrokerReportResponse$Type extends MessageType<GetBrokerReportResponse> {
+    constructor() {
+        super("tinkoff.public.invest.api.contract.v1.GetBrokerReportResponse", [
+            { no: 1, name: "broker_report", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => BrokerReport },
+            { no: 2, name: "itemsCount", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 3, name: "pagesCount", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 4, name: "page", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
+        ]);
+    }
+    create(value?: PartialMessage<GetBrokerReportResponse>): GetBrokerReportResponse {
+        const message = { brokerReport: [], itemsCount: 0, pagesCount: 0, page: 0 };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<GetBrokerReportResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetBrokerReportResponse): GetBrokerReportResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* repeated tinkoff.public.invest.api.contract.v1.BrokerReport broker_report */ 1:
+                    message.brokerReport.push(BrokerReport.internalBinaryRead(reader, reader.uint32(), options));
+                    break;
+                case /* int32 itemsCount */ 2:
+                    message.itemsCount = reader.int32();
+                    break;
+                case /* int32 pagesCount */ 3:
+                    message.pagesCount = reader.int32();
+                    break;
+                case /* int32 page */ 4:
+                    message.page = reader.int32();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: GetBrokerReportResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* repeated tinkoff.public.invest.api.contract.v1.BrokerReport broker_report = 1; */
+        for (let i = 0; i < message.brokerReport.length; i++)
+            BrokerReport.internalBinaryWrite(message.brokerReport[i], writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* int32 itemsCount = 2; */
+        if (message.itemsCount !== 0)
+            writer.tag(2, WireType.Varint).int32(message.itemsCount);
+        /* int32 pagesCount = 3; */
+        if (message.pagesCount !== 0)
+            writer.tag(3, WireType.Varint).int32(message.pagesCount);
+        /* int32 page = 4; */
+        if (message.page !== 0)
+            writer.tag(4, WireType.Varint).int32(message.page);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message tinkoff.public.invest.api.contract.v1.GetBrokerReportResponse
+ */
+export const GetBrokerReportResponse = new GetBrokerReportResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class BrokerReport$Type extends MessageType<BrokerReport> {
+    constructor() {
+        super("tinkoff.public.invest.api.contract.v1.BrokerReport", [
+            { no: 1, name: "trade_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "order_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "figi", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "execute_sign", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 5, name: "trade_datetime", kind: "message", T: () => Timestamp },
+            { no: 6, name: "exchange", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 7, name: "class_code", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 8, name: "direction", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 9, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 10, name: "ticker", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 11, name: "price", kind: "message", T: () => MoneyValue },
+            { no: 12, name: "quantity", kind: "scalar", T: 3 /*ScalarType.INT64*/, L: 0 /*LongType.BIGINT*/ },
+            { no: 13, name: "order_amount", kind: "message", T: () => MoneyValue },
+            { no: 14, name: "aci_value", kind: "message", T: () => Quotation },
+            { no: 15, name: "total_order_amount", kind: "message", T: () => MoneyValue },
+            { no: 16, name: "broker_commission", kind: "message", T: () => MoneyValue },
+            { no: 17, name: "exchange_commission", kind: "message", T: () => MoneyValue },
+            { no: 18, name: "exchange_clearing_commission", kind: "message", T: () => MoneyValue },
+            { no: 19, name: "repo_rate", kind: "message", T: () => Quotation },
+            { no: 20, name: "party", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 21, name: "clear_value_date", kind: "message", T: () => Timestamp },
+            { no: 22, name: "sec_value_date", kind: "message", T: () => Timestamp },
+            { no: 23, name: "broker_status", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 24, name: "separate_agreement_type", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 25, name: "separate_agreement_number", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 26, name: "separate_agreement_date", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 27, name: "delivery_type", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+    create(value?: PartialMessage<BrokerReport>): BrokerReport {
+        const message = { tradeId: "", orderId: "", figi: "", executeSign: "", exchange: "", classCode: "", direction: "", name: "", ticker: "", quantity: 0n, party: "", brokerStatus: "", separateAgreementType: "", separateAgreementNumber: "", separateAgreementDate: "", deliveryType: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<BrokerReport>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: BrokerReport): BrokerReport {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string trade_id */ 1:
+                    message.tradeId = reader.string();
+                    break;
+                case /* string order_id */ 2:
+                    message.orderId = reader.string();
+                    break;
+                case /* string figi */ 3:
+                    message.figi = reader.string();
+                    break;
+                case /* string execute_sign */ 4:
+                    message.executeSign = reader.string();
+                    break;
+                case /* google.protobuf.Timestamp trade_datetime */ 5:
+                    message.tradeDatetime = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.tradeDatetime);
+                    break;
+                case /* string exchange */ 6:
+                    message.exchange = reader.string();
+                    break;
+                case /* string class_code */ 7:
+                    message.classCode = reader.string();
+                    break;
+                case /* string direction */ 8:
+                    message.direction = reader.string();
+                    break;
+                case /* string name */ 9:
+                    message.name = reader.string();
+                    break;
+                case /* string ticker */ 10:
+                    message.ticker = reader.string();
+                    break;
+                case /* tinkoff.public.invest.api.contract.v1.MoneyValue price */ 11:
+                    message.price = MoneyValue.internalBinaryRead(reader, reader.uint32(), options, message.price);
+                    break;
+                case /* int64 quantity */ 12:
+                    message.quantity = reader.int64().toBigInt();
+                    break;
+                case /* tinkoff.public.invest.api.contract.v1.MoneyValue order_amount */ 13:
+                    message.orderAmount = MoneyValue.internalBinaryRead(reader, reader.uint32(), options, message.orderAmount);
+                    break;
+                case /* tinkoff.public.invest.api.contract.v1.Quotation aci_value */ 14:
+                    message.aciValue = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.aciValue);
+                    break;
+                case /* tinkoff.public.invest.api.contract.v1.MoneyValue total_order_amount */ 15:
+                    message.totalOrderAmount = MoneyValue.internalBinaryRead(reader, reader.uint32(), options, message.totalOrderAmount);
+                    break;
+                case /* tinkoff.public.invest.api.contract.v1.MoneyValue broker_commission */ 16:
+                    message.brokerCommission = MoneyValue.internalBinaryRead(reader, reader.uint32(), options, message.brokerCommission);
+                    break;
+                case /* tinkoff.public.invest.api.contract.v1.MoneyValue exchange_commission */ 17:
+                    message.exchangeCommission = MoneyValue.internalBinaryRead(reader, reader.uint32(), options, message.exchangeCommission);
+                    break;
+                case /* tinkoff.public.invest.api.contract.v1.MoneyValue exchange_clearing_commission */ 18:
+                    message.exchangeClearingCommission = MoneyValue.internalBinaryRead(reader, reader.uint32(), options, message.exchangeClearingCommission);
+                    break;
+                case /* tinkoff.public.invest.api.contract.v1.Quotation repo_rate */ 19:
+                    message.repoRate = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.repoRate);
+                    break;
+                case /* string party */ 20:
+                    message.party = reader.string();
+                    break;
+                case /* google.protobuf.Timestamp clear_value_date */ 21:
+                    message.clearValueDate = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.clearValueDate);
+                    break;
+                case /* google.protobuf.Timestamp sec_value_date */ 22:
+                    message.secValueDate = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.secValueDate);
+                    break;
+                case /* string broker_status */ 23:
+                    message.brokerStatus = reader.string();
+                    break;
+                case /* string separate_agreement_type */ 24:
+                    message.separateAgreementType = reader.string();
+                    break;
+                case /* string separate_agreement_number */ 25:
+                    message.separateAgreementNumber = reader.string();
+                    break;
+                case /* string separate_agreement_date */ 26:
+                    message.separateAgreementDate = reader.string();
+                    break;
+                case /* string delivery_type */ 27:
+                    message.deliveryType = reader.string();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: BrokerReport, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string trade_id = 1; */
+        if (message.tradeId !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.tradeId);
+        /* string order_id = 2; */
+        if (message.orderId !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.orderId);
+        /* string figi = 3; */
+        if (message.figi !== "")
+            writer.tag(3, WireType.LengthDelimited).string(message.figi);
+        /* string execute_sign = 4; */
+        if (message.executeSign !== "")
+            writer.tag(4, WireType.LengthDelimited).string(message.executeSign);
+        /* google.protobuf.Timestamp trade_datetime = 5; */
+        if (message.tradeDatetime)
+            Timestamp.internalBinaryWrite(message.tradeDatetime, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+        /* string exchange = 6; */
+        if (message.exchange !== "")
+            writer.tag(6, WireType.LengthDelimited).string(message.exchange);
+        /* string class_code = 7; */
+        if (message.classCode !== "")
+            writer.tag(7, WireType.LengthDelimited).string(message.classCode);
+        /* string direction = 8; */
+        if (message.direction !== "")
+            writer.tag(8, WireType.LengthDelimited).string(message.direction);
+        /* string name = 9; */
+        if (message.name !== "")
+            writer.tag(9, WireType.LengthDelimited).string(message.name);
+        /* string ticker = 10; */
+        if (message.ticker !== "")
+            writer.tag(10, WireType.LengthDelimited).string(message.ticker);
+        /* tinkoff.public.invest.api.contract.v1.MoneyValue price = 11; */
+        if (message.price)
+            MoneyValue.internalBinaryWrite(message.price, writer.tag(11, WireType.LengthDelimited).fork(), options).join();
+        /* int64 quantity = 12; */
+        if (message.quantity !== 0n)
+            writer.tag(12, WireType.Varint).int64(message.quantity);
+        /* tinkoff.public.invest.api.contract.v1.MoneyValue order_amount = 13; */
+        if (message.orderAmount)
+            MoneyValue.internalBinaryWrite(message.orderAmount, writer.tag(13, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation aci_value = 14; */
+        if (message.aciValue)
+            Quotation.internalBinaryWrite(message.aciValue, writer.tag(14, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.MoneyValue total_order_amount = 15; */
+        if (message.totalOrderAmount)
+            MoneyValue.internalBinaryWrite(message.totalOrderAmount, writer.tag(15, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.MoneyValue broker_commission = 16; */
+        if (message.brokerCommission)
+            MoneyValue.internalBinaryWrite(message.brokerCommission, writer.tag(16, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.MoneyValue exchange_commission = 17; */
+        if (message.exchangeCommission)
+            MoneyValue.internalBinaryWrite(message.exchangeCommission, writer.tag(17, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.MoneyValue exchange_clearing_commission = 18; */
+        if (message.exchangeClearingCommission)
+            MoneyValue.internalBinaryWrite(message.exchangeClearingCommission, writer.tag(18, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation repo_rate = 19; */
+        if (message.repoRate)
+            Quotation.internalBinaryWrite(message.repoRate, writer.tag(19, WireType.LengthDelimited).fork(), options).join();
+        /* string party = 20; */
+        if (message.party !== "")
+            writer.tag(20, WireType.LengthDelimited).string(message.party);
+        /* google.protobuf.Timestamp clear_value_date = 21; */
+        if (message.clearValueDate)
+            Timestamp.internalBinaryWrite(message.clearValueDate, writer.tag(21, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.Timestamp sec_value_date = 22; */
+        if (message.secValueDate)
+            Timestamp.internalBinaryWrite(message.secValueDate, writer.tag(22, WireType.LengthDelimited).fork(), options).join();
+        /* string broker_status = 23; */
+        if (message.brokerStatus !== "")
+            writer.tag(23, WireType.LengthDelimited).string(message.brokerStatus);
+        /* string separate_agreement_type = 24; */
+        if (message.separateAgreementType !== "")
+            writer.tag(24, WireType.LengthDelimited).string(message.separateAgreementType);
+        /* string separate_agreement_number = 25; */
+        if (message.separateAgreementNumber !== "")
+            writer.tag(25, WireType.LengthDelimited).string(message.separateAgreementNumber);
+        /* string separate_agreement_date = 26; */
+        if (message.separateAgreementDate !== "")
+            writer.tag(26, WireType.LengthDelimited).string(message.separateAgreementDate);
+        /* string delivery_type = 27; */
+        if (message.deliveryType !== "")
+            writer.tag(27, WireType.LengthDelimited).string(message.deliveryType);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message tinkoff.public.invest.api.contract.v1.BrokerReport
+ */
+export const BrokerReport = new BrokerReport$Type();
 /**
  * @generated ServiceType for protobuf service tinkoff.public.invest.api.contract.v1.OperationsService
  */
@@ -1443,5 +2263,6 @@ export const OperationsService = new ServiceType("tinkoff.public.invest.api.cont
     { name: "GetOperations", options: {}, I: OperationsRequest, O: OperationsResponse },
     { name: "GetPortfolio", options: {}, I: PortfolioRequest, O: PortfolioResponse },
     { name: "GetPositions", options: {}, I: PositionsRequest, O: PositionsResponse },
-    { name: "GetWithdrawLimits", options: {}, I: WithdrawLimitsRequest, O: WithdrawLimitsResponse }
+    { name: "GetWithdrawLimits", options: {}, I: WithdrawLimitsRequest, O: WithdrawLimitsResponse },
+    { name: "GetBrokerReport", options: {}, I: BrokerReportRequest, O: BrokerReportResponse }
 ]);

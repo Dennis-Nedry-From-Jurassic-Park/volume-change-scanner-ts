@@ -4,6 +4,8 @@
 import type { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
 import { OperationsService } from "./operations";
+import type { BrokerReportResponse } from "./operations";
+import type { BrokerReportRequest } from "./operations";
 import type { WithdrawLimitsResponse } from "./operations";
 import type { WithdrawLimitsRequest } from "./operations";
 import type { PositionsResponse } from "./operations";
@@ -47,6 +49,10 @@ export interface IOperationsServiceClient {
      * @generated from protobuf rpc: GetWithdrawLimits(tinkoff.public.invest.api.contract.v1.WithdrawLimitsRequest) returns (tinkoff.public.invest.api.contract.v1.WithdrawLimitsResponse);
      */
     getWithdrawLimits(input: WithdrawLimitsRequest, options?: RpcOptions): UnaryCall<WithdrawLimitsRequest, WithdrawLimitsResponse>;
+    /**
+     * @generated from protobuf rpc: GetBrokerReport(tinkoff.public.invest.api.contract.v1.BrokerReportRequest) returns (tinkoff.public.invest.api.contract.v1.BrokerReportResponse);
+     */
+    getBrokerReport(input: BrokerReportRequest, options?: RpcOptions): UnaryCall<BrokerReportRequest, BrokerReportResponse>;
 }
 /**
  * Сервис предназначен для получения:</br> **1**.  списка операций по счёту;</br> **2**.
@@ -96,5 +102,12 @@ export class OperationsServiceClient implements IOperationsServiceClient, Servic
     getWithdrawLimits(input: WithdrawLimitsRequest, options?: RpcOptions): UnaryCall<WithdrawLimitsRequest, WithdrawLimitsResponse> {
         const method = this.methods[3], opt = this._transport.mergeOptions(options);
         return stackIntercept<WithdrawLimitsRequest, WithdrawLimitsResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * @generated from protobuf rpc: GetBrokerReport(tinkoff.public.invest.api.contract.v1.BrokerReportRequest) returns (tinkoff.public.invest.api.contract.v1.BrokerReportResponse);
+     */
+    getBrokerReport(input: BrokerReportRequest, options?: RpcOptions): UnaryCall<BrokerReportRequest, BrokerReportResponse> {
+        const method = this.methods[4], opt = this._transport.mergeOptions(options);
+        return stackIntercept<BrokerReportRequest, BrokerReportResponse>("unary", this._transport, method, opt, input);
     }
 }

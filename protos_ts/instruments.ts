@@ -12,9 +12,9 @@ import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MESSAGE_TYPE } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
-import { Quotation } from "./common";
 import { SecurityTradingStatus } from "./common";
 import { MoneyValue } from "./common";
+import { Quotation } from "./common";
 import { Timestamp } from "./google/protobuf/timestamp";
 /**
  * Запрос расписания торгов
@@ -101,7 +101,7 @@ export interface InstrumentRequest {
     /**
      * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.InstrumentIdType id_type = 1;
      */
-    idType: InstrumentIdType; // Тип идентификатора инструмента. Возможные значения: figi, ticker, isin. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)
+    idType: InstrumentIdType; // Тип идентификатора инструмента. Возможные значения: figi, ticker. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)
     /**
      * @generated from protobuf field: string class_code = 2;
      */
@@ -263,29 +263,29 @@ export interface Bond {
      */
     currency: string; // Валюта расчётов.
     /**
-     * @generated from protobuf field: double klong = 7;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation klong = 7;
      */
-    klong: number; // Коэффициент ставки риска длинной позиции по инструменту.
+    klong?: Quotation; // Коэффициент ставки риска длинной позиции по инструменту.
     /**
-     * @generated from protobuf field: double kshort = 8;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation kshort = 8;
      */
-    kshort: number; // Коэффициент ставки риска короткой позиции по инструменту.
+    kshort?: Quotation; // Коэффициент ставки риска короткой позиции по инструменту.
     /**
-     * @generated from protobuf field: double dlong = 9;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dlong = 9;
      */
-    dlong: number; // Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
+    dlong?: Quotation; // Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
     /**
-     * @generated from protobuf field: double dshort = 10;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dshort = 10;
      */
-    dshort: number; // Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
+    dshort?: Quotation; // Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
     /**
-     * @generated from protobuf field: double dlong_min = 11;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dlong_min = 11;
      */
-    dlongMin: number; // Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
+    dlongMin?: Quotation; // Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
     /**
-     * @generated from protobuf field: double dshort_min = 12;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dshort_min = 12;
      */
-    dshortMin: number; // Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
+    dshortMin?: Quotation; // Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
     /**
      * @generated from protobuf field: bool short_enabled_flag = 13;
      */
@@ -379,9 +379,9 @@ export interface Bond {
      */
     amortizationFlag: boolean; // Признак облигации с амортизацией долга.
     /**
-     * @generated from protobuf field: float min_price_increment = 38;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 38;
      */
-    minPriceIncrement: number; // Шаг цены.
+    minPriceIncrement?: Quotation; // Шаг цены.
     /**
      * @generated from protobuf field: bool api_trade_available_flag = 39;
      */
@@ -418,29 +418,29 @@ export interface Currency {
      */
     currency: string; // Валюта расчётов.
     /**
-     * @generated from protobuf field: double klong = 7;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation klong = 7;
      */
-    klong: number; // Коэффициент ставки риска длинной позиции по инструменту.
+    klong?: Quotation; // Коэффициент ставки риска длинной позиции по инструменту.
     /**
-     * @generated from protobuf field: double kshort = 8;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation kshort = 8;
      */
-    kshort: number; // Коэффициент ставки риска короткой позиции по инструменту.
+    kshort?: Quotation; // Коэффициент ставки риска короткой позиции по инструменту.
     /**
-     * @generated from protobuf field: double dlong = 9;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dlong = 9;
      */
-    dlong: number; // Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
+    dlong?: Quotation; // Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
     /**
-     * @generated from protobuf field: double dshort = 10;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dshort = 10;
      */
-    dshort: number; // Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
+    dshort?: Quotation; // Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
     /**
-     * @generated from protobuf field: double dlong_min = 11;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dlong_min = 11;
      */
-    dlongMin: number; // Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
+    dlongMin?: Quotation; // Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
     /**
-     * @generated from protobuf field: double dshort_min = 12;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dshort_min = 12;
      */
-    dshortMin: number; // Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
+    dshortMin?: Quotation; // Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
     /**
      * @generated from protobuf field: bool short_enabled_flag = 13;
      */
@@ -486,9 +486,9 @@ export interface Currency {
      */
     isoCurrencyName: string; // Строковый ISO-код валюты.
     /**
-     * @generated from protobuf field: float min_price_increment = 25;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 25;
      */
-    minPriceIncrement: number; // Шаг цены.
+    minPriceIncrement?: Quotation; // Шаг цены.
     /**
      * @generated from protobuf field: bool api_trade_available_flag = 26;
      */
@@ -525,29 +525,29 @@ export interface Etf {
      */
     currency: string; // Валюта расчётов.
     /**
-     * @generated from protobuf field: double klong = 7;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation klong = 7;
      */
-    klong: number; // Коэффициент ставки риска длинной позиции по инструменту.
+    klong?: Quotation; // Коэффициент ставки риска длинной позиции по инструменту.
     /**
-     * @generated from protobuf field: double kshort = 8;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation kshort = 8;
      */
-    kshort: number; // Коэффициент ставки риска короткой позиции по инструменту.
+    kshort?: Quotation; // Коэффициент ставки риска короткой позиции по инструменту.
     /**
-     * @generated from protobuf field: double dlong = 9;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dlong = 9;
      */
-    dlong: number; // Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
+    dlong?: Quotation; // Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
     /**
-     * @generated from protobuf field: double dshort = 10;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dshort = 10;
      */
-    dshort: number; // Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
+    dshort?: Quotation; // Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
     /**
-     * @generated from protobuf field: double dlong_min = 11;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dlong_min = 11;
      */
-    dlongMin: number; // Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
+    dlongMin?: Quotation; // Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
     /**
-     * @generated from protobuf field: double dshort_min = 12;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dshort_min = 12;
      */
-    dshortMin: number; // Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
+    dshortMin?: Quotation; // Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
     /**
      * @generated from protobuf field: bool short_enabled_flag = 13;
      */
@@ -561,9 +561,9 @@ export interface Etf {
      */
     exchange: string; // Торговая площадка.
     /**
-     * @generated from protobuf field: double fixed_commission = 17;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation fixed_commission = 17;
      */
-    fixedCommission: number; // Размер фиксированной комиссии фонда.
+    fixedCommission?: Quotation; // Размер фиксированной комиссии фонда.
     /**
      * @generated from protobuf field: string focus_type = 18;
      */
@@ -573,9 +573,9 @@ export interface Etf {
      */
     releasedDate?: Timestamp; // Дата выпуска в часовом поясе UTC.
     /**
-     * @generated from protobuf field: double num_shares = 20;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation num_shares = 20;
      */
-    numShares: number; // Количество акций фонда в обращении.
+    numShares?: Quotation; // Количество акций фонда в обращении.
     /**
      * @generated from protobuf field: string country_of_risk = 21;
      */
@@ -609,9 +609,9 @@ export interface Etf {
      */
     sellAvailableFlag: boolean; // Признак доступности для продажи.
     /**
-     * @generated from protobuf field: float min_price_increment = 29;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 29;
      */
-    minPriceIncrement: number; // Шаг цены.
+    minPriceIncrement?: Quotation; // Шаг цены.
     /**
      * @generated from protobuf field: bool api_trade_available_flag = 30;
      */
@@ -644,29 +644,29 @@ export interface Future {
      */
     currency: string; // Валюта расчётов.
     /**
-     * @generated from protobuf field: double klong = 6;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation klong = 6;
      */
-    klong: number; // Коэффициент ставки риска длинной позиции по клиенту.
+    klong?: Quotation; // Коэффициент ставки риска длинной позиции по клиенту.
     /**
-     * @generated from protobuf field: double kshort = 7;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation kshort = 7;
      */
-    kshort: number; // Коэффициент ставки риска короткой позиции по клиенту.
+    kshort?: Quotation; // Коэффициент ставки риска короткой позиции по клиенту.
     /**
-     * @generated from protobuf field: double dlong = 8;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dlong = 8;
      */
-    dlong: number; // Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
+    dlong?: Quotation; // Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
     /**
-     * @generated from protobuf field: double dshort = 9;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dshort = 9;
      */
-    dshort: number; // Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
+    dshort?: Quotation; // Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
     /**
-     * @generated from protobuf field: double dlong_min = 10;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dlong_min = 10;
      */
-    dlongMin: number; // Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
+    dlongMin?: Quotation; // Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
     /**
-     * @generated from protobuf field: double dshort_min = 11;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dshort_min = 11;
      */
-    dshortMin: number; // Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
+    dshortMin?: Quotation; // Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
     /**
      * @generated from protobuf field: bool short_enabled_flag = 12;
      */
@@ -700,9 +700,9 @@ export interface Future {
      */
     basicAsset: string; // Основной актив.
     /**
-     * @generated from protobuf field: double basic_asset_size = 20;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation basic_asset_size = 20;
      */
-    basicAssetSize: number; // Размер основного актива.
+    basicAssetSize?: Quotation; // Размер основного актива.
     /**
      * @generated from protobuf field: string country_of_risk = 21;
      */
@@ -718,7 +718,7 @@ export interface Future {
     /**
      * @generated from protobuf field: google.protobuf.Timestamp expiration_date = 24;
      */
-    expirationDate?: Timestamp; // Дата истечения срока.
+    expirationDate?: Timestamp; // Дата истечения срока в часов поясе UTC.
     /**
      * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.SecurityTradingStatus trading_status = 25;
      */
@@ -736,9 +736,9 @@ export interface Future {
      */
     sellAvailableFlag: boolean; // Признак доступности для продажи.
     /**
-     * @generated from protobuf field: float min_price_increment = 29;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 29;
      */
-    minPriceIncrement: number; // Шаг цены.
+    minPriceIncrement?: Quotation; // Шаг цены.
     /**
      * @generated from protobuf field: bool api_trade_available_flag = 30;
      */
@@ -775,29 +775,29 @@ export interface Share {
      */
     currency: string; // Валюта расчётов.
     /**
-     * @generated from protobuf field: double klong = 7;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation klong = 7;
      */
-    klong: number; // Коэффициент ставки риска длинной позиции по инструменту.
+    klong?: Quotation; // Коэффициент ставки риска длинной позиции по инструменту.
     /**
-     * @generated from protobuf field: double kshort = 8;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation kshort = 8;
      */
-    kshort: number; // Коэффициент ставки риска короткой позиции по инструменту.
+    kshort?: Quotation; // Коэффициент ставки риска короткой позиции по инструменту.
     /**
-     * @generated from protobuf field: double dlong = 9;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dlong = 9;
      */
-    dlong: number; // Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
+    dlong?: Quotation; // Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
     /**
-     * @generated from protobuf field: double dshort = 10;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dshort = 10;
      */
-    dshort: number; // Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
+    dshort?: Quotation; // Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
     /**
-     * @generated from protobuf field: double dlong_min = 11;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dlong_min = 11;
      */
-    dlongMin: number; // Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
+    dlongMin?: Quotation; // Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
     /**
-     * @generated from protobuf field: double dshort_min = 12;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dshort_min = 12;
      */
-    dshortMin: number; // Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
+    dshortMin?: Quotation; // Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
     /**
      * @generated from protobuf field: bool short_enabled_flag = 13;
      */
@@ -863,9 +863,9 @@ export interface Share {
      */
     shareType: ShareType; // Тип акции. Возможные значения: [ShareType](https://tinkoff.github.io/investAPI/instruments#sharetype)
     /**
-     * @generated from protobuf field: float min_price_increment = 31;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 31;
      */
-    minPriceIncrement: number; // Шаг цены.
+    minPriceIncrement?: Quotation; // Шаг цены.
     /**
      * @generated from protobuf field: bool api_trade_available_flag = 32;
      */
@@ -916,9 +916,9 @@ export interface AccruedInterest {
      */
     value?: Quotation; // Величина выплаты.
     /**
-     * @generated from protobuf field: float value_percent = 3;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation value_percent = 3;
      */
-    valuePercent: number; // Величина выплаты в процентах от номинала.
+    valuePercent?: Quotation; // Величина выплаты в процентах от номинала.
     /**
      * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation nominal = 4;
      */
@@ -950,9 +950,9 @@ export interface GetFuturesMarginResponse {
      */
     initialMarginOnSell?: MoneyValue; // Гарантийное обеспечение при продаже.
     /**
-     * @generated from protobuf field: float min_price_increment = 3;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 3;
      */
-    minPriceIncrement: number; // Шаг цены.
+    minPriceIncrement?: Quotation; // Шаг цены.
     /**
      * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation min_price_increment_amount = 4;
      */
@@ -1000,29 +1000,29 @@ export interface Instrument {
      */
     currency: string; // Валюта расчётов.
     /**
-     * @generated from protobuf field: double klong = 7;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation klong = 7;
      */
-    klong: number; // Коэффициент ставки риска длинной позиции по инструменту.
+    klong?: Quotation; // Коэффициент ставки риска длинной позиции по инструменту.
     /**
-     * @generated from protobuf field: double kshort = 8;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation kshort = 8;
      */
-    kshort: number; // Коэффициент ставки риска короткой позиции по инструменту.
+    kshort?: Quotation; // Коэффициент ставки риска короткой позиции по инструменту.
     /**
-     * @generated from protobuf field: double dlong = 9;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dlong = 9;
      */
-    dlong: number; // Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
+    dlong?: Quotation; // Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
     /**
-     * @generated from protobuf field: double dshort = 10;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dshort = 10;
      */
-    dshort: number; // Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
+    dshort?: Quotation; // Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
     /**
-     * @generated from protobuf field: double dlong_min = 11;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dlong_min = 11;
      */
-    dlongMin: number; // Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
+    dlongMin?: Quotation; // Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)
     /**
-     * @generated from protobuf field: double dshort_min = 12;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation dshort_min = 12;
      */
-    dshortMin: number; // Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
+    dshortMin?: Quotation; // Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)
     /**
      * @generated from protobuf field: bool short_enabled_flag = 13;
      */
@@ -1064,9 +1064,9 @@ export interface Instrument {
      */
     sellAvailableFlag: boolean; // Признак доступности для продажи.
     /**
-     * @generated from protobuf field: float min_price_increment = 23;
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 23;
      */
-    minPriceIncrement: number; // Шаг цены.
+    minPriceIncrement?: Quotation; // Шаг цены.
     /**
      * @generated from protobuf field: bool api_trade_available_flag = 24;
      */
@@ -1115,15 +1115,15 @@ export interface Dividend {
     /**
      * @generated from protobuf field: google.protobuf.Timestamp payment_date = 2;
      */
-    paymentDate?: Timestamp; // Дата фактических выплат.
+    paymentDate?: Timestamp; // Дата фактических выплат в часовом поясе UTC.
     /**
      * @generated from protobuf field: google.protobuf.Timestamp declared_date = 3;
      */
-    declaredDate?: Timestamp; // Дата объявления дивидендов.
+    declaredDate?: Timestamp; // Дата объявления дивидендов в часовом поясе UTC.
     /**
      * @generated from protobuf field: google.protobuf.Timestamp last_buy_date = 4;
      */
-    lastBuyDate?: Timestamp; // Последний день (включительно) покупки для получения выплаты.
+    lastBuyDate?: Timestamp; // Последний день (включительно) покупки для получения выплаты в часовом поясе UTC.
     /**
      * @generated from protobuf field: string dividend_type = 5;
      */
@@ -1131,7 +1131,7 @@ export interface Dividend {
     /**
      * @generated from protobuf field: google.protobuf.Timestamp record_date = 6;
      */
-    recordDate?: Timestamp; // Дата фиксации реестра
+    recordDate?: Timestamp; // Дата фиксации реестра в часовом поясе UTC.
     /**
      * @generated from protobuf field: string regularity = 7;
      */
@@ -1147,7 +1147,7 @@ export interface Dividend {
     /**
      * @generated from protobuf field: google.protobuf.Timestamp created_at = 10;
      */
-    createdAt?: Timestamp; // Дата и время создания записи.
+    createdAt?: Timestamp; // Дата и время создания записи в часовом поясе UTC.
 }
 /**
  * Тип идентификатора инструмента. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)
@@ -1187,7 +1187,7 @@ export enum InstrumentStatus {
      */
     UNSPECIFIED = 0,
     /**
-     * Базовый список инструментов (по умолчанию).
+     * Базовый список инструментов (по умолчанию). Инструменты доступные для торговли через TINKOFF INVEST API.
      *
      * @generated from protobuf enum value: INSTRUMENT_STATUS_BASE = 1;
      */
@@ -2092,12 +2092,12 @@ class Bond$Type extends MessageType<Bond> {
             { no: 4, name: "isin", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 5, name: "lot", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
             { no: 6, name: "currency", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 7, name: "klong", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 8, name: "kshort", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 9, name: "dlong", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 10, name: "dshort", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 11, name: "dlong_min", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 12, name: "dshort_min", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
+            { no: 7, name: "klong", kind: "message", T: () => Quotation },
+            { no: 8, name: "kshort", kind: "message", T: () => Quotation },
+            { no: 9, name: "dlong", kind: "message", T: () => Quotation },
+            { no: 10, name: "dshort", kind: "message", T: () => Quotation },
+            { no: 11, name: "dlong_min", kind: "message", T: () => Quotation },
+            { no: 12, name: "dshort_min", kind: "message", T: () => Quotation },
             { no: 13, name: "short_enabled_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 15, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 16, name: "exchange", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
@@ -2121,12 +2121,12 @@ class Bond$Type extends MessageType<Bond> {
             { no: 35, name: "floating_coupon_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 36, name: "perpetual_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 37, name: "amortization_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 38, name: "min_price_increment", kind: "scalar", T: 2 /*ScalarType.FLOAT*/ },
+            { no: 38, name: "min_price_increment", kind: "message", T: () => Quotation },
             { no: 39, name: "api_trade_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
     create(value?: PartialMessage<Bond>): Bond {
-        const message = { figi: "", ticker: "", classCode: "", isin: "", lot: 0, currency: "", klong: 0, kshort: 0, dlong: 0, dshort: 0, dlongMin: 0, dshortMin: 0, shortEnabledFlag: false, name: "", exchange: "", couponQuantityPerYear: 0, countryOfRisk: "", countryOfRiskName: "", sector: "", issueKind: "", issueSize: 0n, issueSizePlan: 0n, tradingStatus: 0, otcFlag: false, buyAvailableFlag: false, sellAvailableFlag: false, floatingCouponFlag: false, perpetualFlag: false, amortizationFlag: false, minPriceIncrement: 0, apiTradeAvailableFlag: false };
+        const message = { figi: "", ticker: "", classCode: "", isin: "", lot: 0, currency: "", shortEnabledFlag: false, name: "", exchange: "", couponQuantityPerYear: 0, countryOfRisk: "", countryOfRiskName: "", sector: "", issueKind: "", issueSize: 0n, issueSizePlan: 0n, tradingStatus: 0, otcFlag: false, buyAvailableFlag: false, sellAvailableFlag: false, floatingCouponFlag: false, perpetualFlag: false, amortizationFlag: false, apiTradeAvailableFlag: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Bond>(this, message, value);
@@ -2155,23 +2155,23 @@ class Bond$Type extends MessageType<Bond> {
                 case /* string currency */ 6:
                     message.currency = reader.string();
                     break;
-                case /* double klong */ 7:
-                    message.klong = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation klong */ 7:
+                    message.klong = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.klong);
                     break;
-                case /* double kshort */ 8:
-                    message.kshort = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation kshort */ 8:
+                    message.kshort = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.kshort);
                     break;
-                case /* double dlong */ 9:
-                    message.dlong = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dlong */ 9:
+                    message.dlong = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dlong);
                     break;
-                case /* double dshort */ 10:
-                    message.dshort = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dshort */ 10:
+                    message.dshort = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dshort);
                     break;
-                case /* double dlong_min */ 11:
-                    message.dlongMin = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dlong_min */ 11:
+                    message.dlongMin = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dlongMin);
                     break;
-                case /* double dshort_min */ 12:
-                    message.dshortMin = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dshort_min */ 12:
+                    message.dshortMin = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dshortMin);
                     break;
                 case /* bool short_enabled_flag */ 13:
                     message.shortEnabledFlag = reader.bool();
@@ -2242,8 +2242,8 @@ class Bond$Type extends MessageType<Bond> {
                 case /* bool amortization_flag */ 37:
                     message.amortizationFlag = reader.bool();
                     break;
-                case /* float min_price_increment */ 38:
-                    message.minPriceIncrement = reader.float();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment */ 38:
+                    message.minPriceIncrement = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.minPriceIncrement);
                     break;
                 case /* bool api_trade_available_flag */ 39:
                     message.apiTradeAvailableFlag = reader.bool();
@@ -2278,24 +2278,24 @@ class Bond$Type extends MessageType<Bond> {
         /* string currency = 6; */
         if (message.currency !== "")
             writer.tag(6, WireType.LengthDelimited).string(message.currency);
-        /* double klong = 7; */
-        if (message.klong !== 0)
-            writer.tag(7, WireType.Bit64).double(message.klong);
-        /* double kshort = 8; */
-        if (message.kshort !== 0)
-            writer.tag(8, WireType.Bit64).double(message.kshort);
-        /* double dlong = 9; */
-        if (message.dlong !== 0)
-            writer.tag(9, WireType.Bit64).double(message.dlong);
-        /* double dshort = 10; */
-        if (message.dshort !== 0)
-            writer.tag(10, WireType.Bit64).double(message.dshort);
-        /* double dlong_min = 11; */
-        if (message.dlongMin !== 0)
-            writer.tag(11, WireType.Bit64).double(message.dlongMin);
-        /* double dshort_min = 12; */
-        if (message.dshortMin !== 0)
-            writer.tag(12, WireType.Bit64).double(message.dshortMin);
+        /* tinkoff.public.invest.api.contract.v1.Quotation klong = 7; */
+        if (message.klong)
+            Quotation.internalBinaryWrite(message.klong, writer.tag(7, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation kshort = 8; */
+        if (message.kshort)
+            Quotation.internalBinaryWrite(message.kshort, writer.tag(8, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dlong = 9; */
+        if (message.dlong)
+            Quotation.internalBinaryWrite(message.dlong, writer.tag(9, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dshort = 10; */
+        if (message.dshort)
+            Quotation.internalBinaryWrite(message.dshort, writer.tag(10, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dlong_min = 11; */
+        if (message.dlongMin)
+            Quotation.internalBinaryWrite(message.dlongMin, writer.tag(11, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dshort_min = 12; */
+        if (message.dshortMin)
+            Quotation.internalBinaryWrite(message.dshortMin, writer.tag(12, WireType.LengthDelimited).fork(), options).join();
         /* bool short_enabled_flag = 13; */
         if (message.shortEnabledFlag !== false)
             writer.tag(13, WireType.Varint).bool(message.shortEnabledFlag);
@@ -2365,9 +2365,9 @@ class Bond$Type extends MessageType<Bond> {
         /* bool amortization_flag = 37; */
         if (message.amortizationFlag !== false)
             writer.tag(37, WireType.Varint).bool(message.amortizationFlag);
-        /* float min_price_increment = 38; */
-        if (message.minPriceIncrement !== 0)
-            writer.tag(38, WireType.Bit32).float(message.minPriceIncrement);
+        /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 38; */
+        if (message.minPriceIncrement)
+            Quotation.internalBinaryWrite(message.minPriceIncrement, writer.tag(38, WireType.LengthDelimited).fork(), options).join();
         /* bool api_trade_available_flag = 39; */
         if (message.apiTradeAvailableFlag !== false)
             writer.tag(39, WireType.Varint).bool(message.apiTradeAvailableFlag);
@@ -2391,12 +2391,12 @@ class Currency$Type extends MessageType<Currency> {
             { no: 4, name: "isin", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 5, name: "lot", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
             { no: 6, name: "currency", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 7, name: "klong", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 8, name: "kshort", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 9, name: "dlong", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 10, name: "dshort", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 11, name: "dlong_min", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 12, name: "dshort_min", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
+            { no: 7, name: "klong", kind: "message", T: () => Quotation },
+            { no: 8, name: "kshort", kind: "message", T: () => Quotation },
+            { no: 9, name: "dlong", kind: "message", T: () => Quotation },
+            { no: 10, name: "dshort", kind: "message", T: () => Quotation },
+            { no: 11, name: "dlong_min", kind: "message", T: () => Quotation },
+            { no: 12, name: "dshort_min", kind: "message", T: () => Quotation },
             { no: 13, name: "short_enabled_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 15, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 16, name: "exchange", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
@@ -2408,12 +2408,12 @@ class Currency$Type extends MessageType<Currency> {
             { no: 22, name: "buy_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 23, name: "sell_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 24, name: "iso_currency_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 25, name: "min_price_increment", kind: "scalar", T: 2 /*ScalarType.FLOAT*/ },
+            { no: 25, name: "min_price_increment", kind: "message", T: () => Quotation },
             { no: 26, name: "api_trade_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
     create(value?: PartialMessage<Currency>): Currency {
-        const message = { figi: "", ticker: "", classCode: "", isin: "", lot: 0, currency: "", klong: 0, kshort: 0, dlong: 0, dshort: 0, dlongMin: 0, dshortMin: 0, shortEnabledFlag: false, name: "", exchange: "", countryOfRisk: "", countryOfRiskName: "", tradingStatus: 0, otcFlag: false, buyAvailableFlag: false, sellAvailableFlag: false, isoCurrencyName: "", minPriceIncrement: 0, apiTradeAvailableFlag: false };
+        const message = { figi: "", ticker: "", classCode: "", isin: "", lot: 0, currency: "", shortEnabledFlag: false, name: "", exchange: "", countryOfRisk: "", countryOfRiskName: "", tradingStatus: 0, otcFlag: false, buyAvailableFlag: false, sellAvailableFlag: false, isoCurrencyName: "", apiTradeAvailableFlag: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Currency>(this, message, value);
@@ -2442,23 +2442,23 @@ class Currency$Type extends MessageType<Currency> {
                 case /* string currency */ 6:
                     message.currency = reader.string();
                     break;
-                case /* double klong */ 7:
-                    message.klong = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation klong */ 7:
+                    message.klong = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.klong);
                     break;
-                case /* double kshort */ 8:
-                    message.kshort = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation kshort */ 8:
+                    message.kshort = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.kshort);
                     break;
-                case /* double dlong */ 9:
-                    message.dlong = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dlong */ 9:
+                    message.dlong = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dlong);
                     break;
-                case /* double dshort */ 10:
-                    message.dshort = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dshort */ 10:
+                    message.dshort = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dshort);
                     break;
-                case /* double dlong_min */ 11:
-                    message.dlongMin = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dlong_min */ 11:
+                    message.dlongMin = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dlongMin);
                     break;
-                case /* double dshort_min */ 12:
-                    message.dshortMin = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dshort_min */ 12:
+                    message.dshortMin = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dshortMin);
                     break;
                 case /* bool short_enabled_flag */ 13:
                     message.shortEnabledFlag = reader.bool();
@@ -2493,8 +2493,8 @@ class Currency$Type extends MessageType<Currency> {
                 case /* string iso_currency_name */ 24:
                     message.isoCurrencyName = reader.string();
                     break;
-                case /* float min_price_increment */ 25:
-                    message.minPriceIncrement = reader.float();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment */ 25:
+                    message.minPriceIncrement = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.minPriceIncrement);
                     break;
                 case /* bool api_trade_available_flag */ 26:
                     message.apiTradeAvailableFlag = reader.bool();
@@ -2529,24 +2529,24 @@ class Currency$Type extends MessageType<Currency> {
         /* string currency = 6; */
         if (message.currency !== "")
             writer.tag(6, WireType.LengthDelimited).string(message.currency);
-        /* double klong = 7; */
-        if (message.klong !== 0)
-            writer.tag(7, WireType.Bit64).double(message.klong);
-        /* double kshort = 8; */
-        if (message.kshort !== 0)
-            writer.tag(8, WireType.Bit64).double(message.kshort);
-        /* double dlong = 9; */
-        if (message.dlong !== 0)
-            writer.tag(9, WireType.Bit64).double(message.dlong);
-        /* double dshort = 10; */
-        if (message.dshort !== 0)
-            writer.tag(10, WireType.Bit64).double(message.dshort);
-        /* double dlong_min = 11; */
-        if (message.dlongMin !== 0)
-            writer.tag(11, WireType.Bit64).double(message.dlongMin);
-        /* double dshort_min = 12; */
-        if (message.dshortMin !== 0)
-            writer.tag(12, WireType.Bit64).double(message.dshortMin);
+        /* tinkoff.public.invest.api.contract.v1.Quotation klong = 7; */
+        if (message.klong)
+            Quotation.internalBinaryWrite(message.klong, writer.tag(7, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation kshort = 8; */
+        if (message.kshort)
+            Quotation.internalBinaryWrite(message.kshort, writer.tag(8, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dlong = 9; */
+        if (message.dlong)
+            Quotation.internalBinaryWrite(message.dlong, writer.tag(9, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dshort = 10; */
+        if (message.dshort)
+            Quotation.internalBinaryWrite(message.dshort, writer.tag(10, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dlong_min = 11; */
+        if (message.dlongMin)
+            Quotation.internalBinaryWrite(message.dlongMin, writer.tag(11, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dshort_min = 12; */
+        if (message.dshortMin)
+            Quotation.internalBinaryWrite(message.dshortMin, writer.tag(12, WireType.LengthDelimited).fork(), options).join();
         /* bool short_enabled_flag = 13; */
         if (message.shortEnabledFlag !== false)
             writer.tag(13, WireType.Varint).bool(message.shortEnabledFlag);
@@ -2580,9 +2580,9 @@ class Currency$Type extends MessageType<Currency> {
         /* string iso_currency_name = 24; */
         if (message.isoCurrencyName !== "")
             writer.tag(24, WireType.LengthDelimited).string(message.isoCurrencyName);
-        /* float min_price_increment = 25; */
-        if (message.minPriceIncrement !== 0)
-            writer.tag(25, WireType.Bit32).float(message.minPriceIncrement);
+        /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 25; */
+        if (message.minPriceIncrement)
+            Quotation.internalBinaryWrite(message.minPriceIncrement, writer.tag(25, WireType.LengthDelimited).fork(), options).join();
         /* bool api_trade_available_flag = 26; */
         if (message.apiTradeAvailableFlag !== false)
             writer.tag(26, WireType.Varint).bool(message.apiTradeAvailableFlag);
@@ -2606,19 +2606,19 @@ class Etf$Type extends MessageType<Etf> {
             { no: 4, name: "isin", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 5, name: "lot", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
             { no: 6, name: "currency", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 7, name: "klong", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 8, name: "kshort", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 9, name: "dlong", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 10, name: "dshort", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 11, name: "dlong_min", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 12, name: "dshort_min", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
+            { no: 7, name: "klong", kind: "message", T: () => Quotation },
+            { no: 8, name: "kshort", kind: "message", T: () => Quotation },
+            { no: 9, name: "dlong", kind: "message", T: () => Quotation },
+            { no: 10, name: "dshort", kind: "message", T: () => Quotation },
+            { no: 11, name: "dlong_min", kind: "message", T: () => Quotation },
+            { no: 12, name: "dshort_min", kind: "message", T: () => Quotation },
             { no: 13, name: "short_enabled_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 15, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 16, name: "exchange", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 17, name: "fixed_commission", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
+            { no: 17, name: "fixed_commission", kind: "message", T: () => Quotation },
             { no: 18, name: "focus_type", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 19, name: "released_date", kind: "message", T: () => Timestamp },
-            { no: 20, name: "num_shares", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
+            { no: 20, name: "num_shares", kind: "message", T: () => Quotation },
             { no: 21, name: "country_of_risk", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 22, name: "country_of_risk_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 23, name: "sector", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
@@ -2627,12 +2627,12 @@ class Etf$Type extends MessageType<Etf> {
             { no: 26, name: "otc_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 27, name: "buy_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 28, name: "sell_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 29, name: "min_price_increment", kind: "scalar", T: 2 /*ScalarType.FLOAT*/ },
+            { no: 29, name: "min_price_increment", kind: "message", T: () => Quotation },
             { no: 30, name: "api_trade_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
     create(value?: PartialMessage<Etf>): Etf {
-        const message = { figi: "", ticker: "", classCode: "", isin: "", lot: 0, currency: "", klong: 0, kshort: 0, dlong: 0, dshort: 0, dlongMin: 0, dshortMin: 0, shortEnabledFlag: false, name: "", exchange: "", fixedCommission: 0, focusType: "", numShares: 0, countryOfRisk: "", countryOfRiskName: "", sector: "", rebalancingFreq: "", tradingStatus: 0, otcFlag: false, buyAvailableFlag: false, sellAvailableFlag: false, minPriceIncrement: 0, apiTradeAvailableFlag: false };
+        const message = { figi: "", ticker: "", classCode: "", isin: "", lot: 0, currency: "", shortEnabledFlag: false, name: "", exchange: "", focusType: "", countryOfRisk: "", countryOfRiskName: "", sector: "", rebalancingFreq: "", tradingStatus: 0, otcFlag: false, buyAvailableFlag: false, sellAvailableFlag: false, apiTradeAvailableFlag: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Etf>(this, message, value);
@@ -2661,23 +2661,23 @@ class Etf$Type extends MessageType<Etf> {
                 case /* string currency */ 6:
                     message.currency = reader.string();
                     break;
-                case /* double klong */ 7:
-                    message.klong = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation klong */ 7:
+                    message.klong = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.klong);
                     break;
-                case /* double kshort */ 8:
-                    message.kshort = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation kshort */ 8:
+                    message.kshort = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.kshort);
                     break;
-                case /* double dlong */ 9:
-                    message.dlong = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dlong */ 9:
+                    message.dlong = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dlong);
                     break;
-                case /* double dshort */ 10:
-                    message.dshort = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dshort */ 10:
+                    message.dshort = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dshort);
                     break;
-                case /* double dlong_min */ 11:
-                    message.dlongMin = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dlong_min */ 11:
+                    message.dlongMin = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dlongMin);
                     break;
-                case /* double dshort_min */ 12:
-                    message.dshortMin = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dshort_min */ 12:
+                    message.dshortMin = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dshortMin);
                     break;
                 case /* bool short_enabled_flag */ 13:
                     message.shortEnabledFlag = reader.bool();
@@ -2688,8 +2688,8 @@ class Etf$Type extends MessageType<Etf> {
                 case /* string exchange */ 16:
                     message.exchange = reader.string();
                     break;
-                case /* double fixed_commission */ 17:
-                    message.fixedCommission = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation fixed_commission */ 17:
+                    message.fixedCommission = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.fixedCommission);
                     break;
                 case /* string focus_type */ 18:
                     message.focusType = reader.string();
@@ -2697,8 +2697,8 @@ class Etf$Type extends MessageType<Etf> {
                 case /* google.protobuf.Timestamp released_date */ 19:
                     message.releasedDate = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.releasedDate);
                     break;
-                case /* double num_shares */ 20:
-                    message.numShares = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation num_shares */ 20:
+                    message.numShares = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.numShares);
                     break;
                 case /* string country_of_risk */ 21:
                     message.countryOfRisk = reader.string();
@@ -2724,8 +2724,8 @@ class Etf$Type extends MessageType<Etf> {
                 case /* bool sell_available_flag */ 28:
                     message.sellAvailableFlag = reader.bool();
                     break;
-                case /* float min_price_increment */ 29:
-                    message.minPriceIncrement = reader.float();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment */ 29:
+                    message.minPriceIncrement = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.minPriceIncrement);
                     break;
                 case /* bool api_trade_available_flag */ 30:
                     message.apiTradeAvailableFlag = reader.bool();
@@ -2760,24 +2760,24 @@ class Etf$Type extends MessageType<Etf> {
         /* string currency = 6; */
         if (message.currency !== "")
             writer.tag(6, WireType.LengthDelimited).string(message.currency);
-        /* double klong = 7; */
-        if (message.klong !== 0)
-            writer.tag(7, WireType.Bit64).double(message.klong);
-        /* double kshort = 8; */
-        if (message.kshort !== 0)
-            writer.tag(8, WireType.Bit64).double(message.kshort);
-        /* double dlong = 9; */
-        if (message.dlong !== 0)
-            writer.tag(9, WireType.Bit64).double(message.dlong);
-        /* double dshort = 10; */
-        if (message.dshort !== 0)
-            writer.tag(10, WireType.Bit64).double(message.dshort);
-        /* double dlong_min = 11; */
-        if (message.dlongMin !== 0)
-            writer.tag(11, WireType.Bit64).double(message.dlongMin);
-        /* double dshort_min = 12; */
-        if (message.dshortMin !== 0)
-            writer.tag(12, WireType.Bit64).double(message.dshortMin);
+        /* tinkoff.public.invest.api.contract.v1.Quotation klong = 7; */
+        if (message.klong)
+            Quotation.internalBinaryWrite(message.klong, writer.tag(7, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation kshort = 8; */
+        if (message.kshort)
+            Quotation.internalBinaryWrite(message.kshort, writer.tag(8, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dlong = 9; */
+        if (message.dlong)
+            Quotation.internalBinaryWrite(message.dlong, writer.tag(9, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dshort = 10; */
+        if (message.dshort)
+            Quotation.internalBinaryWrite(message.dshort, writer.tag(10, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dlong_min = 11; */
+        if (message.dlongMin)
+            Quotation.internalBinaryWrite(message.dlongMin, writer.tag(11, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dshort_min = 12; */
+        if (message.dshortMin)
+            Quotation.internalBinaryWrite(message.dshortMin, writer.tag(12, WireType.LengthDelimited).fork(), options).join();
         /* bool short_enabled_flag = 13; */
         if (message.shortEnabledFlag !== false)
             writer.tag(13, WireType.Varint).bool(message.shortEnabledFlag);
@@ -2787,18 +2787,18 @@ class Etf$Type extends MessageType<Etf> {
         /* string exchange = 16; */
         if (message.exchange !== "")
             writer.tag(16, WireType.LengthDelimited).string(message.exchange);
-        /* double fixed_commission = 17; */
-        if (message.fixedCommission !== 0)
-            writer.tag(17, WireType.Bit64).double(message.fixedCommission);
+        /* tinkoff.public.invest.api.contract.v1.Quotation fixed_commission = 17; */
+        if (message.fixedCommission)
+            Quotation.internalBinaryWrite(message.fixedCommission, writer.tag(17, WireType.LengthDelimited).fork(), options).join();
         /* string focus_type = 18; */
         if (message.focusType !== "")
             writer.tag(18, WireType.LengthDelimited).string(message.focusType);
         /* google.protobuf.Timestamp released_date = 19; */
         if (message.releasedDate)
             Timestamp.internalBinaryWrite(message.releasedDate, writer.tag(19, WireType.LengthDelimited).fork(), options).join();
-        /* double num_shares = 20; */
-        if (message.numShares !== 0)
-            writer.tag(20, WireType.Bit64).double(message.numShares);
+        /* tinkoff.public.invest.api.contract.v1.Quotation num_shares = 20; */
+        if (message.numShares)
+            Quotation.internalBinaryWrite(message.numShares, writer.tag(20, WireType.LengthDelimited).fork(), options).join();
         /* string country_of_risk = 21; */
         if (message.countryOfRisk !== "")
             writer.tag(21, WireType.LengthDelimited).string(message.countryOfRisk);
@@ -2823,9 +2823,9 @@ class Etf$Type extends MessageType<Etf> {
         /* bool sell_available_flag = 28; */
         if (message.sellAvailableFlag !== false)
             writer.tag(28, WireType.Varint).bool(message.sellAvailableFlag);
-        /* float min_price_increment = 29; */
-        if (message.minPriceIncrement !== 0)
-            writer.tag(29, WireType.Bit32).float(message.minPriceIncrement);
+        /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 29; */
+        if (message.minPriceIncrement)
+            Quotation.internalBinaryWrite(message.minPriceIncrement, writer.tag(29, WireType.LengthDelimited).fork(), options).join();
         /* bool api_trade_available_flag = 30; */
         if (message.apiTradeAvailableFlag !== false)
             writer.tag(30, WireType.Varint).bool(message.apiTradeAvailableFlag);
@@ -2848,12 +2848,12 @@ class Future$Type extends MessageType<Future> {
             { no: 3, name: "class_code", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "lot", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
             { no: 5, name: "currency", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 6, name: "klong", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 7, name: "kshort", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 8, name: "dlong", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 9, name: "dshort", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 10, name: "dlong_min", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 11, name: "dshort_min", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
+            { no: 6, name: "klong", kind: "message", T: () => Quotation },
+            { no: 7, name: "kshort", kind: "message", T: () => Quotation },
+            { no: 8, name: "dlong", kind: "message", T: () => Quotation },
+            { no: 9, name: "dshort", kind: "message", T: () => Quotation },
+            { no: 10, name: "dlong_min", kind: "message", T: () => Quotation },
+            { no: 11, name: "dshort_min", kind: "message", T: () => Quotation },
             { no: 12, name: "short_enabled_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 13, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 14, name: "exchange", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
@@ -2862,7 +2862,7 @@ class Future$Type extends MessageType<Future> {
             { no: 17, name: "futures_type", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 18, name: "asset_type", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 19, name: "basic_asset", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 20, name: "basic_asset_size", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
+            { no: 20, name: "basic_asset_size", kind: "message", T: () => Quotation },
             { no: 21, name: "country_of_risk", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 22, name: "country_of_risk_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 23, name: "sector", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
@@ -2871,12 +2871,12 @@ class Future$Type extends MessageType<Future> {
             { no: 26, name: "otc_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 27, name: "buy_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 28, name: "sell_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 29, name: "min_price_increment", kind: "scalar", T: 2 /*ScalarType.FLOAT*/ },
+            { no: 29, name: "min_price_increment", kind: "message", T: () => Quotation },
             { no: 30, name: "api_trade_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
     create(value?: PartialMessage<Future>): Future {
-        const message = { figi: "", ticker: "", classCode: "", lot: 0, currency: "", klong: 0, kshort: 0, dlong: 0, dshort: 0, dlongMin: 0, dshortMin: 0, shortEnabledFlag: false, name: "", exchange: "", futuresType: "", assetType: "", basicAsset: "", basicAssetSize: 0, countryOfRisk: "", countryOfRiskName: "", sector: "", tradingStatus: 0, otcFlag: false, buyAvailableFlag: false, sellAvailableFlag: false, minPriceIncrement: 0, apiTradeAvailableFlag: false };
+        const message = { figi: "", ticker: "", classCode: "", lot: 0, currency: "", shortEnabledFlag: false, name: "", exchange: "", futuresType: "", assetType: "", basicAsset: "", countryOfRisk: "", countryOfRiskName: "", sector: "", tradingStatus: 0, otcFlag: false, buyAvailableFlag: false, sellAvailableFlag: false, apiTradeAvailableFlag: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Future>(this, message, value);
@@ -2902,23 +2902,23 @@ class Future$Type extends MessageType<Future> {
                 case /* string currency */ 5:
                     message.currency = reader.string();
                     break;
-                case /* double klong */ 6:
-                    message.klong = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation klong */ 6:
+                    message.klong = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.klong);
                     break;
-                case /* double kshort */ 7:
-                    message.kshort = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation kshort */ 7:
+                    message.kshort = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.kshort);
                     break;
-                case /* double dlong */ 8:
-                    message.dlong = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dlong */ 8:
+                    message.dlong = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dlong);
                     break;
-                case /* double dshort */ 9:
-                    message.dshort = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dshort */ 9:
+                    message.dshort = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dshort);
                     break;
-                case /* double dlong_min */ 10:
-                    message.dlongMin = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dlong_min */ 10:
+                    message.dlongMin = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dlongMin);
                     break;
-                case /* double dshort_min */ 11:
-                    message.dshortMin = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dshort_min */ 11:
+                    message.dshortMin = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dshortMin);
                     break;
                 case /* bool short_enabled_flag */ 12:
                     message.shortEnabledFlag = reader.bool();
@@ -2944,8 +2944,8 @@ class Future$Type extends MessageType<Future> {
                 case /* string basic_asset */ 19:
                     message.basicAsset = reader.string();
                     break;
-                case /* double basic_asset_size */ 20:
-                    message.basicAssetSize = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation basic_asset_size */ 20:
+                    message.basicAssetSize = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.basicAssetSize);
                     break;
                 case /* string country_of_risk */ 21:
                     message.countryOfRisk = reader.string();
@@ -2971,8 +2971,8 @@ class Future$Type extends MessageType<Future> {
                 case /* bool sell_available_flag */ 28:
                     message.sellAvailableFlag = reader.bool();
                     break;
-                case /* float min_price_increment */ 29:
-                    message.minPriceIncrement = reader.float();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment */ 29:
+                    message.minPriceIncrement = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.minPriceIncrement);
                     break;
                 case /* bool api_trade_available_flag */ 30:
                     message.apiTradeAvailableFlag = reader.bool();
@@ -3004,24 +3004,24 @@ class Future$Type extends MessageType<Future> {
         /* string currency = 5; */
         if (message.currency !== "")
             writer.tag(5, WireType.LengthDelimited).string(message.currency);
-        /* double klong = 6; */
-        if (message.klong !== 0)
-            writer.tag(6, WireType.Bit64).double(message.klong);
-        /* double kshort = 7; */
-        if (message.kshort !== 0)
-            writer.tag(7, WireType.Bit64).double(message.kshort);
-        /* double dlong = 8; */
-        if (message.dlong !== 0)
-            writer.tag(8, WireType.Bit64).double(message.dlong);
-        /* double dshort = 9; */
-        if (message.dshort !== 0)
-            writer.tag(9, WireType.Bit64).double(message.dshort);
-        /* double dlong_min = 10; */
-        if (message.dlongMin !== 0)
-            writer.tag(10, WireType.Bit64).double(message.dlongMin);
-        /* double dshort_min = 11; */
-        if (message.dshortMin !== 0)
-            writer.tag(11, WireType.Bit64).double(message.dshortMin);
+        /* tinkoff.public.invest.api.contract.v1.Quotation klong = 6; */
+        if (message.klong)
+            Quotation.internalBinaryWrite(message.klong, writer.tag(6, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation kshort = 7; */
+        if (message.kshort)
+            Quotation.internalBinaryWrite(message.kshort, writer.tag(7, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dlong = 8; */
+        if (message.dlong)
+            Quotation.internalBinaryWrite(message.dlong, writer.tag(8, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dshort = 9; */
+        if (message.dshort)
+            Quotation.internalBinaryWrite(message.dshort, writer.tag(9, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dlong_min = 10; */
+        if (message.dlongMin)
+            Quotation.internalBinaryWrite(message.dlongMin, writer.tag(10, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dshort_min = 11; */
+        if (message.dshortMin)
+            Quotation.internalBinaryWrite(message.dshortMin, writer.tag(11, WireType.LengthDelimited).fork(), options).join();
         /* bool short_enabled_flag = 12; */
         if (message.shortEnabledFlag !== false)
             writer.tag(12, WireType.Varint).bool(message.shortEnabledFlag);
@@ -3046,9 +3046,9 @@ class Future$Type extends MessageType<Future> {
         /* string basic_asset = 19; */
         if (message.basicAsset !== "")
             writer.tag(19, WireType.LengthDelimited).string(message.basicAsset);
-        /* double basic_asset_size = 20; */
-        if (message.basicAssetSize !== 0)
-            writer.tag(20, WireType.Bit64).double(message.basicAssetSize);
+        /* tinkoff.public.invest.api.contract.v1.Quotation basic_asset_size = 20; */
+        if (message.basicAssetSize)
+            Quotation.internalBinaryWrite(message.basicAssetSize, writer.tag(20, WireType.LengthDelimited).fork(), options).join();
         /* string country_of_risk = 21; */
         if (message.countryOfRisk !== "")
             writer.tag(21, WireType.LengthDelimited).string(message.countryOfRisk);
@@ -3073,9 +3073,9 @@ class Future$Type extends MessageType<Future> {
         /* bool sell_available_flag = 28; */
         if (message.sellAvailableFlag !== false)
             writer.tag(28, WireType.Varint).bool(message.sellAvailableFlag);
-        /* float min_price_increment = 29; */
-        if (message.minPriceIncrement !== 0)
-            writer.tag(29, WireType.Bit32).float(message.minPriceIncrement);
+        /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 29; */
+        if (message.minPriceIncrement)
+            Quotation.internalBinaryWrite(message.minPriceIncrement, writer.tag(29, WireType.LengthDelimited).fork(), options).join();
         /* bool api_trade_available_flag = 30; */
         if (message.apiTradeAvailableFlag !== false)
             writer.tag(30, WireType.Varint).bool(message.apiTradeAvailableFlag);
@@ -3099,12 +3099,12 @@ class Share$Type extends MessageType<Share> {
             { no: 4, name: "isin", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 5, name: "lot", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
             { no: 6, name: "currency", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 7, name: "klong", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 8, name: "kshort", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 9, name: "dlong", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 10, name: "dshort", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 11, name: "dlong_min", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 12, name: "dshort_min", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
+            { no: 7, name: "klong", kind: "message", T: () => Quotation },
+            { no: 8, name: "kshort", kind: "message", T: () => Quotation },
+            { no: 9, name: "dlong", kind: "message", T: () => Quotation },
+            { no: 10, name: "dshort", kind: "message", T: () => Quotation },
+            { no: 11, name: "dlong_min", kind: "message", T: () => Quotation },
+            { no: 12, name: "dshort_min", kind: "message", T: () => Quotation },
             { no: 13, name: "short_enabled_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 15, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 16, name: "exchange", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
@@ -3121,12 +3121,12 @@ class Share$Type extends MessageType<Share> {
             { no: 28, name: "sell_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 29, name: "div_yield_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 30, name: "share_type", kind: "enum", T: () => ["tinkoff.public.invest.api.contract.v1.ShareType", ShareType, "SHARE_TYPE_"] },
-            { no: 31, name: "min_price_increment", kind: "scalar", T: 2 /*ScalarType.FLOAT*/ },
+            { no: 31, name: "min_price_increment", kind: "message", T: () => Quotation },
             { no: 32, name: "api_trade_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
     create(value?: PartialMessage<Share>): Share {
-        const message = { figi: "", ticker: "", classCode: "", isin: "", lot: 0, currency: "", klong: 0, kshort: 0, dlong: 0, dshort: 0, dlongMin: 0, dshortMin: 0, shortEnabledFlag: false, name: "", exchange: "", issueSize: 0n, countryOfRisk: "", countryOfRiskName: "", sector: "", issueSizePlan: 0n, tradingStatus: 0, otcFlag: false, buyAvailableFlag: false, sellAvailableFlag: false, divYieldFlag: false, shareType: 0, minPriceIncrement: 0, apiTradeAvailableFlag: false };
+        const message = { figi: "", ticker: "", classCode: "", isin: "", lot: 0, currency: "", shortEnabledFlag: false, name: "", exchange: "", issueSize: 0n, countryOfRisk: "", countryOfRiskName: "", sector: "", issueSizePlan: 0n, tradingStatus: 0, otcFlag: false, buyAvailableFlag: false, sellAvailableFlag: false, divYieldFlag: false, shareType: 0, apiTradeAvailableFlag: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Share>(this, message, value);
@@ -3155,23 +3155,23 @@ class Share$Type extends MessageType<Share> {
                 case /* string currency */ 6:
                     message.currency = reader.string();
                     break;
-                case /* double klong */ 7:
-                    message.klong = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation klong */ 7:
+                    message.klong = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.klong);
                     break;
-                case /* double kshort */ 8:
-                    message.kshort = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation kshort */ 8:
+                    message.kshort = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.kshort);
                     break;
-                case /* double dlong */ 9:
-                    message.dlong = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dlong */ 9:
+                    message.dlong = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dlong);
                     break;
-                case /* double dshort */ 10:
-                    message.dshort = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dshort */ 10:
+                    message.dshort = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dshort);
                     break;
-                case /* double dlong_min */ 11:
-                    message.dlongMin = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dlong_min */ 11:
+                    message.dlongMin = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dlongMin);
                     break;
-                case /* double dshort_min */ 12:
-                    message.dshortMin = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dshort_min */ 12:
+                    message.dshortMin = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dshortMin);
                     break;
                 case /* bool short_enabled_flag */ 13:
                     message.shortEnabledFlag = reader.bool();
@@ -3221,8 +3221,8 @@ class Share$Type extends MessageType<Share> {
                 case /* tinkoff.public.invest.api.contract.v1.ShareType share_type */ 30:
                     message.shareType = reader.int32();
                     break;
-                case /* float min_price_increment */ 31:
-                    message.minPriceIncrement = reader.float();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment */ 31:
+                    message.minPriceIncrement = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.minPriceIncrement);
                     break;
                 case /* bool api_trade_available_flag */ 32:
                     message.apiTradeAvailableFlag = reader.bool();
@@ -3257,24 +3257,24 @@ class Share$Type extends MessageType<Share> {
         /* string currency = 6; */
         if (message.currency !== "")
             writer.tag(6, WireType.LengthDelimited).string(message.currency);
-        /* double klong = 7; */
-        if (message.klong !== 0)
-            writer.tag(7, WireType.Bit64).double(message.klong);
-        /* double kshort = 8; */
-        if (message.kshort !== 0)
-            writer.tag(8, WireType.Bit64).double(message.kshort);
-        /* double dlong = 9; */
-        if (message.dlong !== 0)
-            writer.tag(9, WireType.Bit64).double(message.dlong);
-        /* double dshort = 10; */
-        if (message.dshort !== 0)
-            writer.tag(10, WireType.Bit64).double(message.dshort);
-        /* double dlong_min = 11; */
-        if (message.dlongMin !== 0)
-            writer.tag(11, WireType.Bit64).double(message.dlongMin);
-        /* double dshort_min = 12; */
-        if (message.dshortMin !== 0)
-            writer.tag(12, WireType.Bit64).double(message.dshortMin);
+        /* tinkoff.public.invest.api.contract.v1.Quotation klong = 7; */
+        if (message.klong)
+            Quotation.internalBinaryWrite(message.klong, writer.tag(7, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation kshort = 8; */
+        if (message.kshort)
+            Quotation.internalBinaryWrite(message.kshort, writer.tag(8, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dlong = 9; */
+        if (message.dlong)
+            Quotation.internalBinaryWrite(message.dlong, writer.tag(9, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dshort = 10; */
+        if (message.dshort)
+            Quotation.internalBinaryWrite(message.dshort, writer.tag(10, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dlong_min = 11; */
+        if (message.dlongMin)
+            Quotation.internalBinaryWrite(message.dlongMin, writer.tag(11, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dshort_min = 12; */
+        if (message.dshortMin)
+            Quotation.internalBinaryWrite(message.dshortMin, writer.tag(12, WireType.LengthDelimited).fork(), options).join();
         /* bool short_enabled_flag = 13; */
         if (message.shortEnabledFlag !== false)
             writer.tag(13, WireType.Varint).bool(message.shortEnabledFlag);
@@ -3323,9 +3323,9 @@ class Share$Type extends MessageType<Share> {
         /* tinkoff.public.invest.api.contract.v1.ShareType share_type = 30; */
         if (message.shareType !== 0)
             writer.tag(30, WireType.Varint).int32(message.shareType);
-        /* float min_price_increment = 31; */
-        if (message.minPriceIncrement !== 0)
-            writer.tag(31, WireType.Bit32).float(message.minPriceIncrement);
+        /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 31; */
+        if (message.minPriceIncrement)
+            Quotation.internalBinaryWrite(message.minPriceIncrement, writer.tag(31, WireType.LengthDelimited).fork(), options).join();
         /* bool api_trade_available_flag = 32; */
         if (message.apiTradeAvailableFlag !== false)
             writer.tag(32, WireType.Varint).bool(message.apiTradeAvailableFlag);
@@ -3453,12 +3453,12 @@ class AccruedInterest$Type extends MessageType<AccruedInterest> {
         super("tinkoff.public.invest.api.contract.v1.AccruedInterest", [
             { no: 1, name: "date", kind: "message", T: () => Timestamp },
             { no: 2, name: "value", kind: "message", T: () => Quotation },
-            { no: 3, name: "value_percent", kind: "scalar", T: 2 /*ScalarType.FLOAT*/ },
+            { no: 3, name: "value_percent", kind: "message", T: () => Quotation },
             { no: 4, name: "nominal", kind: "message", T: () => Quotation }
         ]);
     }
     create(value?: PartialMessage<AccruedInterest>): AccruedInterest {
-        const message = { valuePercent: 0 };
+        const message = {};
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<AccruedInterest>(this, message, value);
@@ -3475,8 +3475,8 @@ class AccruedInterest$Type extends MessageType<AccruedInterest> {
                 case /* tinkoff.public.invest.api.contract.v1.Quotation value */ 2:
                     message.value = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.value);
                     break;
-                case /* float value_percent */ 3:
-                    message.valuePercent = reader.float();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation value_percent */ 3:
+                    message.valuePercent = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.valuePercent);
                     break;
                 case /* tinkoff.public.invest.api.contract.v1.Quotation nominal */ 4:
                     message.nominal = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.nominal);
@@ -3499,9 +3499,9 @@ class AccruedInterest$Type extends MessageType<AccruedInterest> {
         /* tinkoff.public.invest.api.contract.v1.Quotation value = 2; */
         if (message.value)
             Quotation.internalBinaryWrite(message.value, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* float value_percent = 3; */
-        if (message.valuePercent !== 0)
-            writer.tag(3, WireType.Bit32).float(message.valuePercent);
+        /* tinkoff.public.invest.api.contract.v1.Quotation value_percent = 3; */
+        if (message.valuePercent)
+            Quotation.internalBinaryWrite(message.valuePercent, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
         /* tinkoff.public.invest.api.contract.v1.Quotation nominal = 4; */
         if (message.nominal)
             Quotation.internalBinaryWrite(message.nominal, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
@@ -3568,12 +3568,12 @@ class GetFuturesMarginResponse$Type extends MessageType<GetFuturesMarginResponse
         super("tinkoff.public.invest.api.contract.v1.GetFuturesMarginResponse", [
             { no: 1, name: "initial_margin_on_buy", kind: "message", T: () => MoneyValue },
             { no: 2, name: "initial_margin_on_sell", kind: "message", T: () => MoneyValue },
-            { no: 3, name: "min_price_increment", kind: "scalar", T: 2 /*ScalarType.FLOAT*/ },
+            { no: 3, name: "min_price_increment", kind: "message", T: () => Quotation },
             { no: 4, name: "min_price_increment_amount", kind: "message", T: () => Quotation }
         ]);
     }
     create(value?: PartialMessage<GetFuturesMarginResponse>): GetFuturesMarginResponse {
-        const message = { minPriceIncrement: 0 };
+        const message = {};
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<GetFuturesMarginResponse>(this, message, value);
@@ -3590,8 +3590,8 @@ class GetFuturesMarginResponse$Type extends MessageType<GetFuturesMarginResponse
                 case /* tinkoff.public.invest.api.contract.v1.MoneyValue initial_margin_on_sell */ 2:
                     message.initialMarginOnSell = MoneyValue.internalBinaryRead(reader, reader.uint32(), options, message.initialMarginOnSell);
                     break;
-                case /* float min_price_increment */ 3:
-                    message.minPriceIncrement = reader.float();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment */ 3:
+                    message.minPriceIncrement = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.minPriceIncrement);
                     break;
                 case /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment_amount */ 4:
                     message.minPriceIncrementAmount = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.minPriceIncrementAmount);
@@ -3614,9 +3614,9 @@ class GetFuturesMarginResponse$Type extends MessageType<GetFuturesMarginResponse
         /* tinkoff.public.invest.api.contract.v1.MoneyValue initial_margin_on_sell = 2; */
         if (message.initialMarginOnSell)
             MoneyValue.internalBinaryWrite(message.initialMarginOnSell, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* float min_price_increment = 3; */
-        if (message.minPriceIncrement !== 0)
-            writer.tag(3, WireType.Bit32).float(message.minPriceIncrement);
+        /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 3; */
+        if (message.minPriceIncrement)
+            Quotation.internalBinaryWrite(message.minPriceIncrement, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
         /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment_amount = 4; */
         if (message.minPriceIncrementAmount)
             Quotation.internalBinaryWrite(message.minPriceIncrementAmount, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
@@ -3687,12 +3687,12 @@ class Instrument$Type extends MessageType<Instrument> {
             { no: 4, name: "isin", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 5, name: "lot", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
             { no: 6, name: "currency", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 7, name: "klong", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 8, name: "kshort", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 9, name: "dlong", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 10, name: "dshort", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 11, name: "dlong_min", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 12, name: "dshort_min", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ },
+            { no: 7, name: "klong", kind: "message", T: () => Quotation },
+            { no: 8, name: "kshort", kind: "message", T: () => Quotation },
+            { no: 9, name: "dlong", kind: "message", T: () => Quotation },
+            { no: 10, name: "dshort", kind: "message", T: () => Quotation },
+            { no: 11, name: "dlong_min", kind: "message", T: () => Quotation },
+            { no: 12, name: "dshort_min", kind: "message", T: () => Quotation },
             { no: 13, name: "short_enabled_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 14, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 15, name: "exchange", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
@@ -3703,12 +3703,12 @@ class Instrument$Type extends MessageType<Instrument> {
             { no: 20, name: "otc_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 21, name: "buy_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 22, name: "sell_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 23, name: "min_price_increment", kind: "scalar", T: 2 /*ScalarType.FLOAT*/ },
+            { no: 23, name: "min_price_increment", kind: "message", T: () => Quotation },
             { no: 24, name: "api_trade_available_flag", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
     create(value?: PartialMessage<Instrument>): Instrument {
-        const message = { figi: "", ticker: "", classCode: "", isin: "", lot: 0, currency: "", klong: 0, kshort: 0, dlong: 0, dshort: 0, dlongMin: 0, dshortMin: 0, shortEnabledFlag: false, name: "", exchange: "", countryOfRisk: "", countryOfRiskName: "", instrumentType: "", tradingStatus: 0, otcFlag: false, buyAvailableFlag: false, sellAvailableFlag: false, minPriceIncrement: 0, apiTradeAvailableFlag: false };
+        const message = { figi: "", ticker: "", classCode: "", isin: "", lot: 0, currency: "", shortEnabledFlag: false, name: "", exchange: "", countryOfRisk: "", countryOfRiskName: "", instrumentType: "", tradingStatus: 0, otcFlag: false, buyAvailableFlag: false, sellAvailableFlag: false, apiTradeAvailableFlag: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Instrument>(this, message, value);
@@ -3737,23 +3737,23 @@ class Instrument$Type extends MessageType<Instrument> {
                 case /* string currency */ 6:
                     message.currency = reader.string();
                     break;
-                case /* double klong */ 7:
-                    message.klong = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation klong */ 7:
+                    message.klong = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.klong);
                     break;
-                case /* double kshort */ 8:
-                    message.kshort = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation kshort */ 8:
+                    message.kshort = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.kshort);
                     break;
-                case /* double dlong */ 9:
-                    message.dlong = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dlong */ 9:
+                    message.dlong = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dlong);
                     break;
-                case /* double dshort */ 10:
-                    message.dshort = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dshort */ 10:
+                    message.dshort = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dshort);
                     break;
-                case /* double dlong_min */ 11:
-                    message.dlongMin = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dlong_min */ 11:
+                    message.dlongMin = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dlongMin);
                     break;
-                case /* double dshort_min */ 12:
-                    message.dshortMin = reader.double();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation dshort_min */ 12:
+                    message.dshortMin = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.dshortMin);
                     break;
                 case /* bool short_enabled_flag */ 13:
                     message.shortEnabledFlag = reader.bool();
@@ -3785,8 +3785,8 @@ class Instrument$Type extends MessageType<Instrument> {
                 case /* bool sell_available_flag */ 22:
                     message.sellAvailableFlag = reader.bool();
                     break;
-                case /* float min_price_increment */ 23:
-                    message.minPriceIncrement = reader.float();
+                case /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment */ 23:
+                    message.minPriceIncrement = Quotation.internalBinaryRead(reader, reader.uint32(), options, message.minPriceIncrement);
                     break;
                 case /* bool api_trade_available_flag */ 24:
                     message.apiTradeAvailableFlag = reader.bool();
@@ -3821,24 +3821,24 @@ class Instrument$Type extends MessageType<Instrument> {
         /* string currency = 6; */
         if (message.currency !== "")
             writer.tag(6, WireType.LengthDelimited).string(message.currency);
-        /* double klong = 7; */
-        if (message.klong !== 0)
-            writer.tag(7, WireType.Bit64).double(message.klong);
-        /* double kshort = 8; */
-        if (message.kshort !== 0)
-            writer.tag(8, WireType.Bit64).double(message.kshort);
-        /* double dlong = 9; */
-        if (message.dlong !== 0)
-            writer.tag(9, WireType.Bit64).double(message.dlong);
-        /* double dshort = 10; */
-        if (message.dshort !== 0)
-            writer.tag(10, WireType.Bit64).double(message.dshort);
-        /* double dlong_min = 11; */
-        if (message.dlongMin !== 0)
-            writer.tag(11, WireType.Bit64).double(message.dlongMin);
-        /* double dshort_min = 12; */
-        if (message.dshortMin !== 0)
-            writer.tag(12, WireType.Bit64).double(message.dshortMin);
+        /* tinkoff.public.invest.api.contract.v1.Quotation klong = 7; */
+        if (message.klong)
+            Quotation.internalBinaryWrite(message.klong, writer.tag(7, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation kshort = 8; */
+        if (message.kshort)
+            Quotation.internalBinaryWrite(message.kshort, writer.tag(8, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dlong = 9; */
+        if (message.dlong)
+            Quotation.internalBinaryWrite(message.dlong, writer.tag(9, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dshort = 10; */
+        if (message.dshort)
+            Quotation.internalBinaryWrite(message.dshort, writer.tag(10, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dlong_min = 11; */
+        if (message.dlongMin)
+            Quotation.internalBinaryWrite(message.dlongMin, writer.tag(11, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.Quotation dshort_min = 12; */
+        if (message.dshortMin)
+            Quotation.internalBinaryWrite(message.dshortMin, writer.tag(12, WireType.LengthDelimited).fork(), options).join();
         /* bool short_enabled_flag = 13; */
         if (message.shortEnabledFlag !== false)
             writer.tag(13, WireType.Varint).bool(message.shortEnabledFlag);
@@ -3869,9 +3869,9 @@ class Instrument$Type extends MessageType<Instrument> {
         /* bool sell_available_flag = 22; */
         if (message.sellAvailableFlag !== false)
             writer.tag(22, WireType.Varint).bool(message.sellAvailableFlag);
-        /* float min_price_increment = 23; */
-        if (message.minPriceIncrement !== 0)
-            writer.tag(23, WireType.Bit32).float(message.minPriceIncrement);
+        /* tinkoff.public.invest.api.contract.v1.Quotation min_price_increment = 23; */
+        if (message.minPriceIncrement)
+            Quotation.internalBinaryWrite(message.minPriceIncrement, writer.tag(23, WireType.LengthDelimited).fork(), options).join();
         /* bool api_trade_available_flag = 24; */
         if (message.apiTradeAvailableFlag !== false)
             writer.tag(24, WireType.Varint).bool(message.apiTradeAvailableFlag);
