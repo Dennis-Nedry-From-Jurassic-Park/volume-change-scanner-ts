@@ -1,18 +1,12 @@
-import {GrpcTransport} from "@protobuf-ts/grpc-transport";
-import {GrpcOptions} from "@protobuf-ts/grpc-transport/build/types/grpc-options";
-import {ChannelCredentials} from "@grpc/grpc-js";
-
-import {Timestamp} from "../protos_ts/google/protobuf/timestamp";
-import {InstrumentsServiceClient} from "../protos_ts/instruments.client";
-import {GetDividendsRequest} from "../protos_ts/instruments";
 import {OperationsServiceClient} from "../protos_ts/operations.client";
 import {OperationsRequest, OperationState, PortfolioRequest} from "../protos_ts/operations";
-import {
-    InstrumentIdType,
-    InstrumentRequest,
-    InstrumentsRequest,
-    InstrumentStatus
-} from "../protos_ts/instruments";
+import {GrpcTransport} from "@protobuf-ts/grpc-transport";
+import {ChannelCredentials} from "@grpc/grpc-js";
+import {Timestamp} from "../protos_ts/google/protobuf/timestamp";
+import {GrpcOptions} from "@protobuf-ts/grpc-transport/build/types/grpc-options";
+import {InstrumentsServiceClient} from "../protos_ts/instruments.client";
+import {GetDividendsRequest} from "../protos_ts/instruments";
+
 import moment from 'moment';
 
 import secrets from './utility-methods/env';
