@@ -115,7 +115,7 @@ export interface CancelStopOrderResponse {
     /**
      * @generated from protobuf field: google.protobuf.Timestamp time = 1;
      */
-    time?: Timestamp; // Время отмены заявки в часовом поясе UTC
+    time?: Timestamp; // Время отмены заявки в часовом поясе UTC.
 }
 /**
  * Информация о стоп-заявке.
@@ -150,15 +150,15 @@ export interface StopOrder {
     /**
      * @generated from protobuf field: google.protobuf.Timestamp create_date = 7;
      */
-    createDate?: Timestamp; // Дата и время выставления заявки в часовом поясе UTC
+    createDate?: Timestamp; // Дата и время выставления заявки в часовом поясе UTC.
     /**
      * @generated from protobuf field: google.protobuf.Timestamp activation_date_time = 8;
      */
-    activationDateTime?: Timestamp; // Дата и время конвертации стоп-заявки в биржевую в часовом поясе UTC
+    activationDateTime?: Timestamp; // Дата и время конвертации стоп-заявки в биржевую в часовом поясе UTC.
     /**
      * @generated from protobuf field: google.protobuf.Timestamp expiration_time = 9;
      */
-    expirationTime?: Timestamp; // Дата и время снятия заявки в часовом поясе UTC
+    expirationTime?: Timestamp; // Дата и время снятия заявки в часовом поясе UTC.
     /**
      * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.MoneyValue price = 10;
      */

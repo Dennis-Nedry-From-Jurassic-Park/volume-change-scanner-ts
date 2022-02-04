@@ -9,19 +9,19 @@ import {GetDividendsRequest} from "../protos_ts/instruments";
 
 import moment from 'moment';
 
+import secrets from './utility-methods/env';
+
 
 export const connect = async (sheet: string) => {
-    const brokerAccountId = sheet === '' ? "" : "";
+    const brokerAccountId = sheet === "IIS" ? secrets.brokerAccountIdIis : secrets.brokerAccountId;
+    const token = secrets.token;
 
     const operationsRequest = OperationsRequest.create();
-    operationsRequest.accountId = brokerAccountId;
-    operationsRequest.from = Timestamp.fromDate(moment().subtract(3, "years").toDate());
-
+    operationsRequest.accountId = brokerAccountId!;
+    operationsRequest.from = Timestamp.fromDate(moment().subtract(1, "years").toDate());
     operationsRequest.to = Timestamp.fromDate(moment().toDate());
     operationsRequest.state = OperationState.EXECUTED;
     operationsRequest.figi = "BBG000C0HQ54";
-
-    const token = "";
 
     let o : GrpcOptions = {
         host: "invest-public-api.tinkoff.ru:443",
@@ -36,12 +36,17 @@ export const connect = async (sheet: string) => {
 
     const portfolioRequest = PortfolioRequest.create();
 
-    portfolioRequest.accountId = brokerAccountId;
+    portfolioRequest.accountId = brokerAccountId!;
 
     const response = operationsServiceClient.getPortfolio(portfolioRequest);
 
-    console.log(await response.status)
-    console.log(await response.response)
+    const instrumentsServiceClient = new InstrumentsServiceClient(gt);
+
+    const instrumentsRequest = InstrumentsRequest.create();
+    instrumentsRequest.instrumentStatus = InstrumentStatus.ALL
+
+    let sharesResponse = await instrumentsServiceClient.shares(instrumentsRequest)
+    console.log(JSON.stringify(sharesResponse.response, (_, v) => typeof v === 'bigint' ? v.toString() : v))
 };
 
-connect("");
+connect("IIS");

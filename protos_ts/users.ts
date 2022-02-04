@@ -77,6 +77,12 @@ export interface Account {
      * @generated from protobuf field: google.protobuf.Timestamp closed_date = 6;
      */
     closedDate?: Timestamp;
+    /**
+     * Уровень доступа к текущему счёту (определяется токеном).
+     *
+     * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.AccessLevel access_level = 7;
+     */
+    accessLevel: AccessLevel;
 }
 /**
  * Запрос маржинальных показателей по счёту
@@ -268,6 +274,37 @@ export enum AccountStatus {
      */
     CLOSED = 3
 }
+/**
+ * Уровень доступа к счёту.
+ *
+ * @generated from protobuf enum tinkoff.public.invest.api.contract.v1.AccessLevel
+ */
+export enum AccessLevel {
+    /**
+     * Уровень доступа не определён.
+     *
+     * @generated from protobuf enum value: ACCOUNT_ACCESS_LEVEL_UNSPECIFIED = 0;
+     */
+    ACCOUNT_ACCESS_LEVEL_UNSPECIFIED = 0,
+    /**
+     * Полный доступ к счёту.
+     *
+     * @generated from protobuf enum value: ACCOUNT_ACCESS_LEVEL_FULL_ACCESS = 1;
+     */
+    ACCOUNT_ACCESS_LEVEL_FULL_ACCESS = 1,
+    /**
+     * Доступ с уровнем прав "только чтение".
+     *
+     * @generated from protobuf enum value: ACCOUNT_ACCESS_LEVEL_READ_ONLY = 2;
+     */
+    ACCOUNT_ACCESS_LEVEL_READ_ONLY = 2,
+    /**
+     * Доступ отсутствует.
+     *
+     * @generated from protobuf enum value: ACCOUNT_ACCESS_LEVEL_NO_ACCESS = 3;
+     */
+    ACCOUNT_ACCESS_LEVEL_NO_ACCESS = 3
+}
 // @generated message type with reflection information, may provide speed optimized methods
 class GetAccountsRequest$Type extends MessageType<GetAccountsRequest> {
     constructor() {
@@ -350,11 +387,12 @@ class Account$Type extends MessageType<Account> {
             { no: 3, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "status", kind: "enum", T: () => ["tinkoff.public.invest.api.contract.v1.AccountStatus", AccountStatus, "ACCOUNT_STATUS_"] },
             { no: 5, name: "opened_date", kind: "message", T: () => Timestamp },
-            { no: 6, name: "closed_date", kind: "message", T: () => Timestamp }
+            { no: 6, name: "closed_date", kind: "message", T: () => Timestamp },
+            { no: 7, name: "access_level", kind: "enum", T: () => ["tinkoff.public.invest.api.contract.v1.AccessLevel", AccessLevel] }
         ]);
     }
     create(value?: PartialMessage<Account>): Account {
-        const message = { id: "", type: 0, name: "", status: 0 };
+        const message = { id: "", type: 0, name: "", status: 0, accessLevel: 0 };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Account>(this, message, value);
@@ -382,6 +420,9 @@ class Account$Type extends MessageType<Account> {
                     break;
                 case /* google.protobuf.Timestamp closed_date */ 6:
                     message.closedDate = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.closedDate);
+                    break;
+                case /* tinkoff.public.invest.api.contract.v1.AccessLevel access_level */ 7:
+                    message.accessLevel = reader.int32();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -413,6 +454,9 @@ class Account$Type extends MessageType<Account> {
         /* google.protobuf.Timestamp closed_date = 6; */
         if (message.closedDate)
             Timestamp.internalBinaryWrite(message.closedDate, writer.tag(6, WireType.LengthDelimited).fork(), options).join();
+        /* tinkoff.public.invest.api.contract.v1.AccessLevel access_level = 7; */
+        if (message.accessLevel !== 0)
+            writer.tag(7, WireType.Varint).int32(message.accessLevel);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

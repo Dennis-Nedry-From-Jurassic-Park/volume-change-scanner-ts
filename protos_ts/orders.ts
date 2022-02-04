@@ -61,7 +61,7 @@ export interface OrderTrades {
     /**
      * @generated from protobuf field: google.protobuf.Timestamp created_at = 2;
      */
-    createdAt?: Timestamp; // Дата и время создания сообщения
+    createdAt?: Timestamp; // Дата и время создания сообщения в часовом поясе UTC.
     /**
      * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.OrderDirection direction = 3;
      */
@@ -84,7 +84,7 @@ export interface OrderTrade {
     /**
      * @generated from protobuf field: google.protobuf.Timestamp date_time = 1;
      */
-    dateTime?: Timestamp; // Дата и время совершения сделки по времени биржи
+    dateTime?: Timestamp; // Дата и время совершения сделки в часовом поясе UTC.
     /**
      * @generated from protobuf field: tinkoff.public.invest.api.contract.v1.Quotation price = 2;
      */
