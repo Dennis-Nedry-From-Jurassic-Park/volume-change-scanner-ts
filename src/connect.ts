@@ -3,7 +3,7 @@ import {OperationsRequest, OperationState, PortfolioRequest} from "../protos_ts/
 
 import {Timestamp} from "../protos_ts/google/protobuf/timestamp";
 import {InstrumentsServiceClient} from "../protos_ts/instruments.client";
-import {getGrpcTransport} from "./auth/connection";
+import {grpcTransport} from "./auth/connection";
 
 import moment from 'moment';
 
@@ -23,8 +23,6 @@ export const main = async () => {
     operationsRequest.state = OperationState.EXECUTED;
     operationsRequest.figi = "BBG000C0HQ54";
 
-
-    const grpcTransport = await getGrpcTransport();
     const operationsServiceClient = new OperationsServiceClient(grpcTransport);
 
     const portfolioRequest = PortfolioRequest.create();

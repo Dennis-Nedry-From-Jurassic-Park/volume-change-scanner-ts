@@ -13,4 +13,3 @@ tool for generating UML:
 ```ts
 npx arkit src/ -o arkit.svg
 ```
-

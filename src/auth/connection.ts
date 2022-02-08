@@ -4,18 +4,13 @@ import {GrpcTransport} from "@protobuf-ts/grpc-transport";
 import {ChannelCredentials} from "@grpc/grpc-js";
 import {GrpcOptions} from "@protobuf-ts/grpc-transport/build/types/grpc-options";
 
+const token = secrets.token;
 
-export const getGrpcTransport = async () => {
-    const token = secrets.token;
-
-    let grpcOptions : GrpcOptions = {
-        host: "invest-public-api.tinkoff.ru:443",
-        meta: {
-            "authorization" : "Bearer " + token
-        },
-        channelCredentials: ChannelCredentials.createSsl(null, null, null)
-    }
-    const grpcTransport = new GrpcTransport(grpcOptions);
-
-    return grpcTransport
+const grpcOptions : GrpcOptions = {
+    host: "invest-public-api.tinkoff.ru:443",
+    meta: {
+        "authorization" : "Bearer " + token
+    },
+    channelCredentials: ChannelCredentials.createSsl(null, null, null)
 }
+export const grpcTransport = new GrpcTransport(grpcOptions);

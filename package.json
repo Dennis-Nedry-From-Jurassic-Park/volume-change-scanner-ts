@@ -6,18 +6,22 @@
   "author": "Vadim Kulikov <dennis.nedry.from.jurassic.park@gmail.com>",
   "license": "Apache-2.0",
   "scripts": {
-    "dev": "ts-node ./src/connect.ts"
+    "dev": "ts-node ./src/connect.ts",
+    "ms": "ts-node ./src/ms.instruments.updates.ts"
   },
   "dependencies": {
     "@grpc/proto-loader": "^0.6.9",
+    "@nestjs/common": "^8.2.6",
     "@protobuf-ts/grpc-transport": "^2.2.2",
     "@protobuf-ts/plugin": "^2.2.2",
     "arkit": "^1.6.4",
+    "deep-object-diff": "^1.1.7",
     "dotenv": "^10.0.0",
     "google-auth-library": "^6.1.6",
     "google-protobuf": "^3.19.4",
     "google-spreadsheet": "^3.1.15",
     "googleapis": "^82.0.0",
+    "jsondiffpatch": "^0.4.1",
     "moment": "^2.29.1",
     "ts-node": "^10.2.1",
     "ts-proto": "^1.104.0"
