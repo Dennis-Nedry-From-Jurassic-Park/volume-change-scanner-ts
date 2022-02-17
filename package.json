@@ -16,7 +16,7 @@
     "dotenv": "^10.0.0",
     "google-auth-library": "^6.1.6",
     "google-protobuf": "^3.19.4",
-    "google-spreadsheet": "^3.1.15",
+    "google-spreadsheet": "^3.2.0",
     "googleapis": "^82.0.0",
     "moment": "^2.29.1",
     "ts-node": "^10.2.1",
