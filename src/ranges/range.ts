@@ -14,7 +14,7 @@ export function rangeInclusive (start:number, stop:number, stepSize:number) {
 }
 
 export function rangeExclusive (start:number, stop:number, stepSize:number) : any {
-    if (stop == null) return rangeExclusive(1, start)
+    //if (stop == null) return rangeExclusive(1, start)
     if (stepSize == null) return rangeExclusive(start, stop, 1);
 
     let range = rangeInclusive(start, stop, stepSize);
