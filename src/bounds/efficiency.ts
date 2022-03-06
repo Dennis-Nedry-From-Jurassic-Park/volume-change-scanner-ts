@@ -1,10 +1,10 @@
-import {InvestmentIndicatorBound} from "./bound.record";
+import {InvestmentIndicatorBound} from './bound.record';
 
 export const efficiencyBoundRange :
     Record<string, InvestmentIndicatorBound> = {
-    ROA: new InvestmentIndicatorBound ('ROA', 7.5, 15.0,  true, '>='),
-    ROE: new InvestmentIndicatorBound ('ROE', 12.5, 25.0,  false, '>='),
-    ROCE: new InvestmentIndicatorBound ('ROCE', 10.0, 20.0,  false, '>='),
-    ROIC: new InvestmentIndicatorBound ('ROIC', 12.5, 25.0,  false, '>='),
-    ROTA: new InvestmentIndicatorBound ('ROTA', 12.5, 25.0,  false, '>='),
-}
+    	ROA: new InvestmentIndicatorBound ({ name: 'ROA', start: 7.5, end: 15.0, isReversed: true, comparisonOperator: '>=' }),
+    	ROE: new InvestmentIndicatorBound ({ name: 'ROE', start: 12.5, end: 25.0, isReversed: false, comparisonOperator: '>=' }),
+    	ROCE: new InvestmentIndicatorBound ({ name: 'ROCE', start: 10.0, end: 20.0, isReversed: false, comparisonOperator: '>=' }),
+    	ROIC: new InvestmentIndicatorBound ({ name: 'ROIC', start: 12.5, end: 25.0, isReversed: false, comparisonOperator: '>=' }),
+    	ROTA: new InvestmentIndicatorBound ({ name: 'ROTA', start: 12.5, end: 25.0, isReversed: false, comparisonOperator: '>=' }),
+    };

@@ -14,43 +14,49 @@ interface BoundScoreRecord extends BoundCommon {
 }
 
 export class InvestmentIndicatorBound implements BoundRecord {
-    name:string
+    name: string
     start: number
     end: number
     isReversed: boolean;
     comparisonOperator: string;
 
-    constructor(name: string, start: number, end: number, isReversed: boolean, comparisonOperator: string) {
-        this.name = name;
-        this.start = start;
-        this.end = end;
-        this.isReversed = isReversed;
-        this.comparisonOperator = comparisonOperator;
+    constructor(values: {
+            name: string,
+            start: number,
+            end: number,
+            isReversed: boolean,
+            comparisonOperator: string
+        }) {
+    	this.name = values.name;
+    	this.start = values.start;
+    	this.end = values.end;
+    	this.isReversed = values.isReversed;
+    	this.comparisonOperator = values.comparisonOperator;
     }
 
     getBuffetIndicators():number[] {
-        return [0, this.start / 3, this.start / 2, this.start, this.end, this.end * 2, this.end * 3, 100, 250, 500, 1000]
+    	return [0, this.start / 3, this.start / 2, this.start, this.end, this.end * 2, this.end * 3, 100, 250, 500, 1000];
     }
 
     getBound():string {
-        return `[${this.name} in range [${this.start} .. ${this.end}] is good.
+    	return `[${this.name} in range [${this.start} .. ${this.end}] is good.
                 ${this.name} ${this.comparisonOperator} ${this.end} is excellent.`;
     }
 }
 
 export class InvestmentIndicatorBoundScore implements BoundScoreRecord {
-    constructor(
+	constructor(
         public name:string,
         public goldRatio:number,
         public isReversed: boolean,
         public comparisonOperator:string
-    ) {};
+	) {}
 
-    getBuffetIndicators():number[] {
-        return [0, this.goldRatio / 3, this.goldRatio / 2, this.goldRatio, this.goldRatio * 2, this.goldRatio * 3, 100, 250, 500]
-    }
+	getBuffetIndicators():number[] {
+		return [0, this.goldRatio / 3, this.goldRatio / 2, this.goldRatio, this.goldRatio * 2, this.goldRatio * 3, 100, 250, 500];
+	}
 
-    getBound():string {
-        return `[${this.name} must be ${this.comparisonOperator} than ${this.goldRatio}].`;
-    }
+	getBound():string {
+		return `[${this.name} must be ${this.comparisonOperator} than ${this.goldRatio}].`;
+	}
 }
