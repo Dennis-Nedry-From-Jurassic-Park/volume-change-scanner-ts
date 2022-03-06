@@ -6,7 +6,9 @@
   "author": "Vadim Kulikov <dennis.nedry.from.jurassic.park@gmail.com>",
   "license": "Apache-2.0",
   "scripts": {
-    "dev": "ts-node ./src/connect.ts"
+    "dev": "ts-node ./src/connect.ts",
+    "debug": "ts-node ./src/debug.ts",
+    "lint": "eslint --fix --ext .ts,.js,.jsx ."
   },
   "dependencies": {
     "@grpc/proto-loader": "^0.6.9",
@@ -20,12 +22,12 @@
     "googleapis": "^82.0.0",
     "moment": "^2.29.1",
     "ts-node": "^10.2.1",
-    "ts-proto": "^1.104.0"
+    "ts-proto": "^1.104.0",
+    "wrr-pool": "^1.1.4"
   },
   "devDependencies": {
     "@types/node": "16.4.0",
-    "eslint": "7.31.0",
-    "eslint-config-next": "11.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
     "typescript": "^4.3.5"
   }
 }

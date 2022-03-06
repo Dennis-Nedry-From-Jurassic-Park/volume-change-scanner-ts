@@ -1,23 +1,23 @@
 export function rangeInclusive (start:number, stop:number, stepSize:number) {
-    if (stop == null) {
-        stop = start;
-        start = 1
-    }
-    if (stepSize == null) stepSize = 1;
+	if (stop == null) {
+		stop = start;
+		start = 1;
+	}
+	if (stepSize == null) stepSize = 1;
 
-    const steps = (stop - start) / stepSize;
+	const steps = (stop - start) / stepSize;
 
-    let set = [];
-    for (let step = 0; step <= steps; step++) set.push(start + step * stepSize);
+	const set = [];
+	for (let step = 0; step <= steps; step++) set.push(start + step * stepSize);
 
-    return set
+	return set;
 }
 
 export function rangeExclusive (start:number, stop:number, stepSize:number) : any {
-    if (stop == null) return rangeExclusive(1, start)
-    if (stepSize == null) return rangeExclusive(start, stop, 1);
+	//if (stop == null) return rangeExclusive(1, start)
+	if (stepSize == null) return rangeExclusive(start, stop, 1);
 
-    let range = rangeInclusive(start, stop, stepSize);
-    if (stop % stepSize === 0) range.pop();
-    return range
+	const range = rangeInclusive(start, stop, stepSize);
+	if (stop % stepSize === 0) range.pop();
+	return range;
 }
