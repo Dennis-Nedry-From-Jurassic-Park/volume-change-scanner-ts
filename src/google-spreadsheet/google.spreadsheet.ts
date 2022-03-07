@@ -2,7 +2,7 @@ import  moment  from 'moment';
 import { google } from 'googleapis';
 import { GoogleAuth } from 'google-auth-library';
 
-require('dotenv').config();
+import 'dotenv/config';
 
 export default class GoogleSpreadsheet {
     private readonly earliestDateTimeCell: string;

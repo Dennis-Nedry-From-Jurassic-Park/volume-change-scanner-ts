@@ -1,6 +1,5 @@
 import {rangeExclusive} from './range';
-
-const {sort} = require('fast-sort');
+import {sort} from 'fast-sort';
 
 const getWeight = (object: any, value: number) => getKeyByValue(object, value);
 
