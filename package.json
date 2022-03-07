@@ -8,13 +8,15 @@
   "scripts": {
     "dev": "ts-node ./src/connect.ts",
     "debug": "ts-node ./src/debug.ts",
-    "lint": "eslint --fix --ext .ts,.js,.jsx ."
+    "lint": "eslint --color --fix --ext .ts,.js,.jsx src",
+    "lint-q": "eslint --color --fix --quiet --ext .ts,.js,.jsx src"
   },
   "dependencies": {
     "@grpc/proto-loader": "^0.6.9",
     "@protobuf-ts/grpc-transport": "^2.2.2",
     "@protobuf-ts/plugin": "^2.2.2",
     "arkit": "^1.6.4",
+    "clickhouse": "^2.4.4",
     "dotenv": "^10.0.0",
     "google-auth-library": "^6.1.6",
     "google-protobuf": "^3.19.4",
@@ -28,6 +30,7 @@
   "devDependencies": {
     "@types/node": "16.4.0",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "jsontosql2": "^0.0.7",
     "typescript": "^4.3.5"
   }
 }

@@ -1,4 +1,4 @@
-const { ClickHouse } = require('clickhouse');
+import {ClickHouse} from 'clickhouse';
 
 ClickHouse.prototype.logQueries = async (queries:any[] = [1,2]) => {
 	for(const query of queries) {
