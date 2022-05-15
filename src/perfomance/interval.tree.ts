@@ -21,10 +21,27 @@ const createIntervalTree = (range: typeof Integer): typeof IntervalTree => {
     return tree;
 }
 
-const numberElements = 5_000_000;
+const numberElements = 1_000_000;
 const searchElement = numberElements / 2;
 
 const tree = createIntervalTree(Integer(numberElements));
+
+const AugmentedIntervalTree = require('augmented-interval-tree');
+
+
+const create_a_tree = (): typeof AugmentedIntervalTree => {
+    const temp_tree = new AugmentedIntervalTree();
+    let i = 1_000_000;
+    let step = 0.005;
+    while ( --i ){
+            temp_tree.insert(i-1, i, step);
+            step++;
+        }
+        return temp_tree;
+
+}
+
+const a_tree = create_a_tree();
 
 const options = {
   minSamples: 5,
@@ -38,6 +55,10 @@ b.suite(
 
   b.add('IntervalTree', () => {
           tree.queryPoint(searchElement);
+    }, options),
+
+  b.add('a_tree', () => {
+          a_tree.find(searchElement);
     }, options),
 
   b.cycle(),
