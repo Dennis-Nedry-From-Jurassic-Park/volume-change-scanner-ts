@@ -1,16 +1,16 @@
 import {rangeExclusive} from '../ranges/range';
-//import WRRPool from 'wrr-pool';
 import COLOR from '../utils/color';
+
 const WRRPool = require('wrr-pool');
 
 const unknownValue = -404;
 
-export enum WeightType {
+const enum WeightType {
     Company = 0,
     Buffet = 1
 }
 
-export enum ErrorMsg {
+const enum ErrorMsg {
     MissedRange = 'Indicator has not exist in range [ start, end ] of current pool'
 }
 
@@ -19,17 +19,7 @@ export default class Pool extends WRRPool {
     private readonly weightedCompanyIndicator: Record<number, number[]> = {};
     private readonly weightedTotalIndicator: Record<number, number[]> = {};
 
-    constructor({
-    	metricName,
-    	bound,
-    	buffetIndicators,
-    	isReversed
-    } : {
-        metricName?:string,
-        bound?: string,
-        buffetIndicators?: number[],
-        isReversed?: boolean
-    })
+    private metricName:string;
 
     constructor({
     	metricName,
@@ -37,124 +27,64 @@ export default class Pool extends WRRPool {
     	buffetIndicators,
     	isReversed
     } : {
-        metricName?:string,
-        bound?: string,
-        buffetIndicators?: number[],
-        isReversed?: boolean
+        metricName:string,
+        bound: string,
+        buffetIndicators: number[],
+        isReversed: boolean
     }) {
     	super();
+
+    	this.metricName = metricName;
 
     	if (buffetIndicators) {
     		this.weightedBuffetIndicator = this.prepareBuffetWeights(buffetIndicators, isReversed!);
     		this.setWeights(bound, metricName, WeightType.Buffet);
-    		console.log(metricName);
-
-    		if(metricName === 'PE'){
-    			console.log(this.weightedBuffetIndicator);
-    		}
+    		//console.log(metricName);
     	}
-
-    	function getWeightForIndicator(indicator:any) {
-    		if (indicator) {
-    			try {
-    				const obj = this.get(function (pool:any) {
-    					return pool.indicator.includes(indicator);
-    				});
-
-    				const {
-    					color,
-    					metric,
-    					bound
-    				} = obj.value;
-
-    				console.log(`${metric} = ${indicator} : ${color}${metric}Weight ${COLOR.purple} = ${color} ${obj.weight}.${COLOR.purple} Range = [${COLOR.yellow}${indicator} ${COLOR.purple}.. ${COLOR.yellow}${indicator}${COLOR.purple}]${COLOR.reset}. Recommended range: ${COLOR.purple}${bound}${COLOR.reset}`);
-
-    				return obj.weight;
-    			} catch (error) {
-    				console.log(error);
-    				return null;
-    			}
-    		} else {
-    			return unknownValue;
-    		}
-    	}
-
-    	function getWeightFromIndicatorsRange(
-    		indicator: any,
-    		weightType: WeightType = WeightType.Buffet
-    	) {
-    		if (indicator) {
-    			try {
-    				const obj = this.get(function (pool:any) {
-    					return pool.weightType === weightType &&
-                            (indicator >= pool.min && indicator <= pool.max);
-    				});
-
-    				if (obj === undefined) throw new Error(ErrorMsg.MissedRange);
-
-    				const {
-    					color,
-    					min,
-    					max,
-    					bound,
-    					metric
-    				} = obj.value;
-
-    				console.log(`${metric} = ${indicator} : ${color}${metric}Weight ${COLOR.purple}=${color} ${obj.weight}.${COLOR.purple} Range = [${COLOR.yellow}${min} ${COLOR.purple}.. ${COLOR.yellow}${max}${COLOR.purple}]${COLOR.reset}. Recommended range: ${COLOR.purple}${bound}${COLOR.reset}`);
-    				return obj.weight;
-    			} catch (error) {
-    				console.log(error);
-    				return unknownValue;
-    			}
-    		} else {
-    			return unknownValue;
-    		}
-    	}
-
-    	// ---------------------------- QuantitativePool -----------------------------------
-    	Pool.prototype.getCountryPoolWeight = getWeightForIndicator;
-    	Pool.prototype.getRecommendationKeyWeight = getWeightForIndicator;
-    	Pool.prototype.getPEpoolWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getPBratioWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getPriceToSalesWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getPegWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getPriceOverFCFWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getPTBVweight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getPNCAVweight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getEVEBweight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getEnterpriseValueToOperatingCashFlowWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getEVtoSalesRatioWeight = getWeightFromIndicatorsRange;
-    	// ------------------------------- HealthPool --------------------------------------
-    	Pool.prototype.getCurrentRatioWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getQuickRatioWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getFlowRatioWeight = getWeightFromIndicatorsRange;
-
-    	Pool.prototype.getLiabilitiesEquityWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getDebtToEbitdaWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getDebtToEquityWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getDebtNCAVweight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getLongTermDebtOverWorkingCapitalWeight = getWeightFromIndicatorsRange;
-    	// ----------------------------- EfficiencyPool ------------------------------------
-    	Pool.prototype.getROEweight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getROAweight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getROTAweight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getROICweight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getROCEweight = getWeightFromIndicatorsRange;
-    	// ------------------------------- GrowthPool --------------------------------------
-    	Pool.prototype.getEarningsYieldWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getEbitYieldWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getEbitdaYieldWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getFCFyieldWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getFPEoverTPEweight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getOCFoverEPSweight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getFCFoverSalesWeight = getWeightFromIndicatorsRange;
-    	// ------------------------------ RatingsPool --------------------------------------
-    	Pool.prototype.getAltmanZscorePoolWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getPiotroskiFscorePoolWeight = getWeightFromIndicatorsRange;
-    	Pool.prototype.getBeneishMscorePoolWeight = getWeightFromIndicatorsRange;
     }
 
-    public getWeightForIndicator(indicator:any) {
+    // ---------------------------- QuantitativePool -----------------------------------
+    getCountryWeight = (indicator: number) => this.getWeightForIndicator(indicator);
+    getRecommendationKeyWeight = (indicator: number) => this.getWeightForIndicator(indicator);
+    getPEWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getPBRatioWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getPriceToSalesWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getPEGWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getPriceOverFCFWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getPTBVWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getPNCAVWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getEVEBWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getEnterpriseValueToOperatingCashFlowWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getEVtoSalesRatioWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    // ------------------------------- HealthPool --------------------------------------
+    getCurrentRatioWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getQuickRatioWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getFlowRatioWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getLiabilitiesEquityWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getDebtToEbitdaWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getDebtToEquityWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getDebtNCAVWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getLongTermDebtOverWorkingCapitalWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    // ----------------------------- EfficiencyPool ------------------------------------
+    getROEWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getROAWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getROTAWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getROICWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getROCEWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    // ------------------------------- GrowthPool --------------------------------------
+    getEarningsYieldWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getEbitYieldWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getEbitdaYieldWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getFCFYieldWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getFPEOverTPEWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getOCFOverEPSWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getFCFOverSalesWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    // ------------------------------ RatingsPool --------------------------------------
+    getAltmanZScorePoolWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getPiotroskiFScorePoolWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+    getBeneishMScorePoolWeight = (indicator: number) => this.getWeightFromIndicatorsRange(indicator);
+
+    getWeightForIndicator(indicator:any) {
     	if (indicator) {
     		try {
     			const obj = this.get(function (pool:any) {
@@ -167,8 +97,6 @@ export default class Pool extends WRRPool {
     				bound
     			} = obj.value;
 
-    			console.log(`${metric} = ${indicator} : ${color}${metric}Weight ${COLOR.purple} = ${color} ${obj.weight}.${COLOR.purple} Range = [${COLOR.yellow}${indicator} ${COLOR.purple}.. ${COLOR.yellow}${indicator}${COLOR.purple}]${COLOR.reset}. Recommended range: ${COLOR.purple}${bound}${COLOR.reset}`);
-
     			return obj.weight;
     		} catch (error) {
     			console.log(error);
@@ -179,10 +107,10 @@ export default class Pool extends WRRPool {
     	}
     }
 
-    public getWeightFromIndicatorsRange(indicator: any, weightType: WeightType = WeightType.Buffet) {
-    	if (indicator) {
+    getWeightFromIndicatorsRange(indicator: number, weightType: WeightType = WeightType.Buffet) {
+    	//if (indicator) {
     		try {
-    			const obj = this.get(function (pool:any) {
+    			const obj = this.get( (pool:Pool) => {
     				return pool.weightType === weightType &&
                             (indicator >= pool.min && indicator <= pool.max);
     			});
@@ -197,16 +125,17 @@ export default class Pool extends WRRPool {
     				metric
     			} = obj.value;
 
-    			console.log(`${metric} = ${indicator} : ${color}${metric}Weight ${COLOR.purple}=${color} ${obj.weight}.${COLOR.purple} Range = [${COLOR.yellow}${min} ${COLOR.purple}.. ${COLOR.yellow}${max}${COLOR.purple}]${COLOR.reset}. Recommended range: ${COLOR.purple}${bound}${COLOR.reset}`);
     			return obj.weight;
     		} catch (error) {
     			console.log(error);
     			return unknownValue;
     		}
-    	} else {
-    		return unknownValue;
-    	}
+    	//} else {
+    	//	return unknownValue;
+    	//}
     }
+
+    getMetricName = () => this.metricName;
 
     getWeight = (object: any, value: number) => this.getKeyByValue(object, value);
 
@@ -218,7 +147,7 @@ export default class Pool extends WRRPool {
     		);
     }
 
-    getKeysWithHighestValue(o:any, n:number){ // console.log(getKeysWithHighestValue(obj, 10))
+    getKeysWithHighestValue(o:any, n:number){
     	const keys = Object.keys(o);
     	keys.sort(function(a,b){ return o[b] - o[a]; });
     	console.log(keys);
@@ -255,7 +184,6 @@ export default class Pool extends WRRPool {
     		const cur  = weights[_i];
     		const next = weights[_i + 1];
 
-
     		arrArrs.push([cur.toFixed(5), next - precision]);
     	}
 
@@ -287,7 +215,7 @@ export default class Pool extends WRRPool {
     public setWeights(
     	bound?:string,
     	metricName?:string,
-    	weightType?: WeightType
+    	weightType?:WeightType
     ) {
     	const weightedRanges = (weightType === WeightType.Buffet)
     		? this.getWeightedBuffetIndicator() : this.getWeightedCompanyIndicator();
@@ -296,9 +224,9 @@ export default class Pool extends WRRPool {
     			{
     				min: Math.min(...range),
     				max: Math.max(...range),
-    				color: COLOR.red,
-    				bound: bound,
-    				metric: metricName,
+    				color: undefined,
+    				bound: undefined,
+    				metric: undefined,
     				weightType: weightType
     			},
     			parseFloat(weight)

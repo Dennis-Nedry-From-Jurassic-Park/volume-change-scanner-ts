@@ -1,5 +1,5 @@
-import {ROApool} from './efficiency/roa.pool';
+import {roaPool} from './efficiency/roa.pool';
 
 export {
-	ROApool
+	roaPool
 };

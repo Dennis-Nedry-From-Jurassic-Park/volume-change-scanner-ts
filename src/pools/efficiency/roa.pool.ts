@@ -3,7 +3,7 @@ import {efficiencyBoundRange} from '../../bounds/efficiency';
 
 const metric = efficiencyBoundRange.ROA;
 
-export const ROApool = new Pool({
+export const roaPool = new Pool({
 	metricName: metric.name,
 	bound: metric.getBound(),
 	buffetIndicators: metric.getBuffetIndicators(),
