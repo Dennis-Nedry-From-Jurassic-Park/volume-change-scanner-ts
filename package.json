@@ -22,7 +22,6 @@
     "@protobuf-ts/grpc-transport": "^2.2.2",
     "@protobuf-ts/plugin": "^2.2.2",
     "arkit": "^1.6.4",
-    "augmented-interval-tree": "^0.1.0",
     "clickhouse": "^2.4.4",
     "dotenv": "^10.0.0",
     "google-auth-library": "^6.1.6",
