@@ -1,5 +1,3 @@
-import {roaPool} from '../pools/efficiency.pool';
-
 import {v4 as uuidv4} from 'uuid';
 
 let uuid = uuidv4();
@@ -9,6 +7,8 @@ const b = require('benny')
 var Integer = require('integer');
 var IntervalTree = require("interval-tree-type");
 
+var Range = require("strange")
+var RangeTree = require("strange/tree")
 
 const createIntervalTree = (range: typeof Integer): typeof IntervalTree => {
     const tree = new IntervalTree();
@@ -27,26 +27,21 @@ const createIntervalTree = (range: typeof Integer): typeof IntervalTree => {
 const numberElements = 1_000_000;
 const searchElement = numberElements / 2;
 
-var IntervalTree2 = require('interval-tree2');
-
-
 const tree = createIntervalTree(Integer(numberElements));
 
-const create_intervals = (range: number): typeof IntervalTree2 => {
-    let temp_tree = new IntervalTree2(searchElement);
+const cr_rang = (range: number): any[] => {
     let i = range+1;
+    let arr = [];
     const PRECISION = 1e-8;
-    let step = 0.005;
 
     while ( --i ){
-         temp_tree.add(i-1, i-PRECISION, step);
-         step++;
+        arr.push(new Range(i-1, i-PRECISION))
     }
 
-    return temp_tree;
+    return arr;
 }
 
-var itree = create_intervals(numberElements)
+var range_tree = RangeTree.from(cr_rang(numberElements))
 
 const options = {
   minSamples: 5,
@@ -62,14 +57,8 @@ b.suite(
           tree.queryPoint(searchElement);
     }, options),
 
-  b.add('itree', () => {
-        itree.pointSearch(searchElement);
-  b.add('roaPool', () => {
-        roaPool.getROAWeight(999.99);
-    }, options),
-
-  b.add('tree_wo_weights', () => {
-        tree_wo_weights.queryPoint(searchElement);
+  b.add('range_tree', () => {
+        range_tree.search(searchElement);
     }, options),
 
   b.cycle(),
