@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "standard": "ignore",
-  "author": "Vadim Kulikov <dennis.nedry.from.jurassic.park@gmail.com>",
+  "author": "",
   "license": "Apache-2.0",
   "scripts": {
     "dev": "ts-node ./src/connect.ts",
+    "instruments": "ts-node ./src/tinkoff-api-instruments/instruments.service.ts",
+    "trading": "ts-node ./src/tinkoff-api-instruments/trading.schedules.ts",
+    "fetch": "ts-node ./src/tinkoff-api-instruments/instruments.service.ts",
     "debug": "ts-node ./src/debug.ts",
+    "perf": "ts-node ./src/perfomance/interval.tree.ts",
     "lint": "eslint --color --fix --ext .ts,.js,.jsx src",
     "lint-q": "eslint --color --fix --quiet --ext .ts,.js,.jsx src",
     "test": "jest"
@@ -24,18 +28,26 @@
     "google-protobuf": "^3.19.4",
     "google-spreadsheet": "^3.2.0",
     "googleapis": "^82.0.0",
+    "integer": "^4.0.0",
+    "interval-tree": "^0.1.0",
+    "interval-tree-type": "^1.0.1",
+    "interval-tree2": "^1.1.0",
     "moment": "^2.29.1",
     "object-sizeof": "^1.6.3",
     "telegraf": "^4.7.0",
     "ts-node": "^10.2.1",
     "ts-proto": "^1.104.0",
+    "uuid": "^8.3.2",
     "wrr-pool": "^1.1.4"
   },
   "devDependencies": {
     "@types/node": "16.4.0",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "benny": "^3.7.1",
     "jest": "^27.5.1",
     "jsontosql2": "^0.0.7",
+    "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
   }
 }
