@@ -7,9 +7,6 @@ const b = require('benny')
 var Integer = require('integer');
 var IntervalTree = require("interval-tree-type");
 
-var Range = require("strange")
-var RangeTree = require("strange/tree")
-
 const createIntervalTree = (range: typeof Integer): typeof IntervalTree => {
     const tree = new IntervalTree();
     let i = Integer(range + 1);
@@ -24,24 +21,10 @@ const createIntervalTree = (range: typeof Integer): typeof IntervalTree => {
     return tree;
 }
 
-const numberElements = 1_000_000;
+const numberElements = 5_000_000;
 const searchElement = numberElements / 2;
 
 const tree = createIntervalTree(Integer(numberElements));
-
-const cr_rang = (range: number): any[] => {
-    let i = range+1;
-    let arr = [];
-    const PRECISION = 1e-8;
-
-    while ( --i ){
-        arr.push(new Range(i-1, i-PRECISION))
-    }
-
-    return arr;
-}
-
-var range_tree = RangeTree.from(cr_rang(numberElements))
 
 const options = {
   minSamples: 5,
@@ -55,10 +38,6 @@ b.suite(
 
   b.add('IntervalTree', () => {
           tree.queryPoint(searchElement);
-    }, options),
-
-  b.add('range_tree', () => {
-        range_tree.search(searchElement);
     }, options),
 
   b.cycle(),
