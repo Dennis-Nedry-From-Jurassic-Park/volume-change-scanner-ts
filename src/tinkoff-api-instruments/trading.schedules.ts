@@ -75,4 +75,6 @@ const getTradingDateTime = (
     return getTradingDay(tradingSchedulesCall, exchange).date;
 }
 
-tradingSchedule
+const isWeekday = (): boolean => { return moment().isoWeekday() < 6; }
+
+tradingSchedules(Exchange.SPB)
