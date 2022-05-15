@@ -8,7 +8,7 @@ const b = require('benny')
 
 var Integer = require('integer');
 var IntervalTree = require("interval-tree-type");
-var createIntervalTree1d = require("interval-tree-1d")
+
 
 const createIntervalTree = (range: typeof Integer): typeof IntervalTree => {
     const tree = new IntervalTree();
@@ -24,26 +24,29 @@ const createIntervalTree = (range: typeof Integer): typeof IntervalTree => {
     return tree;
 }
 
-const numberElements = 1000000;
+const numberElements = 1_000_000;
 const searchElement = numberElements / 2;
+
+var IntervalTree2 = require('interval-tree2');
+
 
 const tree = createIntervalTree(Integer(numberElements));
 
-
-
-const create_intervals = (range: number): any[] => {
+const create_intervals = (range: number): typeof IntervalTree2 => {
+    let temp_tree = new IntervalTree2(searchElement);
     let i = range+1;
-    let arr = [];
     const PRECISION = 1e-8;
+    let step = 0.005;
 
     while ( --i ){
-        arr.push([i-1, i-PRECISION])
+         temp_tree.add(i-1, i-PRECISION, step);
+         step++;
     }
 
-    return arr;
+    return temp_tree;
 }
 
-var tree_wo_weights = createIntervalTree1d(create_intervals(numberElements))
+var itree = create_intervals(numberElements)
 
 const options = {
   minSamples: 5,
@@ -59,6 +62,8 @@ b.suite(
           tree.queryPoint(searchElement);
     }, options),
 
+  b.add('itree', () => {
+        itree.pointSearch(searchElement);
   b.add('roaPool', () => {
         roaPool.getROAWeight(999.99);
     }, options),
