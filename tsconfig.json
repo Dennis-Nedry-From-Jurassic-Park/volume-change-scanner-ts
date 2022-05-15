@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "pretty": true,
-    "diagnostics": true,
+    "diagnostics": false,
     "target": "esnext",
     "module": "CommonJS",
     "esModuleInterop": true,

@@ -4,8 +4,7 @@ import {GrpcTransport} from '@protobuf-ts/grpc-transport';
 import {ChannelCredentials} from '@grpc/grpc-js';
 import {GrpcOptions} from '@protobuf-ts/grpc-transport/build/types/grpc-options';
 
-
-export const getGrpcTransport = async () => {
+export const grpcTransport = () => {
 	const token = secrets.token;
 
 	const grpcOptions : GrpcOptions = {
