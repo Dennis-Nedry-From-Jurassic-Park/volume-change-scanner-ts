@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "ts-node ./src/connect.ts",
     "instruments": "ts-node ./src/tinkoff-api-instruments/instruments.service.ts",
-    "trading": "ts-node ./src/tinkoff-api-instruments/trading.schedules.ts",
+    ".shares": "ts-node ./src/tinkoff-api-instruments/shares.ms.ts",
+    ".trading": "ts-node ./src/tinkoff-api-instruments/trading.schedules.ms.ts",
     "fetch": "ts-node ./src/tinkoff-api-instruments/instruments.service.ts",
     "debug": "ts-node ./src/debug.ts",
     "perf": "ts-node ./src/perfomance/interval.tree.ts",
