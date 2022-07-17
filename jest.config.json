@@ -1,0 +1,10 @@
+{
+  "bail": 15,
+  "verbose": true,
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "rootDir": ".",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  }
+}
