@@ -3,6 +3,7 @@
     "strict": true,
     "pretty": true,
 
+    "diagnostics": false,
 
     "target": "esnext",
     "module": "CommonJS",

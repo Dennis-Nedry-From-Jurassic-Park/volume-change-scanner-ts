@@ -108,6 +108,7 @@ export default class Pool extends WRRPool {
     }
 
     getWeightFromIndicatorsRange(indicator: number, weightType: WeightType = WeightType.Buffet) {
+
         const obj = this.get( (pool:Pool) => {
             				return pool.weightType === weightType &&
                                     (indicator >= pool.min && indicator <= pool.max);
@@ -128,8 +129,9 @@ export default class Pool extends WRRPool {
 
     getWeightFromIndicatorsRange0(indicator: number, weightType: WeightType = WeightType.Buffet) {
     	if (indicator) {
+
     		try {
-    			const obj = this.get(function (pool:any) {
+    			const obj = this.get( (pool:Pool) => {
     				return pool.weightType === weightType &&
                             (indicator >= pool.min && indicator <= pool.max);
     			});
@@ -149,16 +151,18 @@ export default class Pool extends WRRPool {
     			console.log(error);
     			return unknownValue;
     		}
-    	} else {
-    		return unknownValue;
-    	}
+    	//} else {
+    	//	return unknownValue;
+    	//}
     }
 
     getMetricName = () => this.metricName;
 
+
     getROAWeight0 (indicator: number) {
              return this.getWeightFromIndicatorsRange(indicator);
          }
+
 
     getWeight = (object: any, value: number) => this.getKeyByValue(object, value);
 
