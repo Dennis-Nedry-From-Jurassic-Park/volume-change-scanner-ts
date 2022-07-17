@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
+    "strict": true,
     "pretty": true,
-    "diagnostics": true,
+
+
     "target": "esnext",
     "module": "CommonJS",
     "esModuleInterop": true,
     "allowJs": true,
     "strictNullChecks": true,
-    "noImplicitAny": true,
-    "strict": true,
+    "noImplicitAny": false,
     "strictFunctionTypes": true,
     "noImplicitThis": false,
     "outDir": "dist",
@@ -27,7 +28,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-
+    "checkJs": false,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "typeRoots": [
