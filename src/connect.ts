@@ -15,9 +15,11 @@ import {
 } from '../protos_ts/instruments';
 
 
+import secrets from './utility-methods/env';
+
 export const main = async () => {
 	const operationsRequest = OperationsRequest.create();
-	operationsRequest.accountId = '111'!;
+	operationsRequest.accountId = '2030966655'!;
 	operationsRequest.from = Timestamp.fromDate(moment().subtract(1, 'years').toDate());
 	operationsRequest.to = Timestamp.fromDate(moment().toDate());
 	operationsRequest.state = OperationState.EXECUTED;
