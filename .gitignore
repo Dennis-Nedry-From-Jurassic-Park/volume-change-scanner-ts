@@ -125,3 +125,4 @@ dist
 /investAPI/
 /benchmark/
 *.json
+/src/tinkoff-api-instruments/accs.txt

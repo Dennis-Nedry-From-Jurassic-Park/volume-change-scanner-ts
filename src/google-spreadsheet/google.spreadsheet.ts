@@ -55,11 +55,11 @@ export default class GoogleSpreadsheet {
     	return dateTime;
     }
 
-    async removeEarliestDateTime() {
+    async clear(cells: string) {
     	await this.googleSheetsInstance.spreadsheets.values.clear({
     		auth: this.auth,
     		spreadsheetId: this.spreadsheetId,
-    		range: `${this.sheet}!${this.earliestDateTimeCell}`
+    		range: `${this.sheet}!${cells}`
     	});
     }
 
@@ -74,11 +74,11 @@ export default class GoogleSpreadsheet {
     	});
     }
 
-    async appendAll(result: Array<any>) {
+    async appendAll(cells: string, result: Array<any>) {
     	await this.googleSheetsInstance.spreadsheets.values.append({
     		auth: this.auth,
     		spreadsheetId: this.spreadsheetId,
-    		range: `${this.sheet}!A4:K4`,
+    		range: `${this.sheet}!${cells}`,
     		valueInputOption: 'USER_ENTERED',
     		resource: {
     			values: result

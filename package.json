@@ -5,7 +5,15 @@
   "standard": "ignore",
   "author": "",
   "license": "Apache-2.0",
+  "main": "src/index.tsx",
   "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "tg-api-investing-robot": "ts-node ./src/tg.api.investing.robot.ts",
+    "ti-api-depth-market": "ts-node ./src/ti.api.depth.market.ts",
+    "ti-api-orders": "ts-node ./src/ti.api.orders.ts",
+    "ti-api-operations-report": "ts-node ./src/ti.api.operations.report.ts",
+    "ti-api-gs-ru-shares-report": "ts-node ./src/ti.api.gs.ru.shares.report.ts",
     "dev": "ts-node ./src/connect.ts",
     "instruments": "ts-node ./src/tinkoff-api-instruments/instruments.service.ts",
     ".shares": "ts-node ./src/tinkoff-api-instruments/shares.ms.ts",
@@ -18,11 +26,19 @@
     "test": "jest"
   },
   "dependencies": {
+    "chart.js": "3.8.0",
+    "react": "18.2.0",
+    "react-chartjs-2": "4.3.1",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "@aduryagin/technical-indicators": "^0.0.30",
     "@babel/plugin-transform-modules-commonjs": "^7.16.8",
     "@grpc/proto-loader": "^0.6.9",
     "@protobuf-ts/grpc-transport": "^2.2.2",
     "@protobuf-ts/plugin": "^2.2.2",
     "arkit": "^1.6.4",
+    "bottleneck": "^2.19.5",
+    "catch-decorator-ts": "^0.0.3",
     "clickhouse": "^2.4.4",
     "dotenv": "^10.0.0",
     "google-auth-library": "^6.1.6",
@@ -31,15 +47,28 @@
     "googleapis": "^82.0.0",
     "integer": "^4.0.0",
     "interval-tree-type": "^1.0.1",
+    "investing-com-api": "^3.2.0",
+    "limiter": "^2.1.0",
     "moment": "^2.29.2",
+    "node-red-contrib-cistern": "^1.0.7",
     "object-sizeof": "^1.6.3",
+    "outlier": "^0.0.1",
+    "outliers": "^0.0.3",
+    "outliers-lizia": "^0.0.2",
+    "peirce-criterion": "^1.1.0",
+    "stats-analysis": "^2.0.0",
+    "ta.js": "^1.11.1",
+    "technicalindicators": "^3.1.0",
     "telegraf": "^4.7.0",
+    "tinkoff-invest-api": "^4.1.0",
     "ts-node": "^10.2.1",
     "ts-proto": "^1.104.0",
     "uuid": "^8.3.2",
+    "winston": "^3.8.1",
     "wrr-pool": "^1.1.4"
   },
   "devDependencies": {
+    "@types/jest": "^28.1.6",
     "@types/node": "16.4.0",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
@@ -48,5 +77,17 @@
     "jsontosql2": "^0.0.7",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
