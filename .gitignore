@@ -121,8 +121,12 @@ dist
 
 # TernJS port file
 .tern-port
+
+/.secrets
 /.env
+
 /investAPI/
 /benchmark/
+
 *.json
 /src/tinkoff-api-instruments/accs.txt

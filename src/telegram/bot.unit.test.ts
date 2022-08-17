@@ -1,5 +1,6 @@
+import { expect, test } from '@jest/globals';
+
 import bot from './bot';
-//const bot = require('./bot');
 
 test('telegram bot created', () => {
 	expect(bot).not.toBeNull();
