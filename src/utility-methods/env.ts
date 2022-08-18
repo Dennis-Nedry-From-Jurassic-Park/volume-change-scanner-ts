@@ -1,13 +1,16 @@
 import 'dotenv/config';
-//require('dotenv').config({ path: './.env' });
 
 const secrets = {
-	sheet: process.env.SHEET as string,
-	scopes: process.env.SCOPES as string,
-	telegramToken: process.env.TELEGRAM_TOKEN as string,
-	token: process.env.TOKEN as string,
-	brokerAccountId: process.env.BROKER_ACCOUNT_ID as string,
-	brokerAccountIdIis: process.env.BROKER_ACCOUNT_ID_IIS as string,
+	sheet: process.env.SHEET,
+	scopes: process.env.SCOPES,
+	telegramToken: process.env.TELEGRAM_TOKEN,
+	telegramInvestingBotId: process.env.TELEGRAM_INVESTING_BOT_ID,
+	token: process.env.TOKEN,
+	brokerAccountId: process.env.BROKER_ACCOUNT_ID_BROKERAGE,
+	brokerAccountIdIis: process.env.BROKER_ACCOUNT_ID_IIS,
+	googleSpreadsheetIisB2: process.env.IIS_B2,
+	googleSpreadsheetBrokerageB2: process.env.BROKERAGE_B2,
+	finnhubKeyApi: process.env.FINNHUB_KEY_API,
 };
 
 export default secrets;

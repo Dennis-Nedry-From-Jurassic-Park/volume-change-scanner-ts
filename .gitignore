@@ -129,3 +129,4 @@ dist
 /benchmark/
 
 *.json
+/src/tinkoff-api-instruments/accs.txt

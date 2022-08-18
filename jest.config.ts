@@ -1,8 +1,16 @@
+import 'jest-ts-auto-mock'
 import type {Config} from '@jest/types';
 
-export default async (): Promise<Config.InitialOptions> => {
-  return {
+const config: Config.InitialOptions = {
     verbose: true,
-    bail: 1,
-  };
+    transform: {
+        ".(ts|tsx)": "ts-jest"
+    },
+    globals: {
+        "ts-jest": {
+            "compiler": "ttypescript",
+
+        }
+    }
 };
+export default config;

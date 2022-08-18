@@ -14,7 +14,15 @@
     "strictFunctionTypes": true,
     "noImplicitThis": false,
     "outDir": "dist",
-    "types": ["node"],
+    "types": ["node", "...", "@types/jest"],
+    
+    "plugins": [
+      {
+        "transform": "ts-auto-mock/transformer",
+        "cacheBetweenTests": false,
+        "features": ["random"]
+      }
+    ],
     "lib": [
       "esnext", "dom", "dom.iterable", "es6"
     ],
@@ -45,6 +53,8 @@
     "node_modules",
     "dist",
     "build",
-    "typings"
+    "typings",
+    "**/tests/*.test.ts",
+    "*.test.ts",
   ]
 }
