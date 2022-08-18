@@ -9,7 +9,8 @@ const secrets = {
 	brokerAccountId: process.env.BROKER_ACCOUNT_ID_BROKERAGE,
 	brokerAccountIdIis: process.env.BROKER_ACCOUNT_ID_IIS,
 	googleSpreadsheetIisB2: process.env.IIS_B2,
-	googleSpreadsheetBrokerageB2: process.env.BROKERAGE_B2
+	googleSpreadsheetBrokerageB2: process.env.BROKERAGE_B2,
+	finnhubKeyApi: process.env.FINNHUB_KEY_API,
 };
 
 export default secrets;
