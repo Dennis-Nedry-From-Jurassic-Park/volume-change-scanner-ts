@@ -108,6 +108,13 @@ lickhouse-server:21.3.20.1
 docker run -it --rm --link clickhouse_host:clickhouse-server yandex/clickhouse-client:21.3.20.1 --host clickhouse-server --port 9000
 
 -----------------------------------------------------------------------------
+sql usefull queries
+
+select count (*) from GetCandles
+select * from GetCandles where toDate(time) = '2022-08-17'
+describe table GetCandles
+optimize  table GetCandles
+-----------------------------------------------------------------------------
 
 
 USE atr
