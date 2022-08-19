@@ -5,7 +5,7 @@ import {
     TradingSchedule,
     TradingSchedulesResponse,
 } from "tinkoff-invest-api/cjs/generated/instruments";
-import {prettyJSON} from "../ms-base/api.ti.service.utils";
+import {prettyJSON} from "../ms-ti-base/api.ti.service.utils";
 import {asyncWriteFile} from "../utility-methods/file";
 import {
     create_enum_field,
