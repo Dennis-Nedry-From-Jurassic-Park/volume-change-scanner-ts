@@ -1,8 +1,8 @@
 import secrets from '../utility-methods/env';
 
 import bot from '../telegram/bot'
-import {get_index} from "../ms-base/indexes";
-import {IndexInvesting} from "../ms-base/indexes";
+import {get_index} from "../ms-ti-base/indexes";
+import {IndexInvesting} from "../ms-ti-base/indexes";
 
 export const exec_investing_robot = async () => {
     const moex = await get_index(IndexInvesting.IMOEX);
