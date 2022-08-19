@@ -9,10 +9,10 @@ import {
     GetDividendsForeignIssuerResponse
 } from 'tinkoff-invest-api/cjs/generated/operations';
 import GoogleSpreadsheet from '../google-spreadsheet/google.spreadsheet';
-import {delay} from "../ms-base/wait";
-import { toNum } from '../ms-base/number';
-import {DIVIDENDS_SHEET} from "../ms-base/google.spreadsheet";
-import {instrumentsService} from "../ms-base/instruments.service";
+import {delay} from "../ms-ti-base/wait";
+import { toNum } from '../ms-ti-base/number';
+import {DIVIDENDS_SHEET} from "../ms-ti-base/google.spreadsheet";
+import {instrumentsService} from "../ms-ti-base/instruments.service";
 
 const token = secrets.token!;
 

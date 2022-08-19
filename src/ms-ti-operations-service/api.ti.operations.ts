@@ -1,12 +1,15 @@
 import secrets from '../utility-methods/env';
 
 import {TinkoffInvestApi} from 'tinkoff-invest-api';
-import {ACCOUNT, get_share_by_ticker, prettyJSON} from '../ms-base/api.ti.service.utils';
 import {OperationsResponse, OperationState, Operation, PositionsSecurities} from "tinkoff-invest-api/cjs/generated/operations"; // TODO: dist
 import {InstrumentStatus, InstrumentIdType} from "tinkoff-invest-api/cjs/generated/instruments"; // TODO: dist
 import moment from 'moment';
 import {arrayToTree} from "performant-array-to-tree";
 import {CandleInterval, LastPrice} from "tinkoff-invest-api/cjs/generated/marketdata";
+import {toNum} from "../ms-ti-base/number";
+import { ACCOUNT } from '../ms-ti-base/users.service';
+import {instrumentsService} from "../ms-ti-base/instruments.service";
+import {prettyJSON} from "../ms-ti-base/output";
 
 const token = secrets.token!;
 
@@ -29,7 +32,7 @@ const get_operations = async (
 }
 
 const exec = async () => {
-    const share = await get_share_by_ticker('PLTR');
+    const share = await instrumentsService.get_share_by_ticker('PLTR');
 
     const format = "YYYY-MM-DD"
     const start = '2022-08-05'
@@ -51,17 +54,17 @@ const exec = async () => {
     let fees = 0; let payment = 0;
 
     tree.forEach( (operation:any) => {
-        const payment_elem = api.helpers.toNumber(operation.data.payment)!
+        const payment_elem = toNum(operation.data.payment)!
 
         operation.nodes.forEach( async (node:any) => {
-            fees += api.helpers.toNumber(node.data.payment)!
+            fees += toNum(node.data.payment)!
             const date = node.data.date;
             const from = moment(date).subtract(30,'seconds').toDate();
             const to = moment(date).add(30,'seconds').toDate();
 
         })
 
-        //const fees_elem = api.helpers.toNumber(operation.nodes.payment)!
+        //const fees_elem = toNum(operation.nodes.payment)!
         console.log(fees)
         console.log(payment_elem)
         payment = payment + payment_elem;
@@ -88,7 +91,7 @@ const exec = async () => {
     const last_price = await api.marketdata.getLastPrices({figi: [share.figi]});
     const quotation = last_price.lastPrices.filter((lastPrice: LastPrice) => { return lastPrice.figi === share.figi})[0].price
 
-    const lastPrice = api.helpers.toNumber(quotation)!
+    const lastPrice = toNum(quotation)!
 
 
 
@@ -124,18 +127,18 @@ const get_$_price = async (date: string): Promise<number | undefined > => {
 
     console.log(prettyJSON(candles))
 
-    const currencyBuy = api.helpers.toNumber(candles.candles[0].high);
+    const currencyBuy = toNum(candles.candles[0].high);
 
     console.log(currencyBuy)
 
     return currencyBuy
 
 
-   // const dollar = api.helpers.toNumber(candles.candles[0].close);
+   // const dollar = toNum(candles.candles[0].close);
 }
 
 const algo3 = async () => {
-    const share = await get_share_by_ticker('DINO');
+    const share = await instrumentsService.get_share_by_ticker('DINO');
 
     const resp = await api.instruments.getInstrumentBy({
         idType: InstrumentIdType.INSTRUMENT_ID_TYPE_FIGI,
