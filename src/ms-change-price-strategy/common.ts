@@ -15,10 +15,10 @@ export const get_price_change = async (
 ) => {
     assert(is_trading_day(exchange), 'today should be trading day')
     assert(interval === CandleInterval.CANDLE_INTERVAL_DAY, 'CandleInterval should be day for unique tickers')
-    // candleInterval = дневки - по ним цену закрытия определяем
-    const curr_day = moment(); //const prev_day = curr_day.subtract(1, 'days')
+
+    const curr_day = moment();
     const prev_day = moment_business_days(curr_day).prevBusinessDay()
-    const prev_day_f = moment(prev_day).format(DAY)
+    const prev_day_ = moment(prev_day).format(DAY)
 
     let prep_tickers = '';
 
@@ -29,17 +29,15 @@ export const get_price_change = async (
     prep_tickers = prep_tickers.slice(0, -1)
 
     let query = `
-        SELECT ticker, figi, time,  low, high, close FROM GetCandles WHERE  
+        SELECT ticker, figi, time, low, high, close, volume FROM GetCandles WHERE  
         1=1
         AND tf=${interval}
         AND ticker IN (${prep_tickers}) 
-        AND toDate(time)='${prev_day_f}'
-        AND isComplete=1
+        AND toDate(time)='${prev_day_}'
     `
     query = query.replace(/(\r\n|\n|\r)/gm, "") + ';'
 
     const prev_day_prices_as_rows: any[] = await clickhouse.query(query).toPromise();
-    //for(let row of prev_day_prices_as_rows) { console.log(row['ticker']); console.log(row) }
 
     //await delay(30000)
 
@@ -56,14 +54,8 @@ export const get_price_change = async (
     //await delay(60000)
 
 
-
-
-    //TODO: let figies = await instrumentsService.get_figies_by_tickers_with_filter(
-   // TODO:      tickers, [Exchange[exchange]], undefined, undefined, undefined
-    //);
-
     const lastPrices = await api.marketdata.getLastPrices({ figi: figies})
-    console.log(lastPrices)
+        //console.log(lastPrices)
 
         //assert(Exchange[exchange] === Exchange.SPB, '!Exchange.SPB')
 
@@ -137,22 +129,72 @@ export const get_price_change = async (
             //     return
             // }
 
-            const prev_price = row.close || 1
+            const prev_price = row.close
+            const volume = row.volume
             const curr_price: any = toNum(lastPrice.price);
             return {
                 ticker: ticker,
                 time: lastPrice.time,
                 prev_price: prev_price,
                 curr_price: curr_price,
+                volume: volume,
                 change: (curr_price / prev_price - 1) * 100
             }
         });
 
+    //let unique = require('make-unique')
+
+    //console.log(merged.length)
+
+    // let u_merged = unique([
+    //     merged
+    // ], (a:any, b:any) => {
+    //     // if `a` and `b` contain the same `.a`, they are the 'same'
+    //     return a.ticker === b.ticker
+    //         && a.time === b.time
+    //         && a.prev_price === b.prev_price
+    //         && a.curr_price === b.curr_price
+    //         && a.volume === b.volume
+    //         && a.volume === b.volume
+    //         && a.change === b.change
+    // })
+
+
+    // const dedup = [...new Set(merged.map(m => `${m.ticker}:${m.ticker}`))].map(m => {
+    //     const [x,y] = m.split(':').map((n:any) => n | 0);
+    //     return {x,y};
+    // });
+    let u_merged = merged.reduce((arr: any[], e) => {
+        if (!arr.find((item:any) => {
+            return item.ticker === e.ticker
+                && item.volume === e.volume
+                && item.prev_price === e.prev_price
+                && item.curr_price === e.curr_price
+        })) {
+            arr.push(e);
+        }
+        return arr;
+    }, [])
+
+    console.log(
+        u_merged
+    );
+
     //console.table(merged)
-    let table = merged.filter( (obj:any) => { return obj.change >= 2.5 || obj.change <= -2.5 })
+    //console.log(u_merged.length)
+
+    let table = u_merged.filter( (obj:any) => { return obj.change >= 2.5 || obj.change <= -2.5 })
     table.sort( (a:any,b:any) => b.change - a.change )
     console.table(table)
-    // tickers to getLastPrices = curr prices
+    // console.log(unique([
+    //     {a: 1, price: 50.555},
+    //     {a: 2, price: 50.555},
+    //     {a: 1, price: 50.555}
+    //
+    // ], (a, b) => {
+    //     // if `a` and `b` contain the same `.a`, they are the 'same'
+    //     return a.a === b.a && a.price === b.price
+    // }))
 }
 
 const filter = (rows: any[], column: string, value: any ): any => {

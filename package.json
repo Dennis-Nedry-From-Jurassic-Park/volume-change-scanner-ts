@@ -7,17 +7,11 @@
   "license": "Apache-2.0",
   "main": "public2/index.tsx",
   "scripts": {
-
     "ms.all.in.one.change.price.strategy": "ts-node ./src/ms-change-price-strategy/ms.all.in.one.change.price.strategy.ts",
-
     "insert.candles": "ts-node ./src/ms-change-price-strategy/ms.ts",
     "russian.shares.all": "ts-node ./src/ms-change-price-strategy/russian.shares.all.ts",
     "spbe.10.00.350.companies": "ts-node ./src/ms-change-price-strategy/spbe.10.00.350.companies.ts",
-
     "api-tg-investing-robot": "ts-node src/ms-tg-investing-exchange-indices/api.tg.investing.robot.ts",
-
-
-
     ".ms-trading-calendar": "ts-node ./src/ms-trading-calendar/ms.ts",
     ".generate-schema-from-protos": "ts-node ./src/db/generate-schema-from-protos/generate-schema-from-protos.ts",
     ".generate-table-schema": "ts-node ./src/db/generate-schema/generate-table-schema.ts",
@@ -101,6 +95,7 @@
     "isolation-forest": "^0.0.9",
     "jest-ts-auto-mock": "^2.1.0",
     "limiter": "^2.1.0",
+    "make-unique": "^1.0.4",
     "ml-isolation-forest": "^0.1.0",
     "moment": "^2.29.4",
     "moment-business-days": "^1.2.0",
