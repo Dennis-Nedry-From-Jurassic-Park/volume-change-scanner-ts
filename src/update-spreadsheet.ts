@@ -9,7 +9,7 @@ import moment from 'moment';
 import {formatBuySellCase, formatFundCase, formatStockCase} from './utility-methods/numeralize';
 
 export const updateSpreadsheet = async (sheet: string) => {
-	const brokerAccountId = sheet === 'B2-IIS' ? '2030966655' : '2038470031';
+	const brokerAccountId = sheet === 'B2-IIS' ? '' : '';
 
 	const gs = new GoogleSpreadsheet(sheet);
 	const api = new TinkoffInvestmentsApi(brokerAccountId).api;
@@ -68,7 +68,7 @@ export const updateSpreadsheet = async (sheet: string) => {
 
 	if (result.length === 0) {
 		console.log('no new portfolio operations');
-		bot.telegram.sendMessage('-456284179', `no new portfolio operations for sheet ${sheet}`);
+		bot.telegram.sendMessage('', `no new portfolio operations for sheet ${sheet}`);
 	} else {
 		const instrumentTypes = ['Stock', 'Etf'];
 		const operationTypes = ['Sell', 'Buy'];
@@ -96,7 +96,7 @@ export const updateSpreadsheet = async (sheet: string) => {
 
 		msg.forEach(m => {
 			console.log(`sended message : ${m}`);
-			bot.telegram.sendMessage('-456284179', `${msg}`);
+			bot.telegram.sendMessage('', `${msg}`);
 		});
 	}
 };
