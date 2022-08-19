@@ -4,9 +4,9 @@ import {is_trading_day, moment_business_days} from "../ms-trading-calendar/ms-tr
 import moment from "moment";
 import {DAY} from "../constants/date.time.formats";
 import clickhouse from "../db/clickhouse/clickhouse";
-import {api} from "../api.ti.common";
-import {toNum} from "../ms-base/number";
-import {instrumentsService} from "../ms-base/instruments.service";
+import {toNum} from "../ms-ti-base/number";
+import {instrumentsService} from "../ms-ti-base/instruments.service";
+import {api} from "../ms-ti-base/api";
 
 export const get_price_change = async (
     exchange: string,
@@ -19,7 +19,6 @@ export const get_price_change = async (
     const curr_day = moment(); //const prev_day = curr_day.subtract(1, 'days')
     const prev_day = moment_business_days(curr_day).prevBusinessDay()
     const prev_day_f = moment(prev_day).format(DAY)
-
 
     let prep_tickers = '';
 
