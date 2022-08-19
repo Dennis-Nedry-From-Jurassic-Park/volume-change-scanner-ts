@@ -2,7 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "pretty": true,
-
+    "allowSyntheticDefaultImports": true,
     "diagnostics": false,
 
     "target": "esnext",
@@ -36,7 +36,6 @@
     "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
     "checkJs": false,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
