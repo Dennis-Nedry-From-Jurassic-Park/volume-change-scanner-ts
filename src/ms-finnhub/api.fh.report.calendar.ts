@@ -2,7 +2,7 @@ import secrets from '../utility-methods/env';
 
 import {TinkoffInvestApi} from 'tinkoff-invest-api';
 import moment from 'moment';
-import {instrumentsService} from "../ms-base/instruments.service";
+import {instrumentsService} from "../ms-ti-base/instruments.service";
 
 const token = secrets.token!;
 const finnhubKeyApi = secrets.finnhubKeyApi!;
