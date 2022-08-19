@@ -1,5 +1,5 @@
+import { prettyJSON } from "../ms-ti-base/output";
 import {asyncWriteFile} from "../utility-methods/file";
-import {prettyJSON} from "../api.ti.service.utils";
 
 const scraper = require('table-scraper');
 
@@ -11,7 +11,7 @@ type elem = {
 let arr: any[] = [];
 
 function createStringArray(arr:any, prop:any) {
-    let result = [];
+    let result: any[] = [];
     for (let i = 0; i < arr.length; i += 1) {
         result.push(arr[i][prop]);
     }

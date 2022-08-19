@@ -5,7 +5,6 @@ import {
     TradingSchedule,
     TradingSchedulesResponse,
 } from "tinkoff-invest-api/cjs/generated/instruments";
-import {prettyJSON} from "../ms-base/api.ti.service.utils";
 import {asyncWriteFile} from "../utility-methods/file";
 import {
     create_enum_field,
@@ -18,6 +17,7 @@ import {SecurityTradingStatus} from "tinkoff-invest-api/cjs/generated/common";
 import {ShareType} from "tinkoff-invest-api/cjs/generated/instruments";
 import {RealExchange} from "tinkoff-invest-api/cjs/generated/instruments";
 import {HistoricCandle} from "tinkoff-invest-api/cjs/generated/marketdata";
+import {prettyJSON} from "../ms-ti-base/output";
 
 let GenerateSchema = require('generate-schema')
 

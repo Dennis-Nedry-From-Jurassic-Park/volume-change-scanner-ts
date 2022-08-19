@@ -25,7 +25,7 @@
     ".test-redis": "ts-node ./src/app.redis.client.ts",
     ".test-ch": "ts-node ./src/ms-candles-loader-tf-all/ms.ts",
     ".start-ms": "ts-node ./src/app.service.ts",
-    ".start-ms-js": "ts-node ./src/app.isolation.forest.js",
+    ".start-ms-js": "ts-node src/ms-math-solver/app.isolation.forest.js",
     ".start": "ts-node ./src/app.main.ts",
     "start": "react-scripts start",
     "build": "react-scripts build",

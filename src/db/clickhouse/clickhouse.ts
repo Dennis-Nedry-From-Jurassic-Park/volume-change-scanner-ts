@@ -1,7 +1,7 @@
 import {ClickHouse, QueryCursor} from "clickhouse";
 import {v4} from "uuid";
 import {logger_clickhouse} from "../../logger/logger";
-import {prettyJSON} from "../../ms-base/output";
+import {prettyJSON} from "../../ms-ti-base/output";
 
 class ClickHouseExt extends ClickHouse {
 	query(query: String, reqParams?: object): QueryCursor {

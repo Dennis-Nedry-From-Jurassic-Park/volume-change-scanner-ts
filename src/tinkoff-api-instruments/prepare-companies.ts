@@ -1,5 +1,5 @@
-import { Share } from "../../protos_ts/instruments";
-import clickhouse from "../clickhouse/clickhouse"
+import clickhouse from "../db/clickhouse/clickhouse"
+import {Share} from "tinkoff-invest-api/cjs/generated/instruments";
 
 const create_companies_table = `
     --DROP TABLE companies_temp_mem IF EXISTS;
@@ -37,7 +37,7 @@ const create_companies_table = `
 
 const insert_companies_data = async () => {
     let rows: any[] = [];
-    const data: Share[] = require('../../RU_shares.json');
+    const data: Share[] = require('../../temp/RU_shares.json');
     data.forEach( (s:Share) => {
         rows.push({
             figi: s.figi,
