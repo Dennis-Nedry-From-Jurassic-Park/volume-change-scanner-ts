@@ -7,10 +7,10 @@ import {StopOrderDirection, StopOrderExpirationType, StopOrderType} from 'tinkof
 
 import {v4 as uuidv4} from 'uuid';
 import {logger} from "./logger/logger";
-import {instrumentsService} from "./ms-base/instruments.service";
-import {ACCOUNT} from "./ms-base/users.service";
-import {assert_max_cash_per_deal} from "./api.ti.common";
-import {toQuotation} from "./ms-base/number";
+import {instrumentsService} from "./ms-ti-base/instruments.service";
+import {ACCOUNT} from "./ms-ti-base/users.service";
+import {toQuotation} from "./ms-ti-base/number";
+import {assert_max_cash_per_deal} from "./ms-tg-investing-exchange-indices/risk.per.deal";
 
 const token = secrets.token!;
 
@@ -66,7 +66,7 @@ const stop_deal = async (
 ) => {
     const share = await instrumentsService.get_share_by_ticker(ticker);
 
-    //await assert_max_cash_per_deal(ACCOUNT.IIS, share, price * num_shares)
+    await assert_max_cash_per_deal(ACCOUNT.IIS, share, price * num_shares)
 
     const account: TinkoffAccount = new RealAccount(api, acc)
 

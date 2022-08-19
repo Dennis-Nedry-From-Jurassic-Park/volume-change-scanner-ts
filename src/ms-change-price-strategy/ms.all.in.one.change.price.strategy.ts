@@ -2,7 +2,7 @@ import {get_price_change} from "./common";
 import {CandleInterval} from "tinkoff-invest-api/cjs/generated/marketdata";
 import moment from "moment";
 import {Exchange} from "../constants/exchange";
-import {delay} from "../ms-base/wait";
+import {delay} from "../ms-ti-base/wait";
 
 console.log(moment().toISOString())
 

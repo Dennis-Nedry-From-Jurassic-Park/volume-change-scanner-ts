@@ -1,4 +1,4 @@
-import { prettyJSON } from "../ms-base/output";
+import { prettyJSON } from "../ms-ti-base/output";
 import {asyncWriteFile} from "../utility-methods/file";
 const scraper = require('table-scraper');
 

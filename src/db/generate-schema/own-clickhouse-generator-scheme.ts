@@ -1,6 +1,6 @@
 import {Share} from "tinkoff-invest-api/cjs/generated/instruments";
 import moment from 'moment';
-import {prettyJSON} from "./../../ms-base/output";
+import {prettyJSON} from "./../../ms-ti-base/output";
 const some_interface: any = {
     "figi": "BBG004S687W8",
     "ticker": "MSNG",

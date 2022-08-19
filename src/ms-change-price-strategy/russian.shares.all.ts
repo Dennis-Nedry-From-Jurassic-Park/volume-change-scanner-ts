@@ -3,8 +3,8 @@ import {Share} from "tinkoff-invest-api/cjs/generated/instruments";
 import {CandleInterval} from "tinkoff-invest-api/cjs/generated/marketdata";
 import {get_price_change} from "./common";
 import {Exchange} from "../constants/exchange";
-import {delay} from "../ms-base/wait";
-import {instrumentsService} from "../ms-base/instruments.service";
+import {delay} from "../ms-ti-base/wait";
+import {instrumentsService} from "../ms-ti-base/instruments.service";
 
 export const price_change_rus_shares = async () => {
     const rus_shares = await instrumentsService.get_all_russian_shares();

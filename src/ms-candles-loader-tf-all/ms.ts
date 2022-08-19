@@ -2,7 +2,7 @@ import clickhouse from "../db/clickhouse/clickhouse"
 import {v4} from "uuid";
 import moment from "moment";
 import assert from "assert";
-import {ACCOUNT} from "../ms-base/users.service";
+import {ACCOUNT} from "../ms-ti-base/users.service";
 
 const insert_into_table = async () => {
 //     const queries = [`

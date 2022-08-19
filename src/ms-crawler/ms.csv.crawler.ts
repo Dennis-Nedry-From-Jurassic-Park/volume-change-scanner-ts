@@ -1,5 +1,5 @@
+import { prettyJSON } from "../ms-ti-base/output";
 import {asyncWriteFile} from "../utility-methods/file";
-import {prettyJSON} from '../api.ti.service.utils';
 
 const csvFilePath='./spbexchange.csv'
 const csv=require('csvtojson')
