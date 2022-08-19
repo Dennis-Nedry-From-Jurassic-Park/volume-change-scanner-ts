@@ -2,9 +2,6 @@ import {RealExchange, Share} from "tinkoff-invest-api/cjs/generated/instruments"
 import clickhouse from "../db/clickhouse/clickhouse";
 import {asyncReadFile} from "../utility-methods/file";
 import {CandleInterval} from "tinkoff-invest-api/cjs/generated/marketdata";
-import {
-    get_russian_shares
-} from "../ms-ti-base/api.ti.service.utils";
 import moment from "moment";
 import {insert_into_table_multiple} from "../db/generate-schema/own-clickhouse-generator-scheme";
 import Bottleneck from "bottleneck";
@@ -36,8 +33,6 @@ const insert_candles = async (
     let ins_rows: any[] = [];
 
     for (const ticker of tickers) {
-        //console.log('ticker: ' + ticker)
-
         const tf = timeframe;
 
         const candles = await bottleneck.schedule(async () => {
@@ -77,15 +72,11 @@ const insert_candles = async (
         for (const row of rows) { ins_rows.push(row); }
     }
 
-    //console.log(ins_rows);
-
     const query = await insert_into_table_multiple('GetCandles', ins_rows)
     console.log(query);
     console.log('count = ' + ins_rows.length);
 
-    const queries:any[] = [
-        query
-    ];
+    const queries:any[] = [query];
 
     await clickhouse.logQueries(queries)
 
@@ -142,8 +133,6 @@ const perf = async () => {
 const exec0 = async (tickers: string[]) => {
     let empty_tickers: string[] = [];
 
-
-
     for (const ticker of tickers) {
         const share =  await instrumentsService.get_share_by_ticker(ticker)
         if(share === undefined) {
@@ -154,8 +143,8 @@ const exec0 = async (tickers: string[]) => {
         await delay(500)
 
         await insert_candles(
-            [ticker], // , 'AMZN', 'TSN'
-            '2022-08-19', //  03:00:00
+            [ticker],
+            '2022-08-19',
             '2022-08-20',
             CandleInterval.CANDLE_INTERVAL_DAY,
             share
@@ -164,8 +153,20 @@ const exec0 = async (tickers: string[]) => {
 
     console.log('empty_tickers = ' + empty_tickers)
 }
-const tickers: string[] = require('../ms-crawler/spbe.10_00_main_session.tickers.json');
-exec0(tickers);
+//const tickers: string[] = require('../ms-crawler/spbe.10_00_main_session.tickers.json');
+//exec0(tickers);
+
+
+const insert_candles_to_all_usa_shares_except_morning_session = async () => {
+    let tickers_10_00_main_session: string[] = require('../ms-crawler/spbe.10_00_main_session.tickers.json');
+    const all_usa_shares = await instrumentsService.get_all_american_shares();
+    let all_usa_tickers: string[] = all_usa_shares.map(it => it.ticker)
+    let combined_tickers = all_usa_tickers.filter((item: string) => tickers_10_00_main_session.indexOf(item) < 0);
+    exec0(combined_tickers);
+}
+insert_candles_to_all_usa_shares_except_morning_session()
+
+
 
 const rus = async () => {
     const apiTradeAvailableFlag = false
@@ -199,16 +200,3 @@ const rus = async () => {
 
 //exec();
 
-// AMZN=115+TSN=100
-
-
-/*
-amzn = 115
-amzn = 61  = 176 + 6 = 182
-
-nvda = 74
-nvda = 116
-total = 190
-
-total = 372
- */
