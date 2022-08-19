@@ -1,4 +1,4 @@
-import {prettyJSON} from "../ms-base/output";
+import {prettyJSON} from "../ms-ti-base/output";
 const scraper = require('table-scraper');
 scraper
     .get('https://www.pennystockflow.com/')
