@@ -1,18 +1,18 @@
 import {RealExchange, Share} from "tinkoff-invest-api/cjs/generated/instruments";
-import {api} from "../api.ti.common";
 import clickhouse from "../db/clickhouse/clickhouse";
 import {asyncReadFile} from "../utility-methods/file";
 import {CandleInterval} from "tinkoff-invest-api/cjs/generated/marketdata";
 import {
     get_russian_shares
-} from "../ms-base/api.ti.service.utils";
+} from "../ms-ti-base/api.ti.service.utils";
 import moment from "moment";
 import {insert_into_table_multiple} from "../db/generate-schema/own-clickhouse-generator-scheme";
 import Bottleneck from "bottleneck";
 import assert from "assert";
-import {delay} from "../ms-base/wait";
-import {toNum} from "../ms-base/number";
-import {instrumentsService} from "../ms-base/instruments.service";
+import {delay} from "../ms-ti-base/wait";
+import {toNum} from "../ms-ti-base/number";
+import {instrumentsService} from "../ms-ti-base/instruments.service";
+import {api} from "../ms-ti-base/api";
 
 const try_it = async () => {
     let enumKey = RealExchange["1"];
@@ -164,8 +164,8 @@ const exec0 = async (tickers: string[]) => {
 
     console.log('empty_tickers = ' + empty_tickers)
 }
-//const tickers: string[] = require('../ms-crawler/spbe.10_00_main_session.tickers.json');
-//exec0(tickers);
+const tickers: string[] = require('../ms-crawler/spbe.10_00_main_session.tickers.json');
+exec0(tickers);
 
 const rus = async () => {
     const apiTradeAvailableFlag = false
@@ -184,7 +184,7 @@ const rus = async () => {
 
     exec0(tickers);
 }
-rus();
+//rus();
 
 
 // perf();
