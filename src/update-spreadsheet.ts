@@ -1,3 +1,4 @@
+// @ts-ignore
 import TinkoffInvestmentsApi from './tinkoff-investments-api';
 import GoogleSpreadsheet from './google-spreadsheet/api';
 
