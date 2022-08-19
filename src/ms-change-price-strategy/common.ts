@@ -1,5 +1,4 @@
 import {CandleInterval, LastPrice} from "tinkoff-invest-api/cjs/generated/marketdata";
-import assert from "assert";
 import {is_trading_day, moment_business_days} from "../ms-trading-calendar/ms-trading-calendar";
 import moment from "moment";
 import {DAY} from "../constants/date.time.formats";
@@ -7,6 +6,7 @@ import clickhouse from "../db/clickhouse/clickhouse";
 import {toNum} from "../ms-ti-base/number";
 import {instrumentsService} from "../ms-ti-base/instruments.service";
 import {api} from "../ms-ti-base/api";
+import assert from "assert";
 
 export const get_price_change = async (
     exchange: string,
