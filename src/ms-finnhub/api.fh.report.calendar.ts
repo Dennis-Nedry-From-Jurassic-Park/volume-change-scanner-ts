@@ -30,7 +30,7 @@ export const report_calendar = async () => {
             return earn.symbol !== 'DDOG'
         })
 
-        const tickers = []; // TODO //await instrumentsService.get_all_tickers();
+        const tickers: any[] = []; // TODO //await instrumentsService.get_all_tickers();
 
         const filtered = report_calendar_tickers.filter((obj: any) => tickers.includes(obj.symbol));
         // https://www.tinkoff.ru/invest/social/profile/Marketon/598cf0ca-e967-413a-9157-e178f5388e5b/
