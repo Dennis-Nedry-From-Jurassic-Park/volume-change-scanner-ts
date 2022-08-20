@@ -1,6 +1,6 @@
 import {RealExchange, Share} from "tinkoff-invest-api/cjs/generated/instruments";
 import clickhouse from "../db/clickhouse/clickhouse";
-import {asyncReadFile} from "../utility-methods/file";
+import {asyncReadFile, asyncWriteFile} from "../utility-methods/file";
 import {CandleInterval} from "tinkoff-invest-api/cjs/generated/marketdata";
 import moment from "moment";
 import {insert_into_table_multiple} from "../db/generate-schema/own-clickhouse-generator-scheme";
@@ -17,7 +17,7 @@ const try_it = async () => {
 }
 
 const bottleneck = new Bottleneck({
-    minTime: 2500,
+    minTime: 1250,
     trackDoneStatus: true
 });
 
@@ -25,15 +25,14 @@ const insert_candles = async (
     tickers: string[],
     from: string,
     to: string,
-    timeframe: CandleInterval,
-    share: Share
+    timeframe: CandleInterval
 ) => {
-    await delay(1000)
-
     let ins_rows: any[] = [];
 
     for (const ticker of tickers) {
-        const tf = timeframe;
+        await delay(250)
+
+        const share = await instrumentsService.get_share_by_ticker(ticker);
 
         const candles = await bottleneck.schedule(async () => {
             try {
@@ -41,7 +40,7 @@ const insert_candles = async (
                     figi: share.figi,
                     from: moment(from).toDate(),
                     to: moment(to).toDate(),
-                    interval: tf
+                    interval: timeframe
                 });
             } catch (e:any) {
                 console.log('failed to fetch candles for ticker ' + ticker + ' exception: ' + e.message)
@@ -61,7 +60,7 @@ const insert_candles = async (
                 ticker: ticker,
                 figi: share.figi,
                 ...updated_row,
-                tf: tf,
+                tf: timeframe,
                 //currency: share.currency,
                 //exchange: share.exchange,
                 //apiTradeAvailableFlag: share.apiTradeAvailableFlag
@@ -74,14 +73,12 @@ const insert_candles = async (
 
     const query = await insert_into_table_multiple('GetCandles', ins_rows)
     console.log(query);
+    await asyncWriteFile('../../query.json', query)
     console.log('count = ' + ins_rows.length);
 
     const queries:any[] = [query];
 
     await clickhouse.logQueries(queries)
-
-
-
 }
 
 const exec = async () => {
@@ -133,23 +130,12 @@ const perf = async () => {
 const exec0 = async (tickers: string[]) => {
     let empty_tickers: string[] = [];
 
-    for (const ticker of tickers) {
-        const share =  await instrumentsService.get_share_by_ticker(ticker)
-        if(share === undefined) {
-            empty_tickers.push(ticker)
-            continue;
-        } // внебиржевая бумага
-
-        await delay(500)
-
-        await insert_candles(
-            [ticker],
-            '2022-08-19',
-            '2022-08-20',
-            CandleInterval.CANDLE_INTERVAL_DAY,
-            share
-        );
-    }
+    await insert_candles(
+        tickers,
+        '2022-08-20',
+        '2022-08-21',
+        CandleInterval.CANDLE_INTERVAL_DAY
+    );
 
     console.log('empty_tickers = ' + empty_tickers)
 }
@@ -164,7 +150,7 @@ const insert_candles_to_all_usa_shares_except_morning_session = async () => {
     let combined_tickers = all_usa_tickers.filter((item: string) => tickers_10_00_main_session.indexOf(item) < 0);
     exec0(combined_tickers);
 }
-insert_candles_to_all_usa_shares_except_morning_session()
+//insert_candles_to_all_usa_shares_except_morning_session()
 
 
 

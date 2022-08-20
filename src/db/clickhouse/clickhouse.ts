@@ -44,7 +44,9 @@ export const clickhouse = new ClickHouseExt({
 		username: 'default',
 		password: '',
 	},
+	usePost: true,
 	isUseGzip: false,
+	trimQuery: false,
 	format: 'json',
 	raw: false,
 	config: {
@@ -53,6 +55,7 @@ export const clickhouse = new ClickHouseExt({
 		output_format_json_quote_64bit_integers :  0,
 		enable_http_compression                 :  0,
 		database                                : '',
+		log_queries								:  1, // профилирование запросов, результат смотреть в system.log_queries
 	}
 });
 
