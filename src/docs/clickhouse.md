@@ -115,6 +115,29 @@ select * from GetCandles where toDate(time) = '2022-08-17'
 describe table GetCandles
 optimize  table GetCandles
 -----------------------------------------------------------------------------
+SELECT query SETTINGS max_query_size=1000000000, http_max_uri_size=1000000000
+
+https://clickhouse.com/docs/ru/operations/settings/settings/
+https://github.com/TimonKK/clickhouse/issues/68
+
+
+config: {
+session_id                              : v4(),
+session_timeout                         :  0,
+output_format_json_quote_64bit_integers :  0,
+enable_http_compression                 :  0,
+database                                : '',
+log_queries								:  1, // профилирование запросов, результат смотреть в system.log_queries
+//http_max_uri_size: 1000000000,
+
+
+
+		// max_query_size: 1000000000,
+		// max_parser_depth: 1000000000,
+		// max_bytes_to_read: 1000000000,
+		// max_rows_to_read: 1000000000
+	} 
+
 
 
 USE atr
@@ -142,11 +165,7 @@ ORDER BY (timestamp)
 
 docker run -d --name clickhouse_host --expose 8123 --ulimit nofile=262144:262144 -p 8123:8123 -v G:\docker-volumes\ch\atr\clickhouse_data\log:/var/log/clickhouse-server -v G:\docker-volumes\ch\atr\clickhouse_data\data:/var/lib/clickhouse yandex/clickhouse-server:21.3.20.1
 
-
-
 docker run -v /path/on/host:/path/inside/container image
-
-
 
 
 docker run -d --name clickhouse_host --expose 8123 --ulimit nofile=262144:262144 -p 8123:8123 \
@@ -161,12 +180,7 @@ docker run -d --name clickhouse_host --expose 8123 --ulimit nofile=262144:262144
  \
 
 
-
-
 docker run -d --name clickhouse_host --expose 8123 --ulimit nofile=262144:262144 -p 8123:8123 -v /clickhouse/log:/var/log/clickhouse-server:/var/log/clickhouse-server -v /clickhouse/data:/var/lib/clickhouse:/var/lib/clickhouse yandex/clickhouse-server:21.3.20.1
-
-
-
 
 
 docker run -d --name clickhouse_host --expose 8123 --ulimit nofile=262144:262144 -p 8123:8123 \
@@ -190,7 +204,7 @@ docker container ls -a --filter status=exited --filter status=created
 docker cp cec5299ed00f:/etc/clickhouse-server/users.xml .
 
 
-CREATE USER zowie IDENTIFIED WITH PLAINTEXT_PASSWORD BY 'cl45sk5qqe';
+CREATE USER <user> IDENTIFIED WITH PLAINTEXT_PASSWORD BY <pass>;
 GRANT ALL PRIVILEGES ON test_atr.* TO zowie
 
 
@@ -240,6 +254,7 @@ ORDER BY (timestamp)
 #  execute an interactive bash shell on the container
 docker-compose exec {container_name} bash
 # docker exec -it {container_name} bash
+or open throw docker desktop terminal
 
 # install preferable text editor (i prefer using 'nano')
 apt-get update
@@ -255,8 +270,8 @@ nano /etc/clickhouse-server/users.xml
 
 
 
-
-
+SELECT *　FROM system.errors　WHERE value > 0　ORDER BY code ASC　LIMIT 1
+UNKNOWN_IDENTIFIER │   47 │     1
 
 insert into security(timestamp,id) select now(), 111 from system.numbers limit 2;
 
