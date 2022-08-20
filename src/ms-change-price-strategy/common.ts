@@ -22,20 +22,21 @@ export const get_price_change = async (
 
     let prep_tickers = '';
 
-    for(let t of tickers) {
-        prep_tickers += "'" + t + "',";
-    }
+    for(let t of tickers) { prep_tickers += "'" + t + "',"; }
 
     prep_tickers = prep_tickers.slice(0, -1)
 
     let query = `
-        SELECT ticker, figi, time, low, high, close, volume FROM GetCandles WHERE  
+        SELECT
+        ticker, figi, time, low, high, close, volume
+        FROM GetCandles WHERE
         1=1
         AND tf=${interval}
-        AND ticker IN (${prep_tickers}) 
-        AND toDate(time)='${prev_day_}'
-    `
-    query = query.replace(/(\r\n|\n|\r)/gm, "") + ';'
+        AND ticker IN (${prep_tickers})
+        AND toDate(time)='${prev_day_}';
+    `;
+
+    query = query.replace(/(\r\n|\n|\r)/gm, "")
 
     const prev_day_prices_as_rows: any[] = await clickhouse.query(query).toPromise();
 

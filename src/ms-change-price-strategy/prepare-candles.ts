@@ -26,7 +26,6 @@ const insert_candles = async (
     from: string,
     to: string,
     timeframe: CandleInterval
-    //share: Share
 ) => {
     let ins_rows: any[] = [];
 
@@ -138,23 +137,6 @@ const exec0 = async (tickers: string[]) => {
         CandleInterval.CANDLE_INTERVAL_DAY
     );
 
-    // for (const ticker of tickers) {
-    //     // const share =  await instrumentsService.get_share_by_ticker(ticker)
-    //     // if(share === undefined) {
-    //     //     empty_tickers.push(ticker)
-    //     //     continue;
-    //     // } // внебиржевая бумага
-    //
-    //     await delay(250)
-    //
-    //     await insert_candles(
-    //         [ticker],
-    //         '2022-08-19',
-    //         '2022-08-20',
-    //         CandleInterval.CANDLE_INTERVAL_DAY
-    //     );
-    // }
-
     console.log('empty_tickers = ' + empty_tickers)
 }
 //const tickers: string[] = require('../ms-crawler/spbe.10_00_main_session.tickers.json');
@@ -189,7 +171,7 @@ const rus = async () => {
 
     exec0(tickers);
 }
-rus();
+//rus();
 
 
 // perf();
