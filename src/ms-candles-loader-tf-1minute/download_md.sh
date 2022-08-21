@@ -1,5 +1,5 @@
 figi_list=figi.txt
-token='t.6XgPKjJ72Ri_w7Ft_H7mlwtTsprvfMjJCPl-KD1dZJECzfRat7OYujU4d8X52GQC_g1gj6Of1DkM2ryBJ7DZCQ'
+token=''
 current_year=$(date +%Y)
 url=https://invest-public-api.tinkoff.ru/history-data
 function download {
