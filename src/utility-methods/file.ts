@@ -1,6 +1,39 @@
 import {promises as fsPromises} from 'fs';
 import {join} from 'path';
 
+const fs = require('fs');
+
+import zip from 'yauzl';
+import path from 'path';
+
+export const isValidZipFile = (filePath) => {
+    return zip.open(filePath, { lazyEntries: true }, (err, stream ) => {
+        if (err) {
+            console.log('fail to read ', filePath);
+            return false;
+        }
+        console.log('success read ', filePath);
+        return true;
+    });
+}
+
+
+export async function syncAppendToFile(filename: string, data: any) {
+    fs.appendFileSync(filename, data);
+}
+
+export async function asyncAppendToFile(filename: string, data: any) {
+    fs.appendFile(filename, data, function (err) {
+        if (err) throw err;
+        console.log('Saved! Filename: ' + filename);
+    });
+}
+
+
+
+
+
+
 export async function asyncWriteFile(filename: string, data: any) {
     /**
      * flags:

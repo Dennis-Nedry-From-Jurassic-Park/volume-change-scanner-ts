@@ -212,6 +212,9 @@ class InstrumentsService {
         return this.shares.filter( (s:Share) => { return s.ticker === ticker })[0];
     }
 
+    get_share_by_figi_sync = (figi:string): Share => {
+        return this.shares.filter( (s:Share) => { return s.figi === figi })[0];
+    }
     get_share_by_figi = async (figi:string): Promise<Share> => {
         return this.shares.filter( (s:Share) => { return s.figi === figi })[0];
     }
