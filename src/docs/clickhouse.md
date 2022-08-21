@@ -36,11 +36,41 @@ ta\data:/var/lib/clickhouse yandex/clickhouse-server:21.3.20.1
 
 docker run -it --rm --link clickhouse_host:clickhouse-server yandex/clickhouse-client:21.3.20.1 --host clickhouse-server --port 9000
 
+https://gist.github.com/sanchezzzhak/511fd140e8809857f8f1d84ddb937015
+
+
+cat 111.csv | curl 'http://localhost:8123/?query=INSERT%20INTO%20GetCandles%20FORMAT%20CSV' --data-binary @-
+cat 111.csv | curl 'http://localhost:8123/?format_csv_delimiter=,&query=INSERT%20INTO%20GetCandles%20FORMAT%20CSV' --data-binary @-
+-----------------------------
+cat 111.csv | curl 'http://localhost:8123/?format_csv_delimiter=;&query=INSERT%20INTO%20GetCandles%20FORMAT%20CSV' --data-binary @-
+-----------------------------
+curl 'http://localhost:8123/?query=INSERT+INTO+GetCandles(*)+VALUES(data)%3b'
+
+
+RHI,BBG000BS5DR2,57.1,57.1,57.1,57.1,9,1515594600,1,1,
 
 
 
+docker run -it --rm --link clickhouse_host:clickhouse-server yandex/clickhouse-client:21.3.20.1 --host clickhouse-server --port 9000 --format_csv_delimiter=";" --query="INSERT INTO GetCandles (*) FORMAT CSV" < _350с.spbe.csv
+
+cat _350с.spbe.csv | winpty docker run -it --rm --link clickhouse_host:clickhouse-server yandex/clickhouse-client:21.3.20.1 --host clickhouse-server --port 9000 --format_csv_delimiter=";" --query="INSERT INTO GetCandles FORMAT CSV";
+
+
+
+https://stackoverflow.com/questions/37954203/clickhouse-data-import
+
+https://clickhouse.com/docs/en/operations/system-tables/query_log/
+https://clickhouse.com/docs/ru/operations/quotas/
+https://clickhouse.com/docs/en/operations/troubleshooting/
 
 -----------------------------------------------------------------------------
+
+for file in *; do cat $file | curl 'http://localhost:8123/?format_csv_delimiter=;&query=INSERT%20INTO%20GetCandles%20FORMAT%20CSV' --data-binary @-; done
+23292034
+23292034
+
+
+
 --------------------------------- PERFOMANCE --------------------------------
 https://gist.github.com/sanchezzzhak/511fd140e8809857f8f1d84ddb937015
 
