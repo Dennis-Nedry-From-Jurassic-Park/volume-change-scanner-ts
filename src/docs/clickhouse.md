@@ -70,7 +70,7 @@ for file in *; do cat $file | curl 'http://localhost:8123/?format_csv_delimiter=
 23292034
 
 
-
+https://www.alibabacloud.com/help/en/clickhouse/latest/use-clickhouse-client-to-import-data
 --------------------------------- PERFOMANCE --------------------------------
 https://gist.github.com/sanchezzzhak/511fd140e8809857f8f1d84ddb937015
 
