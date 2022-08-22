@@ -139,7 +139,7 @@ const cancel_stoporders_deal = async (
 //deal('SAVA', 1.56, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
 //deal('FULC', 9.02, 2, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_LIMIT, ACCOUNT.IIS)
 //deal('TATN', 400, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_LIMIT, ACCOUNT.BROKERAGE)
-//deal('BBBY', 11.59, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
+//deal('ISKJ', 11.59, 2, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
 
 
 
@@ -151,14 +151,14 @@ const cancel_stoporders_deal = async (
 //deal('BBBY', 2.5, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
 
 // stop_deal(
-//     'EAR',
-//     3.1,
-//     2.96,
-//     10,
+//     'ISKJ',
+//     85.98,
+//     85.98,
+//     2,
 //     StopOrderDirection.STOP_ORDER_DIRECTION_SELL,
 //     StopOrderExpirationType.STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_CANCEL,
 //     StopOrderType.STOP_ORDER_TYPE_STOP_LOSS,
-//     ACCOUNT.IIS
+//     ACCOUNT.BROKERAGE
 // )
 
 
