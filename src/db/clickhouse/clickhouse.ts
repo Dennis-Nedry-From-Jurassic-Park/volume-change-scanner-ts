@@ -56,6 +56,11 @@ export const clickhouse = new ClickHouseExt({
 		enable_http_compression                 :  0,
 		database                                : '',
 		log_queries								:  1, // профилирование запросов, результат смотреть в system.log_queries
+		max_query_size: 1000000000,
+		max_parser_depth: 1000000000,
+		max_bytes_to_read: 1000000000,
+		max_rows_to_read: 1000000000,
+		http_max_field_value_size: 1000000000
 	}
 });
 
