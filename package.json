@@ -8,6 +8,7 @@
   "main": "public2/index.tsx",
   "scripts": {
     "prepare_figies": "ts-node ./src/ms-change-price-strategy/prepare_figies.ts",
+    "load-candles-tf-1mi-per-2week": "ts-node ./src/ms-candles-loader-tf-1minute/load-candles-tf-1mi-per-2week.ts",
     "all.spbe.tickers.except.350c": "ts-node ./src/ms-change-price-strategy/all.spbe.tickers.except.350c.ts",
     "ms.all.in.one.change.price.strategy": "ts-node ./src/ms-change-price-strategy/ms.all.in.one.change.price.strategy.ts",
     "prepare-candles": "ts-node ./src/ms-change-price-strategy/prepare-candles.ts",
@@ -144,6 +145,7 @@
     "util": "^0.12.4",
     "uuid": "^8.3.2",
     "winston": "^3.8.1",
+    "winston-daily-rotate-file": "^4.7.1",
     "wrr-pool": "^1.1.4"
   },
   "devDependencies": {

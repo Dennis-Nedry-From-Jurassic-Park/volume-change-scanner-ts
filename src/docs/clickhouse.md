@@ -34,6 +34,20 @@ mkdir -p ./{data,etc,log}
 docker run -d --name clickhouse_host --ulimit nofile=262144:262144 -p 8123:8123 -v \\wsl$\Ubuntu\clickhouse_data\log:/var/log/clickhouse-server -v \\wsl$\Ubuntu\clickhouse_da
 ta\data:/var/lib/clickhouse yandex/clickhouse-server:21.3.20.1
 
+docker run -it --rm --link clickhouse_host_2:clickhouse-server clickhouse/clickhouse-client:21.3.20.1 --host clickhouse-server --port 9000
+https://kb.altinity.com/altinity-kb-setup-and-maintenance/clickhouse-versions/
+https://hub.docker.com/r/clickhouse/clickhouse-server/tags
+https://hub.docker.com/r/clickhouse/clickhouse-client/tags
+
+docker pull clickhouse/clickhouse-server:22.8.1
+docker pull clickhouse/clickhouse-client:21.3.20.1
+
+---------------------------------------------------------------------------
+docker run -d --name clickhouse_host_2 --ulimit nofile=262144:262144 -p 8123:8123 -v \\wsl$\Ubuntu\clickhouse_data\log:/var/log/clickhouse-server -v \\wsl$\Ubuntu\clickhouse_data\data:/var/lib/clickhouse clickhouse/clickhouse-server:22.8.1
+
+docker run -it --rm --link clickhouse_host:clickhouse-server yandex/clickhouse-client:21.3.20.1 --host clickhouse-server --port 9000 --format_csv_delimiter=";" --query="INSERT INTO GetCandles (*) FORMAT CSV" < _350с.spbe.csv
+
+---------------------------------------------------------------------------
 docker run -it --rm --link clickhouse_host:clickhouse-server yandex/clickhouse-client:21.3.20.1 --host clickhouse-server --port 9000
 
 https://gist.github.com/sanchezzzhak/511fd140e8809857f8f1d84ddb937015
