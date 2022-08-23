@@ -45,3 +45,21 @@ export const logger_clickhouse = winston.createLogger({
         get_transport('clickhouse', 'debug')
     ],
 });
+export const logger_candles = winston.createLogger({
+    level: 'debug',
+    format: winston.format.json(),
+    defaultMeta: { service: 'clickhouse-database' },
+    transports: [
+        get_transport('candles_error', 'error'),
+        get_transport('candles', 'debug')
+    ],
+});
+export const logger_cron = winston.createLogger({
+    level: 'debug',
+    format: winston.format.json(),
+    defaultMeta: { service: 'ms-bull-cron' },
+    transports: [
+        get_transport('cron_error', 'error'),
+        get_transport('cron', 'debug')
+    ],
+});
