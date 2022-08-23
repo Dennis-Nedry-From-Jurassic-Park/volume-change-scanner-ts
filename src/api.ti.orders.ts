@@ -26,7 +26,7 @@ const deal = async (
 ) => {
     const share = await instrumentsService.get_share_by_ticker(ticker);
 
-    await assert_max_cash_per_deal(acc, share, price * num_shares)
+   // await assert_max_cash_per_deal(acc, share, price * num_shares)
     // TODO: count deals assert
     const account: TinkoffAccount = new RealAccount(api, acc)
 
@@ -143,7 +143,7 @@ const cancel_stoporders_deal = async (
 
 
 
-//deal('RUN', 36.25, 2, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
+//deal('MOMO', 0.56, 2, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
 //deal('EAR', 2.15, 25, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_LIMIT, ACCOUNT.IIS)
 //deal('EAR', 2.15, 5, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
 //deal('EAR', 2.4, 5, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
@@ -151,16 +151,15 @@ const cancel_stoporders_deal = async (
 //deal('BBBY', 2.5, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
 
 // stop_deal(
-//     'ISKJ',
-//     85.98,
-//     85.98,
-//     2,
+//     'AWH',
+//     0.63,
+//     0.63,
+//     50,
 //     StopOrderDirection.STOP_ORDER_DIRECTION_SELL,
 //     StopOrderExpirationType.STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_CANCEL,
-//     StopOrderType.STOP_ORDER_TYPE_STOP_LOSS,
-//     ACCOUNT.BROKERAGE
+//     StopOrderType.STOP_ORDER_TYPE_TAKE_PROFIT,
+//     ACCOUNT.IIS
 // )
-
 
 
 const shares = async () => {
