@@ -8,7 +8,7 @@ import {toNum} from "../ms-ti-base/number";
 import {instrumentsService} from "../ms-ti-base/instruments.service";
 import {api} from "../ms-ti-base/api";
 import {bottleneck} from "../bottleneck/bottleneck";
-import {logger_clickhouse} from "../logger/logger";
+import {logger_candles, logger_clickhouse} from "../logger/logger";
 
 const insert_candles = async (
     tickers: string[],
@@ -32,7 +32,7 @@ const insert_candles = async (
                     interval: timeframe
                 });
             } catch (e:any) {
-                logger_clickhouse.error('failed to fetch candles for ticker ' + ticker + ' exception: ' + e.message)
+                logger_candles.error('failed to fetch candles for ticker ' + ticker + ' exception: ' + e.message)
             }
         });
 
