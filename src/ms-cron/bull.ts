@@ -6,12 +6,19 @@ import {
     insert_candles_to_all_usa_shares_except_morning_session
 } from "../ms-change-price-strategy/prepare-candles-sbpe-exchange-main-session";
 import {logger_cron, logger_market_depth} from "../logger/logger";
+import WaitJob from "./wait-job";
 
 const Queue = require('bull');
 
-const cron_moex_exchange                    = '30 04 20 ? * MON-SAT'
-const cron_spbe_exchange_morning_session    = '30 10 20 ? * MON-SAT'
-const cron_spbe_exchange_main_session       = '30 25 20 ? * MON-SAT'
+const waitJob = new WaitJob('08:22:30')
+
+const firstJobAt = waitJob.getFirstJobAt();
+const secondJobAt = waitJob.getSecondJobAt();
+const thirdJobAt = waitJob.getThirdJobAt();
+
+const cron_moex_exchange                    = `${firstJobAt} ? * MON-SAT`
+const cron_spbe_exchange_morning_session    = `${secondJobAt} ? * MON-SAT`
+const cron_spbe_exchange_main_session       = `${thirdJobAt} ? * MON-SAT`
 
 const prepare_candles_moex_exchange_queue = new Queue('prepare_candles_moex_exchange_queue');
 const prepare_candles_spbe_exchange_morning_session_queue = new Queue('prepare_candles_spbe_exchange_morning_session_queue');
@@ -24,7 +31,6 @@ const options_for_moex_exchange_queue = {
     attempts: 3,
     repeat: { cron: cron_moex_exchange }
 };
-
 
 prepare_candles_moex_exchange_queue.add(data, options_for_moex_exchange_queue);
 prepare_candles_moex_exchange_queue.process((job) => prepare_candles_moex_exchange());
