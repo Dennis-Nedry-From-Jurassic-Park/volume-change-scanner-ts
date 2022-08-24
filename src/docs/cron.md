@@ -27,3 +27,10 @@ https://docs.nestjs.com/techniques/task-scheduling
 https://blog.abelotech.com/posts/nodejs-scheduler-cron-timeout-interval/
 
 https://qna.habr.com/search?q=Timeseries
+
+https://github.com/bradymholt/cRonstrue/blob/master/test/cronstrue.ts
+
+https://blog.logrocket.com/comparing-best-node-js-schedulers/
+
+https://github.com/OptimalBits/bull/blob/develop/REFERENCE.md
+https://github.com/OptimalBits/bull/blob/develop/PATTERNS.md

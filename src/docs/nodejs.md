@@ -13,3 +13,7 @@ npm cache clean --force
 ```
 npx arkit src/ -o arkit.svg
 ```
+
+https://www.npmjs.com/search?ranking=maintenance&q=keywords%3Aretry
+
+https://www.npmjs.com/package/delayed-promise-retry
