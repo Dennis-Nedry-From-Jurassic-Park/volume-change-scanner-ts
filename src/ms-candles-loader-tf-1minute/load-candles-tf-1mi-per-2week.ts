@@ -127,7 +127,7 @@ const get_days_between_start_end = async (
     //
     // console.log(dates[0]);
 }
-let tickers_10_00_main_session: string[] = require('../ms-crawler/spbe.10_00_main_session.tickers_.json');
+let tickers_10_00_main_session: string[] = require('../../assets/ti-api-v2/tickers/spbe.10_00_main_session.tickers_.json');
 //get_days_between_start_end(2, 'weeks', tickers_10_00_main_session);
 get_days_between_start_end(0, 'day', tickers_10_00_main_session);
 

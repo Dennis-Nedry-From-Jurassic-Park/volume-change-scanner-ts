@@ -1,3 +1,5 @@
+https://clickhouse.com/docs/en/interfaces/third-party/integrations/
+
 windows:
 
 https://stackoverflow.com/questions/43181654/locating-data-volumes-in-docker-desktop-windows

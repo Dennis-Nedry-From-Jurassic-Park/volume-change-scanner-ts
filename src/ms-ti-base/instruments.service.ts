@@ -5,6 +5,7 @@ import {SecurityTradingStatus} from "tinkoff-invest-api/cjs/generated/common";
 import {delay} from "./wait";
 import moment from "moment";
 import {DAY} from "../constants/date.time.formats";
+import {shares_status_all, shares_status_base} from "../path/path";
 
 export interface Pair {
     ticker: string,
@@ -36,7 +37,7 @@ class InstrumentsService {
         this.imoex_exchanges = [Exchange.MOEX, Exchange.MOEX_MORNING, Exchange.MOEX_WEEKEND];
 
         const shares_file_name =
-                this.status === InstrumentStatus.INSTRUMENT_STATUS_BASE ?  './shares_status_base.json' : './shares_status_all.json';
+                this.status === InstrumentStatus.INSTRUMENT_STATUS_BASE ? shares_status_base : shares_status_all;
 
         this.shares = require(shares_file_name).instruments.filter((share: Share) => share.otcFlag === this.otcFlag );
 
@@ -48,8 +49,6 @@ class InstrumentsService {
             return share.otcFlag === this.otcFlag && tickers.includes(share.ticker)
         }).map( (share:Share) => { return share.figi });
     }
-
-
 
     get_figies_by_tickers_with_filter = async (
         tickers?: string[],

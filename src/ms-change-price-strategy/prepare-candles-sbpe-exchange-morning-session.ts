@@ -1,4 +1,3 @@
-import pRetry from "p-retry";
 import {prepare_candles} from "./prepare-candles";
 import {tickers} from "../ms-ti-base/tickers";
 

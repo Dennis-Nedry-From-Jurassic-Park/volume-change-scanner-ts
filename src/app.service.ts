@@ -11,7 +11,7 @@ import moment from 'moment';
 
 const token = secrets.token!;
 
-import { ATR } from '@aduryagin/technical-indicators'
+//import { ATR } from '@aduryagin/technical-indicators'
 import {instrumentsService} from "./ms-ti-base/instruments.service";
 import { toNum } from './ms-ti-base/number';
 

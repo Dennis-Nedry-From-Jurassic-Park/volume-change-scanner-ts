@@ -1,0 +1,10 @@
+.git
+.idea
+.cache.ti.api.gs.ru.shares.report
+arch-diagramms
+benchmark
+node_modules
+logs
+output
+README.md
+update-proto-contracts.sh

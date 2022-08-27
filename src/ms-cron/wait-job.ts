@@ -23,14 +23,6 @@ export default class WaitJob {
         this.new_format = new_format;
         this.closeWorkerAfterMinutes = closeWorkerAfterMinutes;
 
-        // (function () {
-        //     this.startJobAt = moment(this.time, this.format);
-        //
-        // })();
-
-        {
-            //this.startJobAt = moment(this.time, this.format);
-        }
         this.startJobAt = moment(this.time, this.format);
         this.firstJobAt = this.startJobAt.format(this.new_format)
         this.secondJobAt = this.startJobAt.add(this.closeWorkerAfterMinutes, 'minutes').format(this.new_format);
