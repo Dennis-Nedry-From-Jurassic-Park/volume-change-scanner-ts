@@ -37,7 +37,7 @@ export const prepareWeights = (indicators: number[]) => {
 
 	let indexSlice = 0;
 
-	const arrArrs = [];
+	const arrArrs: any[] = [];
 	const precision = 0.000000001;
 
 	for (let _i = 0; _i < weights.length-1; _i++) {
