@@ -1,10 +1,32 @@
 import {Controller, Get, Param, Query, Req, Res} from "@nestjs/common";
 import {PrometheusController} from "@willsoto/nestjs-prometheus";
 import { Request, Response } from 'express';
+import {defaultPath, health} from "./app.common";
 
-@Controller('metrics')
+
+// const client = require('prom-client');
+//
+// // Create a Registry to register the metrics
+// const register = new client.Registry();
+//
+// client.collectDefaultMetrics({
+//     app: 'node-application-monitoring-app',
+//     prefix: 'node_',
+//     timeout: 10000,
+//     gcDurationBuckets: [0.001, 0.01, 0.1, 1, 2, 5],
+//     register
+// });
+// const express = require('express');
+// const app = express();
+//@Controller('metrics')
 export class CustomPrometheusController extends PrometheusController {
-    @Get('api/v1/label/__name__/values?')
+
+
+    // @Get('mymetrics')
+    // async mymetrics(@Res() res) {
+    //     res.setHeader('Content-Type', register.contentType);
+    //     res.send(await register.metrics());
+    // }
     //@Get()
 
     //start=:start&end=:end

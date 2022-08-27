@@ -5,17 +5,19 @@ import {CustomPrometheusController} from "./app.custom.prometheus.controller";
 //import { RedisModule} from 'nestjs-redis'
 
 @Module({
-    imports: [
-        PrometheusModule.register({
-            controller: CustomPrometheusController,
-            //path: 'metrics',
-            defaultMetrics: {
-                enabled: true
-            }
-        }),
-       // RedisModule.register(options)
-    ],
-    controllers: [AppController]
+    // imports: [
+    //     PrometheusModule.register({
+    //         controller: CustomPrometheusController,
+    //         //path: 'metrics',
+    //         defaultMetrics: {
+    //             enabled: true
+    //         }
+    //     }),
+    //    // RedisModule.register(options)
+    // ],
+    controllers: [AppController],
+    providers: []
 })
 
 export class AppModule {} // http://localhost:3002/health
+

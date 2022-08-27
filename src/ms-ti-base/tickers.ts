@@ -1,4 +1,4 @@
-const tickers: string[] =  require("../ms-crawler/spbe.10_00_main_session.tickers.json");
+const tickers: string[] =  require("../../assets/ti-api-v2/tickers/spbe.10_00_main_session_500c.tickers.json");
 export {
     tickers
 }

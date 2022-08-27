@@ -1,6 +1,6 @@
 import {ACCOUNT} from "./users.service";
 import {api} from "./api";
-import {MoneyValue} from "tinkoff-invest-api/src/generated/common";
+import {MoneyValue} from "tinkoff-invest-api/cjs/generated/common";
 import {toNum} from "./number";
 
 export const getPortfolioBalance = async (accountId: typeof ACCOUNT, currency: string): Promise<number | undefined> => {
