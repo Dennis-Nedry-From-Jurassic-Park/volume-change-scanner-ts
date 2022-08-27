@@ -5,3 +5,6 @@ npx protoc --ts_out ./protos_ts --proto_path protos protos/*.proto --ts_opt gene
 
 ❗    | arg `--ts_opt generate_dependencies` is used for generating google/protobuf/timestamp.ts
 :---: | :---
+
+
+https://capnproto.org/language.html
