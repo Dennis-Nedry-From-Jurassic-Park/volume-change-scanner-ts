@@ -3,8 +3,6 @@ import {Share} from "tinkoff-invest-api/cjs/generated/instruments";
 import assert from "assert";
 import {prepare_candles} from "./prepare-candles";
 
-import pRetry from "p-retry";
-
 export const prepare_candles_moex_exchange = async () => {
     // const result = await pRetry(async () => console.log(111), {
     //     onFailedAttempt: error => {
@@ -23,4 +21,3 @@ export const prepare_candles_moex_exchange = async () => {
 
     await prepare_candles(tickers);
 }
-prepare_candles_moex_exchange();

@@ -25,13 +25,14 @@ const insert_candles = async (
 
         const candles = await bottleneck.schedule(async () => {
             try {
-                return  api.marketdata.getCandles({
+                return api.marketdata.getCandles({
                     figi: share.figi,
                     from: moment(from).toDate(),
                     to: moment(to).toDate(),
                     interval: timeframe
                 });
             } catch (e:any) {
+                console.log('failed to fetch candles for ticker ' + ticker + ' exception: ' + e.message)
                 logger_candles.error('failed to fetch candles for ticker ' + ticker + ' exception: ' + e.message)
             }
         });
@@ -76,10 +77,10 @@ export const prepare_candles = async (tickers: string[]) => {
     let empty_tickers: string[] = [];
 
     const to = moment().format('YYYY-MM-DD')
-
+    const prev = moment().subtract(1, 'days').format('YYYY-MM-DD')
     await insert_candles(
         tickers,
-        '2022-08-20',
+        prev,
         to,
         CandleInterval.CANDLE_INTERVAL_DAY
     );
