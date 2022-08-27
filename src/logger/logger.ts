@@ -8,7 +8,7 @@ const get_transport = (appname: string, level: string): DailyRotateFile => {
     return new DailyRotateFile({
         filename: `${appname}-%DATE%.log`,
         dirname: path,
-        datePattern: 'YYYY-MM-DD-HH',
+        datePattern: 'YYYY-MM-DD',
         zippedArchive: true,
         maxSize: '100m',
         maxFiles: '28d',
