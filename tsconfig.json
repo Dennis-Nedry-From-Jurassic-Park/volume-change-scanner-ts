@@ -1,21 +1,51 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "pretty": true,
-    "allowSyntheticDefaultImports": true,
-    "diagnostics": false,
-
-    "target": "esnext",
-    "module": "CommonJS",
-    "esModuleInterop": true,
     "allowJs": true,
-    "strictNullChecks": true,
-    "noImplicitAny": false,
-    "strictFunctionTypes": true,
-    "noImplicitThis": false,
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "checkJs": false,
+    "declaration": true,
+    "diagnostics": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "preserve",
+    "lib": [
+      "es2019.array",
+      "dom.iterable",
+      "DOM",
+      "es2020",
+      "es2021",
+      "ES2021.String",
+      "esnext",
+      "es6"
+    ],
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "isolatedModules": false,
+
+    "incremental": true,
+    "importHelpers": true,
     "outDir": "dist",
-    "types": ["node", "...", "@types/jest"],
-    
+    "rootDir": ".",
+
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "noEmit": false,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "sourceRoot": "src",
+    "sourceMap": true,
+    "target": "esnext",
+    "types": ["node", "@types/jest"],
+    "typeRoots": [
+      "node_modules/@types/"
+    ],
     "plugins": [
       {
         "transform": "ts-auto-mock/transformer",
@@ -23,37 +53,21 @@
         "features": ["random"]
       }
     ],
-    "lib": [
-      "esnext", "dom", "dom.iterable", "es6"
-    ],
-    "jsx": "preserve",
-    "noEmit": true,
-    "moduleResolution": "node",
-
-    "sourceMap": true,
-    "importHelpers": true,
-
-    "declaration": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "checkJs": false,
-    "forceConsistentCasingInFileNames": true,
-    "incremental": true,
-    "typeRoots": [
-      "node_modules/@types/"
-    ],
-    "skipLibCheck": true,
-    "alwaysStrict": true,
-    "resolveJsonModule": true,
-    "isolatedModules": false
+    "pretty": true
   },
-  "include": ["src"],
   "exclude": [
+    ".cache.ti.api.gs.ru.shares.report",
     "node_modules",
+    "arch-diagramms",
     "dist",
+    "test",
     "build",
+    "output",
+    "logs",
+    "benchmark",
     "typings",
     "**/tests/*.test.ts",
     "*.test.ts",
-  ]
+  ],
+  "include": ["src"]
 }
