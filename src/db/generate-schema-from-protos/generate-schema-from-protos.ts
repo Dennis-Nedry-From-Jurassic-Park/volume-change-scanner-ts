@@ -1,4 +1,3 @@
-const fs = require('fs');
 const path = './src/db/generate-schema-from-protos/protos/instruments.proto'
 const allFileContents = fs.readFileSync(path, 'utf-8');
 

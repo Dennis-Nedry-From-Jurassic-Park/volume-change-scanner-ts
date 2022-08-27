@@ -66,7 +66,6 @@ untryOfRiskName String,  sector String,  issueSizePlan Int32,  tradingStatus Int
 import {RealExchange, Share, ShareType} from "tinkoff-invest-api/cjs/generated/instruments";
 import SafeMock, {when, verify} from "safe-mock";
 import {SecurityTradingStatus} from "tinkoff-invest-api/cjs/generated/common";
-import {api} from "../../api.ti.common";
 
 //const share = SafeMock.build<Share>();
 //const share = {} as Share
