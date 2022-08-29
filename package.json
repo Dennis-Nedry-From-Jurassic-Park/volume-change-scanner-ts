@@ -7,6 +7,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "api-ti-orders": "ts-node src/api.ti.orders.ts",
+    "portfolio.ts": "ts-node src/metrics/portfolio.ts",
     "bull.ts": "ts-node src/ms-cron/bull.ts",
     "ms-cron2": "ts-node src/ms-cron/cron.ts",
     "ms-cron": "cross-env NODE_OPTIONS='-r node_modules/ts-node/register' ts-node src/ms-cron/cron.ts",
@@ -148,7 +149,7 @@
     "tabletojson": "^2.0.7",
     "technicalindicators": "^3.1.0",
     "telegraf": "^4.8.6",
-    "tinkoff-invest-api": "^4.1.0",
+    "tinkoff-invest-api": "^5.0.0",
     "ts-jest": "^28.0.8",
     "ts-node": "^10.9.1",
     "ts-patch": "^2.0.2",
@@ -156,11 +157,9 @@
     "tty-table": "^4.1.6",
     "ttypescript": "^1.5.13",
     "util": "^0.12.4",
-
     "uuid": "^8.3.2",
     "winston": "^3.8.1",
     "winston-daily-rotate-file": "^4.7.1",
-
     "wrr-pool": "^1.1.4",
     "yauzl": "^2.10.0"
   },
