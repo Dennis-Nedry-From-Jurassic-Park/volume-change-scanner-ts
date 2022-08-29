@@ -1,9 +1,29 @@
+1) docker compose up -d
+2) docker run -it --rm --link volume-change-scanner-ts-clickhouse1-1:clickhouse-server clickhouse/clickhouse-client:21.3.20.1 --host clickhouse-server --port 9000
+
 https://clickhouse.com/docs/en/interfaces/third-party/integrations/
 
 windows:
 
 https://stackoverflow.com/questions/43181654/locating-data-volumes-in-docker-desktop-windows
 cd //wsl$/docker-desktop-data/version-pack-data/community/docker/volumes/
+
+
+--------------------
+https://github.com/Altinity/clickhouse-grafana/blob/master/docker-compose.yaml
+https://github.com/lmangani/docker-clickhouse-grafana
+
+https://onelinerhub.com/clickhouse/how-to-format-datetime
+https://onelinerhub.com/clickhouse
+https://github.com/lmangani/docker-clickhouse-grafana
+https://mcs.mail.ru/docs/additionals/cases/cases-monitoring/case-node-exporter
+https://clickhouse.com/docs/ru/sql-reference/functions/date-time-functions/
+
+--------------------
+perf:
+https://altinitydb.medium.com/new-encodings-to-improve-clickhouse-efficiency-927678e496bd
+
+
 
 
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
@@ -507,25 +527,6 @@ kline_type AS TF, \
 ticker \
 FROM historical_candles_temp_mem \
 GROUP BY ticker, kline_type
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

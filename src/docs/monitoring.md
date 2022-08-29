@@ -4,8 +4,13 @@ https://www.bogotobogo.com/DevOps/Docker/Docker_Prometheus_Grafana.php
 https://github.com/siimon/prom-client#prometheus-client-for-nodejs--
 https://github.com/PayU/prometheus-api-metrics
 
+https://grafana.com/grafana/dashboards/11159-nodejs-application-dashboard/
+https://grafana.com/grafana/plugins/vertamedia-clickhouse-datasource/
+
 https://prometheus.io/docs/practices/naming/
 
+https://grafana.com/grafana/dashboards/2515-clickhouse-queries/
+https://altinity.com/blog/2019/12/28/creating-beautiful-grafana-dashboards-on-clickhouse-a-tutorial
 
 https://github.com/siimon/prom-client#configuration
 
