@@ -3,8 +3,8 @@ version: '3'
 services:
   prometheus:
     image: prom/prometheus:latest
-    networks:
-      - nesjs-network
+#    networks:
+#      - main
     volumes:
       - prometheus_data:/prometheus
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -13,9 +13,15 @@ services:
     ports:
       - '9090:9090'
   grafana:
+    network_mode: bridge
+#    extra_hosts:
+#      - "host.docker.internal:host-gateway"
+#      - "localhost:127.0.0.1"
+    links:
+      - clickhouse1
     image: grafana/grafana:latest
-    networks:
-      - nesjs-network
+#    networks:
+#      - main
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
@@ -38,15 +44,37 @@ services:
       dockerfile: Dockerfile
     ports:
       - '9200:9200'
-    networks:
-      - nesjs-network
+#    networks:
+#      - main
     env_file:
       - .env
+  clickhouse1:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "localhost:127.0.0.1"
+    image: clickhouse/clickhouse-server:22.8.1
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    expose:
+      - "9000" # client port
+      - "8123" # client port
+    volumes:
+      #- clickhouse_storage:/var/lib/clickhouse
+      - \\wsl$$\Ubuntu\clickhouse_data\data:/var/lib/clickhouse
+      - \\wsl$$\Ubuntu\clickhouse_data\log:/var/log/clickhouse-server
+#    networks:
+#      - main
+    network_mode: bridge
 
 volumes:
+  #clickhouse_storage: {}
   prometheus_data: {}
   grafana_data: {}
   app_data: {}
 
-networks:
-  nesjs-network:
+#networks:
+#  main:
+#    enable_ipv6: false
+#    driver: bridge
+
