@@ -1,5 +1,5 @@
-# docker-compose.yml
-version: '3'
+version: '3.7'
+
 services:
   prometheus:
     image: prom/prometheus:latest
@@ -18,7 +18,7 @@ services:
 #      - "host.docker.internal:host-gateway"
 #      - "localhost:127.0.0.1"
     links:
-      - clickhouse1
+      - clickhouse
     image: grafana/grafana:latest
 #    networks:
 #      - main
@@ -35,20 +35,21 @@ services:
       - '3000:3000'
   app:
     container_name: app
-    entrypoint: ["npm", "run", "start"]
+    entrypoint: ["npm", "run", "start:ms:atr"]
     depends_on:
       - prometheus
       - grafana
+      - clickhouse
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/app/Dockerfile
     ports:
       - '9200:9200'
 #    networks:
 #      - main
     env_file:
       - .env
-  clickhouse1:
+  clickhouse:
     extra_hosts:
       - "host.docker.internal:host-gateway"
       - "localhost:127.0.0.1"
