@@ -1,0 +1,84 @@
+version: '3.7'
+
+services:
+  redis:
+    container_name: redis
+
+    #command:
+      #- /bin/sh
+      #- -c
+      # - Double dollars, so that the variable is not expanded by Docker Compose
+      # - Surround by quotes, so that the shell does not split the password
+      # - The ${variable:?message} syntax causes shell to exit with a non-zero
+      #   code and print a message, when the variable is not set or empty
+      #- redis-server --save 60 1 --loglevel debug --requirepass "$${REDIS_PASSWORD:?REDIS_PASSWORD variable is not set}"
+    env_file:
+      - .env
+    image: redis:7.0.4-alpine
+    network_mode: bridge
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 60 1 --loglevel debug --requirepass "${REDIS_PASSWORD}"
+    volumes:
+      - redis_data:/data
+
+  grafana2:
+    network_mode: bridge
+    #    extra_hosts:
+    #      - "host.docker.internal:host-gateway"
+    #      - "localhost:127.0.0.1"
+    links:
+      - clickhouse2
+    image: grafana/grafana:latest
+    #    networks:
+    #      - main
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/config.ini:/etc/grafana/config.ini
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=illchangeitanyway
+    ports:
+      - '3000:3000'
+
+  app_cron:
+    container_name: app_cron
+    entrypoint: [ "npm", "run", "start:ms:cron" ]
+    depends_on:
+      - redis
+      - clickhouse2
+      - grafana2
+    build:
+      context: .
+      dockerfile: docker/ms-cron/Dockerfile
+    ports:
+      - '9200:9200'
+    #    networks:
+    #      - main
+    env_file:
+      - .env
+    network_mode: bridge
+  clickhouse2:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    image: clickhouse/clickhouse-server:22.8.1
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    expose:
+      - "9000" # client port
+      - "8123"
+    volumes:
+      #- clickhouse_storage:/var/lib/clickhouse
+      - \\wsl$$\Ubuntu\clickhouse_data\data:/var/lib/clickhouse
+      - \\wsl$$\Ubuntu\clickhouse_data\log:/var/log/clickhouse-server
+    #    networks:
+    #      - main
+    network_mode: bridge
+volumes:
+  #clickhouse_storage: {}
+  redis_data: {}
+  grafana_data: {}
+  app_cron_data: {}

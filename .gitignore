@@ -129,7 +129,7 @@ dist
 /benchmark/
 
 *.json
-/src/tinkoff-api-instruments/accs.txt
+/packages/backend/apps/ms-base/src/tinkoff-api-instruments/accs.txt
 /logs_prev/
 /output/
 /temp/output.zip
