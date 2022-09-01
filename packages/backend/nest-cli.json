@@ -1,0 +1,30 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "/",
+  "monorepo": true,
+  "root": "/",
+  "compilerOptions": {
+    "webpack": false,
+    "tsConfigPath": "./tsconfig.json",
+    "projects": {
+      "ms-cron": {
+        "type": "application",
+        "root": "apps/ms-cron",
+        "entryFile": "portfolio",
+        "sourceRoot": "apps/ms-cron/src",
+        "compilerOptions": {
+          "tsConfigPath": "apps/ms-cron/tsconfig.app.json"
+        }
+      },
+      "ms-atr": {
+        "type": "application",
+        "root": "apps/ms-atr",
+        "entryFile": "automatic.trading.robot",
+        "sourceRoot": "apps/ms-atr/src",
+        "compilerOptions": {
+          "tsConfigPath": "apps/ms-atr/tsconfig.app.json"
+        }
+      }
+    }
+  }
+}
