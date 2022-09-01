@@ -1,1 +1,0 @@
-export const DAY = 'YYYY-MM-DD'

@@ -1,1 +1,0 @@
-curl -X GET --location "https://invest-public-api.tinkoff.ru/history-data?figi=BBG0013HGFT4&year=2022" -H "Authorization: Bearer ${token}" -o output.zip
