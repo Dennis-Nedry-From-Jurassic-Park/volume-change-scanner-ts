@@ -10,4 +10,3 @@ import {TasksModule} from "./tasks/tasks.module";
 })
 
 export class PortfolioModule {}
-
