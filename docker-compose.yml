@@ -3,8 +3,8 @@ version: '3.7'
 services:
   prometheus:
     image: prom/prometheus:latest
-#    networks:
-#      - main
+    networks:
+      - atr-net
     volumes:
       - prometheus_data:/prometheus
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -20,8 +20,8 @@ services:
     links:
       - clickhouse
     image: grafana/grafana:latest
-#    networks:
-#      - main
+    networks:
+      - atr-net
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
@@ -45,11 +45,29 @@ services:
       dockerfile: docker/app/Dockerfile
     ports:
       - '9200:9200'
-#    networks:
-#      - main
+    networks:
+      - atr-net
     env_file:
       - .env
+  app_cron:
+    container_name: app_cron
+    entrypoint: [ "npm", "run", "start:ms:cron" ]
+    depends_on:
+      - redis
+      - clickhouse
+    #      - grafana2
+    build:
+      context: .
+      dockerfile: docker/ms-cron/Dockerfile
+    ports:
+      - '9201:9201'
+    networks:
+      - atr-net
+    env_file:
+      - .env
+    network_mode: bridge
   clickhouse:
+    container_name: clickhouse
     extra_hosts:
       - "host.docker.internal:host-gateway"
       - "localhost:127.0.0.1"
@@ -59,13 +77,13 @@ services:
       - "9000:9000"
     expose:
       - "9000" # client port
-      - "8123" # client port
+      - "8123"
     volumes:
       #- clickhouse_storage:/var/lib/clickhouse
       - \\wsl$$\Ubuntu\clickhouse_data\data:/var/lib/clickhouse
       - \\wsl$$\Ubuntu\clickhouse_data\log:/var/log/clickhouse-server
-#    networks:
-#      - main
+    networks:
+      - atr-net
     network_mode: bridge
 
 volumes:
@@ -73,9 +91,6 @@ volumes:
   prometheus_data: {}
   grafana_data: {}
   app_data: {}
-
-#networks:
-#  main:
-#    enable_ipv6: false
-#    driver: bridge
-
+networks:
+  atr-net:
+    driver: bridge
