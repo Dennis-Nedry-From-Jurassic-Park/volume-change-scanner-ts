@@ -18,4 +18,4 @@ RUN yarn install
 
 RUN rm -rf /atr/dist
 
-RUN yarn build:ms:atr
+RUN yarn build:ms:cron

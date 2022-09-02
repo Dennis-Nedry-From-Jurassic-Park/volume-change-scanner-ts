@@ -164,8 +164,8 @@ const cancel_stoporders_deal = async (
 
 // stop_deal(
 //     'MOMO',
-//     5.05,
-//     5.08,
+//     5.15,
+//     5.18,
 //     33,
 //     StopOrderDirection.STOP_ORDER_DIRECTION_SELL,
 //     StopOrderExpirationType.STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_CANCEL,
