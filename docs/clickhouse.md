@@ -1,7 +1,15 @@
-1) docker compose up -d
-2) docker run -it --rm --link volume-change-scanner-ts-clickhouse1-1:clickhouse-server clickhouse/clickhouse-client:21.3.20.1 --host clickhouse-server --port 9000
+1) 
+2) 
+3) 
+4) docker compose up -d
+5) docker run -it --rm --link volume-change-scanner-ts-clickhouse1-1:clickhouse-server clickhouse/clickhouse-client:21.3.20.1 --host clickhouse-server --port 9000
 
 https://clickhouse.com/docs/en/interfaces/third-party/integrations/
+
+https://github.com/GoogleChrome/lighthouse
+https://github.com/vkcom/lighthouse
+https://github.com/vkcom/kittenhouse
+https://www.sequelpro.com/
 
 windows:
 

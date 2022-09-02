@@ -1,0 +1,11 @@
+BPMN
+https://www.npmjs.com/package/bpmn
+https://www.npmjs.com/package/workflow-4-node
+https://www.npmjs.com/package/turbine.js
+https://github.com/paed01/bpmn-engine
+https://www.npmjs.com/package/@opuscapita/fsm-workflow-history
+https://www.npmjs.com/package/engineering
+https://github.com/paed01/bpmn-engine
+https://www.npmjs.com/package/bpmn-engine
+https://github.com/ralphhanna/bpmn-server
+https://openbase.com/categories/js/best-nodejs-process-management-libraries
