@@ -11,21 +11,12 @@
   ],
   "scripts": {
     "docker:run:stop:all": "docker stop $(docker ps -a -q)",
-    "docker:run:app": "docker-compose -f docker-compose.yml up -d",
-    "docker:run:cron": "docker-compose -f docker-compose-cron.yml up -d",
-
+    "docker:run:ms:app": "docker-compose -f docker-compose.yml up -d",
+    "docker:run:ms:cron": "docker-compose -f docker-compose-cron.yml up -d",
     "build:ms:atr": "yarn workspace @atr/backend build:ms:atr",
     "build:ms:cron": "yarn workspace @atr/backend build:ms:cron",
-
     "start:ms:atr": "yarn workspace @atr/backend start:ms:atr",
     "start:ms:cron": "yarn workspace @atr/backend start:ms:cron",
-
-
-
-
-
-
-
     "api-ti-orders": "ts-node packages/backend/apps/ms-atr/src/api.ti.orders.ts",
     "portfolio.ts": "ts-node packages/backend/apps/ms-base/src/metrics/portfolio.ts",
     "operations.portfolio.ts": "ts-node packages/backend/apps/ms-src/src/ms-cron/operations.portfolio.ts",
@@ -83,8 +74,6 @@
   },
   "dependencies": {
     "rxjs": "^7.5.6"
-  },
-  "devDependencies": {
   },
   "browserslist": {
     "production": [
