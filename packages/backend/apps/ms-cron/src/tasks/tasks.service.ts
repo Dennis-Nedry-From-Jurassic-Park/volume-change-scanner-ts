@@ -5,6 +5,11 @@ import moment from "moment";
 import {get_portfolio_balance} from "../../../ms-base/src/metrics/portfolio";
 import WaitJob from "../wait-job";
 import {prepare_candles_moex_exchange} from "../../../ms-change-price-strategy/prepare-candles-moex-exchange";
+import {prepare_candles} from "../../../ms-change-price-strategy/prepare-candles";
+import {tickers} from "../../../ms-ti-base/tickers";
+import {
+    insert_candles_to_all_usa_shares_except_morning_session
+} from "../../../ms-change-price-strategy/prepare-candles-sbpe-exchange-main-session";
 
 
 const waitJob = new WaitJob('20:35:30')
@@ -16,6 +21,8 @@ const thirdJobAt = waitJob.getThirdJobAt();
 const cron_moex_exchange                    = `${firstJobAt} ? * MON-SAT`
 const cron_spbe_exchange_morning_session    = `${secondJobAt} ? * MON-SAT`
 const cron_spbe_exchange_main_session       = `${thirdJobAt} ? * MON-SAT`
+
+const timeout = waitJob.getCloseWorkerAfterMinutes() * 60 * 1000;
 
 
 @Injectable()
@@ -29,11 +36,24 @@ export class TasksService {
     //     get_portfolio_balance().then(() => console.log(msg));
     // }
 
-    @Timeout(5000)
-    @Cron(cron_moex_exchange)
+    @Timeout(0)
     prepare_candles_moex_exchange() {
-        const msg = `${moment().format('HH:mm:ss')} Job prepare_candles_moex_exchange with id has been started`;
-        logger_cron.log('debug', msg);
+        const msg = `${moment().format('HH:mm:ss')} Job prepare_candles_moex_exchange has been completed`;
         prepare_candles_moex_exchange().then(() => console.log(msg));
+        logger_cron.log('debug', msg);
     }
+    //
+    // @Timeout(timeout)
+    // prepare_candles_spbe_exchange_morning_session() {
+    //     const msg = `${moment().format('HH:mm:ss')} Job prepare_candles_spbe_exchange_morning_session has been completed`;
+    //     prepare_candles(tickers).then(() => console.log(msg));
+    //     logger_cron.log('debug', msg);
+    // }
+    //
+    // @Timeout(2 * timeout)
+    // prepare_candles_spbe_exchange_main_session() {
+    //     const msg = `${moment().format('HH:mm:ss')} Job prepare_candles_spbe_exchange_main_session has been completed`;
+    //     insert_candles_to_all_usa_shares_except_morning_session().then(() => console.log(msg));
+    //     logger_cron.log('debug', msg);
+    // }
 }
