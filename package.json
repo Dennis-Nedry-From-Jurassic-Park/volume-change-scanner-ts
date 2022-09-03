@@ -12,9 +12,23 @@
   "scripts": {
     "docker:run:stop:all": "docker stop $(docker ps -a -q)",
     "docker:run:ms:app": "docker-compose -f docker-compose.yml up -d",
-    "docker:run:ms:cron": "docker-compose -f docker-compose-cron.yml up -d",
+
+    "docker:down:ms:cron": "docker-compose -f docker-compose-cron.yml down --remove-orphans",
+    "docker:tag:ms:cron": "docker tag 7097bc9a6667f62ef8cec701a78e785a1a8c059fd4ebe0c5c4b3ebbcb6761797 deps:0.0.1",
+
+
+    "docker:build:ms:cron": "docker build . --no-cache --progress=tty -f docker/ms-cron/Dependencies.Dockerfile",
+
+
+    "docker:run:ms:cron": "docker-compose -f docker-compose-cron.yml up -d --quiet-pull --build ms_cron",
+
+
     "build:ms:atr": "yarn workspace @atr/backend build:ms:atr",
+
+
     "build:ms:cron": "yarn workspace @atr/backend build:ms:cron",
+
+
     "start:ms:atr": "yarn workspace @atr/backend start:ms:atr",
     "start:ms:cron": "yarn workspace @atr/backend start:ms:cron",
     "api-ti-orders": "ts-node packages/backend/apps/ms-atr/src/api.ti.orders.ts",

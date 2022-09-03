@@ -42,7 +42,7 @@ services:
       - clickhouse
     build:
       context: .
-      dockerfile: docker/app/Dockerfile
+      dockerfile: docker/ms-app/Dockerfile
     ports:
       - '9200:9200'
     networks:

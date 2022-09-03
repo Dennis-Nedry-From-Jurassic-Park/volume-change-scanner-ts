@@ -6,7 +6,8 @@ services:
     env_file:
       - .env
     image: redis:7.0.4-alpine
-    network_mode: bridge
+    networks:
+      - atr-net
     restart: always
     ports:
       - '6379:6379'
@@ -34,8 +35,10 @@ services:
 #    ports:
 #      - '3000:3000'
 
-  app_cron:
-    container_name: app_cron
+  ms_cron:
+    container_name: ms_cron
+    #container_name: ms_cron_${IMAGES_TAG}
+    #image: ms_cron_image:${IMAGES_TAG}
     networks:
       - atr-net
     entrypoint: [ "npm", "run", "start:ms:cron" ]
@@ -46,6 +49,8 @@ services:
     build:
       context: .
       dockerfile: docker/ms-cron/Dockerfile
+#      args:
+#        IMAGES_TAG: $IMAGES_TAG
     ports:
       - '9201:9201'
     env_file:
