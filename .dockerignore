@@ -2,9 +2,12 @@
 .idea
 .cache.ti.api.gs.ru.shares.report
 arch-diagramms
+docs
 benchmark
 node_modules
 logs
+grafana
+prometheus
 output
 README.md
 update-proto-contracts.sh
