@@ -1,0 +1,99 @@
+{
+  "name": "volume-change-scanner-ts",
+  "version": "0.1.0",
+  "private": true,
+  "standard": "ignore",
+  "author": "",
+  "license": "Apache-2.0",
+  "workspaces": [
+    "packages/libs/**",
+    "packages/backend/**"
+  ],
+  "scripts": {
+    "docker:run:stop:all": "docker stop $(docker ps -a -q)",
+    "docker:run:ms:app": "docker-compose -f docker-compose.yml up -d",
+    "docker:down:ms:cron": "docker-compose -f docker-compose-cron.yml down --remove-orphans",
+    "docker:tag:ms:cron": "docker tag a9ee625926d49177b1c82db82111facff7ec3e2c4746ca9bfc6980f2896ec4e5 deps:0.0.2",
+
+
+    "docker:build:ms:cron": "docker build . --no-cache --progress=tty -f docker/ms-cron/Dependencies.Dockerfile",
+    "docker:run:ms:cron": "docker-compose -f docker-compose-cron.yml up -d --quiet-pull --build ms_cron",
+
+
+    "build:ms:atr": "yarn workspace @atr/backend build:ms:atr",
+    "build:ms:cron": "yarn workspace @atr/backend build:ms:cron",
+    "build:ms:prepare": "yarn workspace @atr/backend build:ms:prepare",
+    "start:ms:atr": "yarn workspace @atr/backend start:ms:atr",
+    "start:ms:cron": "yarn workspace @atr/backend start:ms:cron",
+    "api-ti-orders": "ts-node packages/backend/apps/ms-atr/src/api.ti.orders.ts",
+    "prepare-candles-sbpe-exchange-main-session": "ts-node packages/backend/apps/ms-change-price-strategy/prepare-candles-sbpe-exchange-main-session.ts",
+    "portfolio.ts": "ts-node packages/backend/apps/ms-base/src/metrics/portfolio.ts",
+    "operations.portfolio.ts": "ts-node packages/backend/apps/ms-src/src/ms-cron/operations.portfolio.ts",
+    "bull.ts": "ts-node packages/backend/apps/ms-src/src/ms-cron/bull.ts",
+    "ms-cron2": "ts-node packages/backend/apps/ms-src/src/ms-cron/cron.ts",
+    "ms-cron": "cross-env NODE_OPTIONS='-r node_modules/ts-node/register' ts-node packages/backend/apps/ms-src/src/ms-cron/cron.ts",
+    "prepare_figies": "ts-node packages/backend/apps/ms-src/src/ms-change-price-strategy/prepare_figies.ts",
+    "load-candles-tf-1mi-per-2week": "ts-node packages/backend/apps/ms-candles-loader-tf-1minute/load-candles-tf-1mi-per-2week.ts",
+    "all.spbe.tickers.except.350c": "ts-node packages/backend/apps/ms-src/src/ms-change-price-strategy/all.spbe.tickers.except.350c.ts",
+    "ms.all.in.one.change.price.strategy": "ts-node packages/backend/apps/ms-src/src/ms-change-price-strategy/ms.all.in.one.change.price.strategy.ts",
+    "prepare-candles": "ts-node packages/backend/apps/ms-src/src/ms-change-price-strategy/prepare-candles.ts",
+    "prepare-candles-sbpe-exchange-morning-session.ts": "ts-node packages/backend/apps/ms-src/src/ms-change-price-strategy/prepare-candles-sbpe-exchange-morning-session.ts",
+    "prepare-candles-moex-exchange.ts": "ts-node packages/backend/apps/ms-src/src/ms-change-price-strategy/prepare-candles-moex-exchange.ts",
+    "prepare-candles-sbpe-exchange-morning-session.ts-2": "ts-node packages/backend/apps/ms-src/src/ms-change-price-strategy/prepare-candles-sbpe-exchange-morning-session.ts",
+    "prepare-candles-sbpe-exchange-main-session.ts": "ts-node packages/backend/apps/ms-src/src/ms-change-price-strategy/prepare-candles-sbpe-exchange-main-session.ts",
+    "prepare-candles-sbpe-exchange-morning-session.ts-22": "ts-node packages/backend/apps/ms-src/src/ms-cron/jobs/prepare-candles-sbpe-exchange-morning-session.ts",
+    "russian.shares.all": "ts-node packages/backend/apps/ms-src/src/ms-change-price-strategy/russian.shares.all.ts",
+    "spbe.10.00.350.companies": "ts-node packages/backend/apps/ms-src/src/ms-change-price-strategy/spbe.10.00.350.companies.ts",
+    "api-tg-investing-robot": "ts-node packages/backend/apps/ms-src/src/ms-tg-investing-exchange-indices/api.tg.investing.robot.ts",
+    ".ms-trading-calendar": "ts-node packages/backend/apps/ms-trading-calendar/ms.ts",
+    ".generate-schema-from-protos": "ts-node packages/backend/apps/ms-base/src/db/generate-schema-from-protos/generate-schema-from-protos.ts",
+    ".generate-table-schema": "ts-node packages/backend/apps/ms-base/src/db/generate-schema/generate-table-schema.ts",
+    ".own-clickhouse-generator-scheme": "ts-node packages/backend/apps/ms-base/src/db/generate-schema/own-clickhouse-generator-scheme.ts",
+    ".test-redis": "ts-node packages/backend/apps/ms-atr/src/app.redis.client.ts",
+    ".test-ch": "ts-node packages/backend/apps/ms-candles-loader-tf-all/ms.ts",
+    ".start-ms": "ts-node packages/backend/apps/ms-atr/src/app.service.ts",
+    ".start-ms-js": "ts-node packages/backend/apps/ms-math-solver/app.isolation.forest.js",
+    ".start": "ts-node packages/backend/apps/ms-atr/src/main.ts",
+    "build": "nest build",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "api.ti.200c.strategy.ts": "ts-node packages/backend/apps/ms-atr/src/api.ti.200c.strategy.ts",
+    "crawler-spbe-200-companies": "ts-node packages/backend/apps/ms-crawler/spbe.200.companies.ts",
+    "api-ti-gap-watch": "ts-node packages/backend/apps/ms-atr/src/api.ti.gap.watch.ts",
+    "api-ti-console": "ts-node packages/backend/apps/ms-console-rendering/api.ti.console.ts",
+    "api-fh-report-pharma-calendar": "ts-node packages/backend/apps/ms-finnhub/api.fh.report.pharma.calendar.ts",
+    "api-ti-merge-companies": "ts-node packages/backend/apps/ms-atr/src/api.ti.merge.companies.ts",
+    "api-ti-depth-market": "ts-node packages/backend/apps/ms-depth-market/api.ti.depth.market.ts",
+    "api-ti-gs-ru-shares-report": "ts-node packages/backend/apps/ms-gs/src/api.ti.gs.ru.shares.report.ts",
+    "api-ti-operations": "ts-node packages/backend/apps/ms-ti-operations-service/api.ti.operations.ts",
+    "api-ti-operations-report": "ts-node packages/backend/apps/ms-ti-operations-service/api.ti.operations.report.ts",
+    "api-ti-report-calendar": "ts-node packages/backend/apps/ms-finnhub/api.fh.report.calendar.ts",
+    "api-ti-last-shares-prices": "ts-node packages/backend/apps/ms-atr/src/api.ti.last.shares.prices.ts",
+    "dev": "ts-node packages/backend/apps/ms-src/src/connect.ts",
+    "instruments": "ts-node packages/backend/apps/ms-base/src/tinkoff-api-instruments/instruments.service.ts",
+    ".shares": "ts-node packages/backend/apps/ms-base/src/tinkoff-api-instruments/shares.ms.ts",
+    ".trading": "ts-node packages/backend/apps/ms-base/src/tinkoff-api-instruments/trading.schedules.ms.ts",
+    "fetch": "ts-node packages/backend/apps/ms-base/src/tinkoff-api-instruments/instruments.service.ts",
+    "debug": "ts-node packages/backend/apps/ms-base/src/debug/debug.ts",
+    "perf": "ts-node packages/backend/apps/ms-base/src/perfomance/interval.tree.ts",
+    "lint": "eslint --color --fix --ext .ts,.js,.jsx packages/backend/apps/ms-src/src",
+    "lint-q": "eslint --color --fix --quiet --ext .ts,.js,.jsx packages/backend/apps/ms-src/src",
+    "test": "jest"
+  },
+  "dependencies": {
+    "rxjs": "^7.5.6"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
