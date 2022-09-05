@@ -77,9 +77,6 @@
     ],
     "@ms-atr/*": [
       "apps/ms-atr/src/*"
-    ],
-    "@ms-prepare-candles-spbe-exchange-main-session/*": [
-      "apps/ms-change-price-strategy/src/*"
     ]
   }
 }

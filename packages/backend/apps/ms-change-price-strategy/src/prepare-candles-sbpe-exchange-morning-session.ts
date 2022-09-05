@@ -1,5 +1,5 @@
 import {prepare_candles} from "./prepare-candles";
-import {tickers} from "../ms-ti-base/tickers";
+import {tickers} from "../../ms-ti-base/tickers";
 
 //prepare_candles(tickers).then(() => console.log('prepare candles for SPBE morning session shares (usa only)'));
 
