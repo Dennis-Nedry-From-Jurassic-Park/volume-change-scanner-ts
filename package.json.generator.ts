@@ -80,8 +80,6 @@ const exec = async () => {
     }
 }`, change);
 
-    console.log(root_json)
-
     await asyncWriteFilef(getAppRootDir()+'\\package.json', root_json)
 
     const packages_backend_package = render(
@@ -211,7 +209,6 @@ const exec = async () => {
     }
 }`, change);
 
-
     await asyncWriteFilef(getAppRootDir()+'\\packages\\backend\\package.json', packages_backend_package)
 
     const packages_backend_tsconfig = render(
@@ -302,7 +299,7 @@ const exec = async () => {
 }
 `, change);
 
-    await asyncWriteFilef(getAppRootDir()+'\\packages\\backend\\tsconfig.json', packages_backend_tsconfig)
+    await asyncWriteFilef(getAppRootDir()+'\\packages\\backend\\tsconfig.json', packages_backend_tsconfig);
 
 
 }
