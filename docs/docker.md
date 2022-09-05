@@ -1,3 +1,30 @@
+https://stackoverflow.com/questions/65272764/ports-are-not-available-listen-tcp-0-0-0-0-50070-bind-an-attempt-was-made-to
+
+netsh interface ipv4 show excludedportrange protocol=tcp
+windows 10 ports problem
+
+netsh int ipv4 set dynamic tcp start=49152 num=16384
+netsh int ipv4 set dynamic tcp start=9200 num=2
+
+
+As per Docker issue for windows https://github.com/docker/for-win/issues/3171 :
+
+You might have that port in any of the excluded port ranges of command netsh interface ipv4 show excludedportrange protocol=tcp
+
+You can use solution mentioned in the above ticket.
+
+Disable hyper-v (which will required a couple of restarts)
+
+dism.exe /Online /Disable-Feature:Microsoft-Hyper-V
+
+After finishing all the required restarts, reserve the port you want so hyper-v doesn't reserve it back
+
+netsh int ipv4 add excludedportrange protocol=tcp startport=50070 numberofports=1
+
+Re-Enable hyper-V (which will require a couple of restart)
+
+dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All
+
 Docker commands:
 ```
 sudo docker run -d --name some-clickhouse-server-2 --ulimit nofile=262144:262144 yandex/clickhouse-server:21.8.3.44
