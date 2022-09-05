@@ -1,4 +1,4 @@
-import {instrumentsService} from "../ms-ti-base/instruments.service";
+import {instrumentsService} from "../../ms-ti-base/instruments.service";
 import {Share} from "tinkoff-invest-api/cjs/generated/instruments";
 import assert from "assert";
 import {prepare_candles} from "./prepare-candles";

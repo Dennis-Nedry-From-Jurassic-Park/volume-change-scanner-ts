@@ -1,9 +1,9 @@
 import {get_price_change} from "./common";
 import {CandleInterval} from "tinkoff-invest-api/cjs/generated/marketdata";
 import moment from "moment";
-import {Exchange} from "../ms-base/src/constants/exchange";
-import {delay} from "../ms-ti-base/wait";
-import {instrumentsService} from "../ms-ti-base/instruments.service";
+import {Exchange} from "../../ms-base/src/constants/exchange";
+import {delay} from "../../ms-ti-base/wait";
+import {instrumentsService} from "../../ms-ti-base/instruments.service";
 import {price_change_rus_shares} from "./russian.shares.all";
 
 const get_change_price_for_all_usa_shares_except_morning_session = async () => {

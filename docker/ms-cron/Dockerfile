@@ -33,6 +33,7 @@ COPY packages/backend/nest-cli.json /atr/packages/backend/
 #COPY packages/backend/tsconfig.build.json /atr/packages/backend/
 #COPY packages/backend/tsconfig.json /atr/packages/backend/
 #COPY package.json /atr/package.json
+COPY assets /atr/assets
 COPY .env .root.dir assets /atr/
 
 #RUN yarn install

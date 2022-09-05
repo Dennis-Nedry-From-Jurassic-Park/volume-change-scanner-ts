@@ -569,7 +569,7 @@ const exec_usa_200c = async () => {
 
     console.log(merged)
 
-    const util = require('util')
+    //const util = require('util')
 
         //const inspect = util.inspect(merged, {showHidden: false, depth: null, colors: true})
 
@@ -610,7 +610,7 @@ const exec_rus_500c = async () => {
 
     console.log(merged)
 
-    const util = require('util')
+    //const util = require('util')
 
     //const inspect = util.inspect(merged, {showHidden: false, depth: null, colors: true})
 

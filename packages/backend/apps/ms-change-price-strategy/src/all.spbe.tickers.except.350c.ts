@@ -1,5 +1,5 @@
 import moment from "moment";
-import {instrumentsService} from "../ms-ti-base/instruments.service";
+import {instrumentsService} from "../../ms-ti-base/instruments.service";
 
 const exec = async () => {
     let tickers_10_00_main_session: string[] = require('../ms-crawler/spbe.10_00_main_session.tickers.json');
