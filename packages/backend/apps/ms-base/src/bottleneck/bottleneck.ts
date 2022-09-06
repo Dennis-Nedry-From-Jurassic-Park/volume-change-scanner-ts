@@ -1,6 +1,6 @@
 import Bottleneck from "bottleneck";
 
 export const bottleneck = new Bottleneck({
-    minTime: 500,
+    minTime: 1250,
     trackDoneStatus: true
 });
