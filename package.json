@@ -13,9 +13,10 @@
         "docker:run:stop:all": "docker stop $(docker ps -a -q)",
         "docker:run:ms:app": "docker-compose -f docker-compose.yml up -d",
         "docker:down:ms:cron": "docker-compose -f docker-compose-cron.yml down --remove-orphans",
-        "docker:tag:ms:cron": "docker tag a9ee625926d49177b1c82db82111facff7ec3e2c4746ca9bfc6980f2896ec4e5 deps:0.0.2",
+
     
-        "docker:build:ms:cron": "docker build . --no-cache --progress=tty -f docker/ms-cron/Dependencies.Dockerfile",
+        "docker:build:ms:cron": "docker build . --no-cache --quiet -f docker/ms-cron/Dependencies.Dockerfile",
+        "docker:tag:ms:cron": "docker tag e8d113b980884a93ce5a328d198ad5030df514e3d766e9c33926617fb3db3a48 deps:0.0.3",
         "docker:run:ms:cron": "docker-compose -f docker-compose-cron.yml up -d --quiet-pull --build ms_cron",
     
         "build:ms:atr": "yarn workspace @atr/backend build:ms:atr",
