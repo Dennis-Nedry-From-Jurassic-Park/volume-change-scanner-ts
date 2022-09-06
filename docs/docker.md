@@ -19,7 +19,7 @@ dism.exe /Online /Disable-Feature:Microsoft-Hyper-V
 
 After finishing all the required restarts, reserve the port you want so hyper-v doesn't reserve it back
 
-netsh int ipv4 add excludedportrange protocol=tcp startport=50070 numberofports=1
+netsh int ipv4 add excludedportrange protocol=tcp startport=8000 numberofports=1205
 
 Re-Enable hyper-V (which will require a couple of restart)
 

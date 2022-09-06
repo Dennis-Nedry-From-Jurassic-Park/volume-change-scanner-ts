@@ -16,3 +16,13 @@ export const insert_candles_to_all_usa_shares_except_morning_session = async () 
 }
 console.log(moment())
 //insert_candles_to_all_usa_shares_except_morning_session().then(() => console.log('end='+moment().toISOString()));
+
+import {tickers} from "../../ms-ti-base/tickers";
+
+const exec = async () => {
+    console.log('start='+moment().toISOString())
+    await prepare_candles(tickers);
+    console.log('end='+moment().toISOString())
+}
+
+exec()

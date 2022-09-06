@@ -381,3 +381,7 @@ https://github.com/aminnairi/package-json-generator
  
 https://packagejson-generator.jabo.dev/
 https://aminnairi.github.io/package-json-generator/
+
+
+npx howfat -d -r table . --http.retry-count 10 --http.timeout 15000
+

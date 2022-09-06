@@ -102,7 +102,7 @@ class InstrumentsService {
     get_all_american_shares = async(): Promise<Share[]> => {
         return await this._get_russian_shares(
             undefined,
-            [Exchange.SPB],
+            [Exchange.SPBE],
             undefined,
             undefined,
             undefined
@@ -122,7 +122,7 @@ class InstrumentsService {
 
     get_american_shares_ = async (
         tickers: string[],
-        exchanges: Exchange[] = [Exchange.SPB],
+        exchanges: Exchange[] = [Exchange.SPBE],
         buyAvailableFlag: boolean,
         sellAvailableFlag: boolean,
         apiTradeAvailableFlag?: boolean,
