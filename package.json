@@ -16,7 +16,7 @@
 
     
         "docker:build:ms:cron": "docker build . --no-cache --quiet -f docker/ms-cron/Dependencies.Dockerfile",
-        "docker:tag:ms:cron": "docker tag e8d113b980884a93ce5a328d198ad5030df514e3d766e9c33926617fb3db3a48 deps:0.0.3",
+        "docker:tag:ms:cron": "docker tag 35bf8351a1a8b8df8d84728cf83f0f9cd492de24096d57fd7776f703a0c3ae94 deps:0.0.4",
         "docker:run:ms:cron": "docker-compose -f docker-compose-cron.yml up -d --quiet-pull --build ms_cron",
     
         "build:ms:atr": "yarn workspace @atr/backend build:ms:atr",
