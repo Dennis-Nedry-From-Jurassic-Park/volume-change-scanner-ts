@@ -1,4 +1,4 @@
-ARG DEPENDENCIES_TAG=0.0.2
+ARG DEPENDENCIES_TAG=0.0.3
 
 #FROM DEPENDENCIES_TAG
 #docker pull alpine:3.16.2
@@ -18,7 +18,7 @@ COPY package.json yarn.lock package.json /atr/
 COPY packages/backend/package.json packages/backend/tsconfig.json packages/backend/tsconfig.build.json /atr/packages/backend/
 
 RUN set -ex; \
-  yarn install --frozen-lockfile --non-interactive; \
+  yarn install --prod --frozen-lockfile --non-interactive; \
   yarn cache clean;
 
 #RUN zip -r -j /app/lambda.zip /app/dependencies/*
