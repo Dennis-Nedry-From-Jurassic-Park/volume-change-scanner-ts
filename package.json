@@ -15,8 +15,9 @@
         "docker:down:ms:cron": "docker-compose -f docker-compose-cron.yml down --remove-orphans",
 
     
+        "docker:rm:none:images": "docker images -a | grep none | awk '{ print $3; }' | xargs docker rmi",
         "docker:build:ms:cron": "docker build . --no-cache --quiet -f docker/ms-cron/Dependencies.Dockerfile",
-        "docker:tag:ms:cron": "docker tag 35bf8351a1a8b8df8d84728cf83f0f9cd492de24096d57fd7776f703a0c3ae94 deps:0.0.4",
+        "docker:tag:ms:cron": "docker tag bf8f9289447e1d3609944d89178beb59e70741f930c804a6aa48919842cafe15 deps:0.0.8",
         "docker:run:ms:cron": "docker-compose -f docker-compose-cron.yml up -d --quiet-pull --build ms_cron",
     
         "build:ms:atr": "yarn workspace @atr/backend build:ms:atr",
@@ -28,15 +29,11 @@
         
         
         "api-ti-orders": "ts-node packages/backend/apps/ms-atr/src/api.ti.orders.ts",
-        
-        "build": "nest build",
-        "start": "nest start",
-        "start:dev": "nest start --watch",
-        "start:debug": "nest start --debug --watch",
+
         
         "lint": "eslint --color --fix --ext .ts,.js,.jsx packages/backend/apps/ms-src/src",
         "lint-q": "eslint --color --fix --quiet --ext .ts,.js,.jsx packages/backend/apps/ms-cron/src",
-        "test": "jest"
+        "test": "yarn test"
     },
     "dependencies": {
         "json-templater": "^1.2.0",
