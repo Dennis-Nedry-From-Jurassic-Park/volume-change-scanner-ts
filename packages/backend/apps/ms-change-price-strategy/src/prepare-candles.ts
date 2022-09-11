@@ -16,6 +16,9 @@ import {is_trading_day, moment_business_days} from "../../ms-trading-calendar/ms
 import {DAY} from "../../ms-base/src/constants/date.time.formats";
 import {getHolidays, getLaborDay, isBankHoliday} from "date-fns-holiday-us";
 import {Exchange} from "../../ms-base/src/constants/exchange";
+import { isHoliday } from "nyse-holidays";
+
+
 
 export const bottleneck_candles = new Bottleneck({
     minTime: 750,
@@ -39,125 +42,123 @@ const insert_candles = async (
     to: string,
     timeframe: CandleInterval
 ) => {
-    let ins_rows: any[] = [];
-    let failed_tickers: any[] = [];
+    let ins_rows: string[] = [];
+    let failed_tickers: string[] = [];
 
-    console.log('='+moment().toISOString())
+    // for (const ticker of tickers) {
+    //     await delay(250)
+    //
+    //     const share = await instrumentsService.get_share_by_ticker(ticker);
+    //
+    //     const candles = await bottleneck_candles.schedule(async () => {
+    //         try {
+    //             return await api.marketdata.getCandles({
+    //                 figi: share.figi,
+    //                 from: moment(from).toDate(),
+    //                 to: moment(to).toDate(),
+    //                 interval: timeframe
+    //             });
+    //         } catch (e:any) {
+    //             console.log('failed to fetch candles for ticker ' + ticker + ' exception: ' + e.message)
+    //         }
+    //     });
+    //
+    //
+    //     //await asyncWriteFile(`../../../${ticker}.json`, prettyJSON(candles!.candles))
+    //
+    //
+    //     //await delay(250000000)
+    //
+    //
+    //
+    //     if(candles === undefined){
+    //         failed_tickers.push(ticker)
+    //         return;
+    //     }
+    //
+    //     //assert(candles !== undefined, 'Empty candles for ticker ' + ticker)
+    //
+    //     const rows = candles.candles.map( ( row:any) => {
+    //         let updated_row = row;
+    //         updated_row.open = toNum(updated_row.open)
+    //         updated_row.high = toNum(updated_row.high)
+    //         updated_row.low = toNum(updated_row.low)
+    //         updated_row.close = toNum(updated_row.close)
+    //
+    //         return {
+    //             ticker: ticker,
+    //             figi: share.figi,
+    //             ...updated_row,
+    //             tf: timeframe,
+    //             //currency: share.currency,
+    //             //exchange: share.exchange,
+    //             //apiTradeAvailableFlag: share.apiTradeAvailableFlag
+    //
+    //         }
+    //     });
+    //
+    //     for (const row of rows) { ins_rows.push(row); }
+    // }
+
+
 
     for (const ticker of tickers) {
+        if (ticker === 'J' || ticker === 'ELY') return;
+
         await delay(250)
 
         const share = await instrumentsService.get_share_by_ticker(ticker);
 
-        const candles = await bottleneck_candles.schedule(async () => {
-            try {
-                return await api.marketdata.getCandles({
-                    figi: share.figi,
-                    from: moment(from).toDate(),
-                    to: moment(to).toDate(),
-                    interval: timeframe
-                });
-            } catch (e:any) {
-                console.log('failed to fetch candles for ticker ' + ticker + ' exception: ' + e.message)
-            }
-        });
-
-
-        //await asyncWriteFile(`../../../${ticker}.json`, prettyJSON(candles!.candles))
-
-
-        //await delay(250000000)
-
-
-
-        if(candles === undefined){
-            failed_tickers.push(ticker)
-            return;
-        }
-
-        //assert(candles !== undefined, 'Empty candles for ticker ' + ticker)
-
-        const rows = candles.candles.map( ( row:any) => {
-            let updated_row = row;
-            updated_row.open = toNum(updated_row.open)
-            updated_row.high = toNum(updated_row.high)
-            updated_row.low = toNum(updated_row.low)
-            updated_row.close = toNum(updated_row.close)
-
-            return {
-                ticker: ticker,
+        await bottleneck.schedule(async () => {
+            api.marketdata.getCandles({
                 figi: share.figi,
-                ...updated_row,
-                tf: timeframe,
-                //currency: share.currency,
-                //exchange: share.exchange,
-                //apiTradeAvailableFlag: share.apiTradeAvailableFlag
+                from: moment(from).toDate(),
+                to: moment(to).toDate(),
+                interval: timeframe
+            })
+                .then(it => {
+                    if (it === undefined) {
+                        failed_tickers.push(ticker)
+                        console.log('failed to fetch candles for ticker ' + ticker + ';')
+                        console.log('failed to fetch candles for tickers ' + tickers.join(' ') + ';')
+                        logger_candles.error('failed to fetch candles for tickers ' + tickers.join(' ') + ';')
+                    }
 
-            }
+                    //assert(candles !== undefined, 'Empty candles for ticker ' + ticker)
+
+                    const rows = it.candles.map( (row: any) => {
+                        let updated_row = row;
+                        updated_row.open = toNum(updated_row.open)
+                        updated_row.high = toNum(updated_row.high)
+                        updated_row.low = toNum(updated_row.low)
+                        updated_row.close = toNum(updated_row.close)
+
+                        return {
+                            ticker: ticker,
+                            figi: share.figi,
+                            ...updated_row,
+                            tf: timeframe,
+                            //currency: share.currency,
+                            //exchange: share.exchange,
+                            //apiTradeAvailableFlag: share.apiTradeAvailableFlag
+
+                        }
+                    });
+
+                    for (const row of rows) {
+                        ins_rows.push(row);
+                    }
+                })
+                .catch(err => {
+                    console.log('failed to fetch candles for ticker ' + ticker + ' exception: ' + err.message)
+                    logger_candles.error('failed to fetch candles for ticker ' + ticker + ' exception: ' + err.message)
+                    failed_tickers.push(ticker)
+
+                    console.log('failed to fetch candles for tickers ' + tickers.join(' ') + ';')
+                    logger_candles.error('failed to fetch candles for tickers ' + tickers.join(' ') + ';')
+                });
         });
-
-        for (const row of rows) { ins_rows.push(row); }
     }
-
-
-
-    // for (const ticker of tickers) {
-    //     if (ticker === 'J' || ticker === 'ELY') return;
-    //
-    //     await delay(500)
-    //
-    //     const share = await instrumentsService.get_share_by_ticker(ticker);
-    //
-    //     await bottleneck.schedule(async () => {
-    //         api.marketdata.getCandles({
-    //             figi: share.figi,
-    //             from: moment(from).toDate(),
-    //             to: moment(to).toDate(),
-    //             interval: timeframe
-    //         })
-    //             .then(it => {
-    //                 if (it === undefined) {
-    //                     failed_tickers.push(ticker)
-    //                     console.log('failed to fetch candles for ticker ' + ticker + ';')
-    //                     console.log('failed to fetch candles for tickers ' + tickers.join(' ') + ';')
-    //                     logger_candles.error('failed to fetch candles for tickers ' + tickers.join(' ') + ';')
-    //                 }
-    //
-    //                 //assert(candles !== undefined, 'Empty candles for ticker ' + ticker)
-    //
-    //                 const rows = it.candles.map( (row: any) => {
-    //                     let updated_row = row;
-    //                     updated_row.open = toNum(updated_row.open)
-    //                     updated_row.high = toNum(updated_row.high)
-    //                     updated_row.low = toNum(updated_row.low)
-    //                     updated_row.close = toNum(updated_row.close)
-    //
-    //                     return {
-    //                         ticker: ticker,
-    //                         figi: share.figi,
-    //                         ...updated_row,
-    //                         tf: timeframe,
-    //                         //currency: share.currency,
-    //                         //exchange: share.exchange,
-    //                         //apiTradeAvailableFlag: share.apiTradeAvailableFlag
-    //
-    //                     }
-    //                 });
-    //
-    //                 for (const row of rows) {
-    //                     ins_rows.push(row);
-    //                 }
-    //             })
-    //             .catch(err => {
-    //                 console.log('failed to fetch candles for ticker ' + ticker + ' exception: ' + err.message)
-    //                 logger_candles.error('failed to fetch candles for ticker ' + ticker + ' exception: ' + err.message)
-    //                 failed_tickers.push(ticker)
-    //
-    //                 console.log('failed to fetch candles for tickers ' + tickers.join(' ') + ';')
-    //                 logger_candles.error('failed to fetch candles for tickers ' + tickers.join(' ') + ';')
-    //             });
-    //     });
-    // }
 
     const len = ins_rows.length;
     console.log('len = ' + len);
@@ -173,13 +174,23 @@ const insert_candles = async (
 
     await clickhouse.logQueries(queries)
 }
-import { isHoliday } from "nyse-holidays";
+
+
+
+
 
 export const prepare_candles = async (tickers: string[]) => {
+    console.log('tickers.length='+tickers.length)
+    assert(tickers.length > 0, 'tickers len must be greater than zero, length of rows for insert statement')
     let empty_tickers: string[] = [];
 
     const to = moment().format('YYYY-MM-DD')
     let prev = moment().subtract(1, 'day').subtract(0, 'hour')//.format('YYYY-MM-DD');
+    let prev_day = moment(prev.format('YYYY-MM-DD')).toDate();
+
+    if(isHoliday(prev_day)) {
+        prev_day = moment_business_days(prev).prevBusinessDay();
+    }
     //const prev_day = moment_business_days(prev).weekday()
 
 
@@ -189,11 +200,7 @@ export const prepare_candles = async (tickers: string[]) => {
     //console.log(getHolidays(2022))
     //console.log(getLaborDay(2022))
 
-    let prev_day = moment(prev.format('YYYY-MM-DD')).toDate();
 
-    if(isHoliday(prev_day)) {
-        prev_day = moment_business_days(prev).prevBusinessDay();
-    }
 
     //console.log(prev_day);
     //console.log(prev)
@@ -218,7 +225,7 @@ export const prepare_candles = async (tickers: string[]) => {
         moment(prev_day).format(DAY),
         to,
         CandleInterval.CANDLE_INTERVAL_DAY
-    );
+    )//.then(() => { console.log('insert_candles') });
 
     console.log('empty_tickers = ' + empty_tickers)
 }

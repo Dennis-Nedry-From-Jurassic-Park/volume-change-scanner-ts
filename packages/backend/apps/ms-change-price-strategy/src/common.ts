@@ -12,7 +12,7 @@ export const get_price_change = async (
     exchange: string,
     tickers: string[],
     interval: CandleInterval
-) => {
+): Promise<any[]> => {
     assert(is_trading_day(exchange), 'today should be trading day')
     assert(interval === CandleInterval.CANDLE_INTERVAL_DAY, 'CandleInterval should be day for unique tickers')
 
@@ -68,6 +68,8 @@ export const get_price_change = async (
     let table = make_array_objects_unique(merged).filter( (obj:any) => { return obj.change >= 2.5 || obj.change <= -2.5 })
         table.sort( (a:any,b:any) => b.change - a.change );
     console.table(table);
+
+    return table
 }
 
 const make_array_objects_unique = (array: any[]): any[] => {

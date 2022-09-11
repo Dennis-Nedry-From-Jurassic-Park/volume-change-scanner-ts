@@ -147,8 +147,13 @@ const cancel_stoporders_deal = async (
 //deal('FSLY', 0.56, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
 //deal('EAR', 2.15, 25, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_LIMIT, ACCOUNT.IIS)
 //deal('EAR', 2.15, 5, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
-//deal('EAR', 2.4, 5, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
+
 //('ENDP', 0.37, 10, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
+
+
+
+//deal('LIFE', 2.4, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
+//deal('MTLR', 127.5, 3, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_LIMIT, ACCOUNT.BROKERAGE)
 //deal('MOMO', 2.5, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
 
 // stop_deal(
@@ -161,6 +166,9 @@ const cancel_stoporders_deal = async (
 //     StopOrderType.STOP_ORDER_TYPE_STOP_LIMIT,
 //     ACCOUNT.IIS
 // )
+
+
+
 
 // stop_deal(
 //     'MOMO',
