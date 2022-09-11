@@ -37,7 +37,7 @@ class ClickHouseExt extends ClickHouse {
 }
 
 export const clickhouse = new ClickHouseExt({
-	url: 'http://clickhouse',
+	url: 'http://clickhouse', // http://localhost
 	port: 8123, // Port 9000 is for clickhouse-client program.
 	debug: true,
 	basicAuth: {
