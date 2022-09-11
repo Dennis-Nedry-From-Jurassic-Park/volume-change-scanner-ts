@@ -17,7 +17,7 @@ export default class WaitJob {
         time: string,
         format: string = 'HH:mm:ss',
         new_format: string = 'ss mm HH',
-        closeWorkerAfterMinutes: number = 3,
+        closeWorkerAfterMinutes: number = 2.5,
     ) {
         this.time = time;
         this.format = format;

@@ -6,6 +6,8 @@ import {delay} from "../../ms-ti-base/wait";
 import {instrumentsService} from "../../ms-ti-base/instruments.service";
 import {price_change_rus_shares} from "./russian.shares.all";
 import {getAppRootDir} from "../../ms-base/src/utility-methods/file";
+import {insert_candles_to_all_usa_shares_except_morning_session} from "./prepare-candles-spbe-exchange-main-session";
+import {prepare_candles_moex_exchange} from "./prepare-candles-moex-exchange";
 
 const get_change_price_for_all_usa_shares_except_morning_session = async () => {
     let tickers_10_00_main_session: string[] = require(getAppRootDir()+'\\assets\\ti-api-v2\\spbe\\spbe.10_00_main_session.tickers.json');
@@ -15,24 +17,35 @@ const get_change_price_for_all_usa_shares_except_morning_session = async () => {
     await get_price_change(Exchange.SPB, combined_tickers, CandleInterval.CANDLE_INTERVAL_DAY);
 }
 
+const exec2 = async () => {
+    await prepare_candles_moex_exchange();
+}
 const exec = async () => {
+    //await insert_candles_to_all_usa_shares_except_morning_session()
+    //    .then(() => console.log('ms get-price-change runned for all_usa_shares_except_morning_session'))
+    //
     await get_change_price_for_all_usa_shares_except_morning_session()
         .then(() => console.log('ms get-price-change runned for all_usa_shares_except_morning_session'))
 
-    await delay(2500).then(() => console.log('delay between runs get price changes for different groups of shares'))
+    //await delay(2500).then(() => console.log('delay between runs get price changes for different groups of shares'))
+    //
+    // console.log(moment().toISOString())
+
+
+
+
+
+    let tickers_10_00_main_session: string[] = require(getAppRootDir()+'\\assets\\ti-api-v2\\spbe\\spbe.10_00_main_session.tickers.json');
+
+    await get_price_change(Exchange.SPB, tickers_10_00_main_session, CandleInterval.CANDLE_INTERVAL_DAY)
+        .then(() => 'ms get-price-change runned for tickers_10_00_main_session');
+
+    await delay(1000).then(() => console.log('delay between runs get price changes for russian shares'))
 
     console.log(moment().toISOString())
 
-    // const tickers_10_00_main_session: string[] = require('../ms-crawler/spbe.10_00_main_session.tickers.json');
-    // await get_price_change(Exchange.SPB, tickers_10_00_main_session, CandleInterval.CANDLE_INTERVAL_DAY)
-    //     .then(() => 'ms get-price-change runned for tickers_10_00_main_session');
-
-    // await delay(5000).then(() => console.log('delay between runs get price changes for russian shares'))
-    //
-    // console.log(moment().toISOString())
-    //
-    // await price_change_rus_shares()
-    //     .then(() => console.log('get price changes for russian shares'));
+    await price_change_rus_shares()
+        .then(() => console.log('get price changes for russian shares'));
 }
 
 exec();

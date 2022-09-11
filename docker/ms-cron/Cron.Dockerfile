@@ -40,6 +40,6 @@ COPY .env .root.dir assets /atr/
 
 RUN rm -rf /atr/dist
 
-COPY --from=deps:0.0.4 /atr /atr
+COPY --from=deps:0.0.8 /atr /atr
 
 RUN yarn build:ms:cron

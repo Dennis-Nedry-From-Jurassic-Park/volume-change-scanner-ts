@@ -1,3 +1,17 @@
+docker images -a | grep none | awk '{ print $3; }' | xargs docker rmi
+
+npm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"
+npm config delete script-shell
+npm config ls -l | grep shell
+
+
+cache yarn:
+https://gist.github.com/armand1m/b8061bcc9e8e9a5c1303854290c7d61e
+https://github.com/maku693/nextjs-docker/blob/main/Dockerfile.dev-shm-yarn-cache
+https://github.com/ScribeMD/docker-cache
+https://github.com/seatgeek/docker-build-cacher
+
+
 https://stackoverflow.com/questions/65272764/ports-are-not-available-listen-tcp-0-0-0-0-50070-bind-an-attempt-was-made-to
 
 netsh interface ipv4 show excludedportrange protocol=tcp

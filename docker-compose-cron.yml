@@ -48,13 +48,33 @@ services:
 #      - grafana2
     build:
       context: .
-      dockerfile: docker/ms-cron/Dockerfile
+      dockerfile: docker/ms-cron/Cron.Dockerfile
 #      args:
 #        IMAGES_TAG: $IMAGES_TAG
     ports:
       - '9201:9201'
     env_file:
       - .env
+#  ms_price_change:
+#    container_name: ms_price_change
+#    #container_name: ms_cron_${IMAGES_TAG}
+#    #image: ms_cron_image:${IMAGES_TAG}
+#    networks:
+#      - atr-net
+#    entrypoint: [ "npm", "run", "start:ms:price:change" ]
+#    depends_on:
+##      - redis
+#      - clickhouse
+##      - grafana2
+#    build:
+#      context: .
+#      dockerfile: docker/ms-cron/Cron.Dockerfile
+##      args:
+##        IMAGES_TAG: $IMAGES_TAG
+#    ports:
+#      - '9201:9201'
+#    env_file:
+#      - .env
   clickhouse:
     container_name: clickhouse
     restart: always
