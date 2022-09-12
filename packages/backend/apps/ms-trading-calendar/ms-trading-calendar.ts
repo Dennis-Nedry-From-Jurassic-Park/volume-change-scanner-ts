@@ -6,6 +6,16 @@ import {api} from "../ms-ti-base/api";
 export const moment_business_days = require('moment-business-days');
 
 
+export const getPreviousWorkday = (moment: moment.Moment): Date => {
+    let workday = moment;
+    let day = workday.day();
+    let diff = 1;  // returns yesterday
+    if (day == 7 || day == 0){  // is Sunday or Monday
+        diff = day + 2;  // returns Friday
+    }
+    return workday.subtract(diff, 'days').toDate();
+}
+
 export const is_trading_day = async (exchange: string): Promise<boolean> => {
     const now = moment().toDate();
 
