@@ -20,3 +20,13 @@ jobs:
           failOnDowngrade: false
           path: yarn.lock
           updateComment: true
+      - name: Yarn Lock Changes 2
+        # Please use `main` as version before the stable release will be published as `v1`.
+        uses: Simek/yarn-lock-changes@main
+        with:
+          token: ${{ secrets.github_token }}
+          # Optional inputs, can be deleted safely if you are happy with default values.
+          collapsibleThreshold: 25
+          failOnDowngrade: false
+          path: ./packages/backend/yarn.lock
+          updateComment: true
