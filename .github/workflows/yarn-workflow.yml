@@ -1,4 +1,4 @@
-name: main
+name: yarn-workflow
 on: [pull_request]
 
 jobs:
