@@ -16,6 +16,9 @@ jobs:
           working-directory: |
             packages/backend/
       - name: Run tests
-        run: yarn test
-#        working-directory: |
-#          ./packages/backend/
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: |
+            packages/backend/
+          run: yarn test
+
