@@ -1,4 +1,7 @@
-1) 
+https://stackoverflow.com/questions/55221803/clickhouse-datetime-with-milliseconds
+https://clickhouse.com/docs/ru/sql-reference/data-types/datetime64/
+
+
 2) 
 3) 
 4) docker compose up -d
