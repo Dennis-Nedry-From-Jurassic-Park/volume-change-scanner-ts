@@ -11,5 +11,5 @@ jobs:
         with:
           install-command: yarn --prod --frozen-lockfile --silent --non-interactive
           working-directory: |
-            packages/backend/apps/ms-cron
+            packages/backend/
             
