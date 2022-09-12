@@ -18,8 +18,4 @@ jobs:
       - name: Run tests
         working-directory: packages/backend/
         run: yarn test
-      - name: outdated version
-        uses: ycjcl868/outdated-version-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
