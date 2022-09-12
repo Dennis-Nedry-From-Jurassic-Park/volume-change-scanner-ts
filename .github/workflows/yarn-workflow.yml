@@ -17,3 +17,5 @@ jobs:
             packages/backend/
       - name: Run tests
         run: yarn test
+        working-directory: |
+          packages/backend/
