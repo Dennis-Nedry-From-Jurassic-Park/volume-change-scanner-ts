@@ -1,5 +1,6 @@
 perfomance:
 https://altinity.com/blog/2017/11/21/compression-in-clickhouse
+https://gist.github.com/sanchezzzhak/511fd140e8809857f8f1d84ddb937015
 
 So query results, for LZ4 compression:
 Cold run:
@@ -28,6 +29,7 @@ ZSDT is preferrable where I/O is the bottleneck in the queries with huge range s
 LZ4 is preferrable when I/O is fast enough so decompression speed becomes a bottleneck.
 For ultra fast disk subsystems, e.g. SSD NVMe arrays, even LZ4 may be slow, so ClickHouse has an option to specify ‘none’ compression.
 
+https://github.com/ClickHouse/ClickHouse/issues/8405#issuecomment-568958750
 
 https://stackoverflow.com/questions/55221803/clickhouse-datetime-with-milliseconds
 https://clickhouse.com/docs/ru/sql-reference/data-types/datetime64/
