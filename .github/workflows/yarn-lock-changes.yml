@@ -14,7 +14,7 @@ jobs:
         # Please use `main` as version before the stable release will be published as `v1`.
         uses: Simek/yarn-lock-changes@main
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.tok }}
           # Optional inputs, can be deleted safely if you are happy with default values.
           collapsibleThreshold: 25
           failOnDowngrade: false
