@@ -1,4 +1,9 @@
+https://karthi-net.medium.com/top-6-gui-tools-for-managing-docker-environments-ee2d69ba5a4f
+
 docker images -a | grep none | awk '{ print $3; }' | xargs docker rmi
+
+docker exec -i -t ms_cron ls -alF /app
+docker exec -i -t ms_cron ls -alF /atr/packages/backend
 
 npm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"
 npm config delete script-shell

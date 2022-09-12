@@ -17,7 +17,7 @@
     
         "docker:rm:none:images": "docker images -a | grep none | awk '{ print $3; }' | xargs docker rmi",
         "docker:build:ms:cron": "docker build . --no-cache --quiet -f docker/ms-cron/Dependencies.Dockerfile",
-        "docker:tag:ms:cron": "docker tag bf8f9289447e1d3609944d89178beb59e70741f930c804a6aa48919842cafe15 deps:0.0.8",
+        "docker:tag:deps": "docker tag 848b7385e3ff97618d9d0612d15c79b5a736e19dfb442447cca302581aaf5e01 deps:0.0.14",
         "docker:run:ms:cron": "docker-compose -f docker-compose-cron.yml up -d --quiet-pull --build ms_cron",
     
         "build:ms:atr": "yarn workspace @atr/backend build:ms:atr",

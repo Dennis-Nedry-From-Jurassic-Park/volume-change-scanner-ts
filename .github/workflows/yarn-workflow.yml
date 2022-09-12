@@ -1,0 +1,21 @@
+name: yarn-workflow
+on: [pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    name: Build and test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run install
+        uses: bahmutov/npm-install@v1
+        with:
+          #run: yarn test
+          useLockFile: false
+          install-command: yarn install --prod --frozen-lockfile --non-interactive
+          working-directory: |
+            packages/backend/
+      - name: Run tests
+        working-directory: packages/backend/
+        run: yarn test
+
