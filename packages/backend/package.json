@@ -4,6 +4,7 @@
     "private": true,
     "license": "Apache-2.0",
     "scripts": {
+        "yarn:clean": "yarn cache clean",
         "build:all": "yarn workspaces foreach run build",
         "build:ms:atr": "yarn nest build ms-atr",
         "build:ms:cron": "yarn nest build ms-cron",
@@ -13,13 +14,10 @@
         "start:ms:prepare:candles:spbe:exchange:main:session": "ts-node -r tsconfig-paths/register apps/ms-change-price-strategy/src/prepare-candles-spbe-exchange-main-session.ts",
         "start:ms.all.in.one.change.price.strategy": "ts-node -r tsconfig-paths/register apps/ms-change-price-strategy/src/ms.all.in.one.change.price.strategy.ts",
         "start:ms.main.ts": "ts-node -r tsconfig-paths/register apps/ms-change-price-strategy/src/main.ts",
-
-
         "build": "nest build",
         "start": "nest start",
         "start:dev": "nest start --watch",
         "start:debug": "nest start --debug --watch",
-
         "test": "jest"
     },
     "dependencies": {
@@ -77,6 +75,7 @@
         "jest-ts-auto-mock": "^2.1.0",
         "ml-isolation-forest": "^0.1.0",
         "moment": "^2.29.4",
+        "moment-business": "^3.0.1",
         "moment-business-days": "^1.2.0",
         "moment-timezone": "^0.5.34",
         "n-readlines": "^1.0.1",
