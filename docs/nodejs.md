@@ -1,4 +1,12 @@
 -----------------------------   npm commands   -----------------------------
+https://stackoverflow.com/questions/23243353/how-to-set-shell-for-npm-run-scripts-in-windows
+npm config set script-shell "C:\\Program Files (x86)\\git\\bin\\bash.exe"
+
+npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
+Note that you need to have git for windows installed.
+
+You can revert it by running:
+npm config delete script-shell
 -----------------------------  update all deps -----------------------------
 https://nodejs.dev/learn/update-all-the-nodejs-dependencies-to-their-latest-version
 ```
