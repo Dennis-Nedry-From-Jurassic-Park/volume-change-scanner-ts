@@ -9,7 +9,10 @@ jobs:
       - uses: actions/checkout@v3
       - uses: bahmutov/npm-install@v1
         with:
-          install-command: yarn --prod --frozen-lockfile --silent --non-interactive
+          #run: yarn test
+          install-command: yarn install --prod --frozen-lockfile --non-interactive
           working-directory: |
             packages/backend/
+      - name: Test
+        run: yarn test
             
