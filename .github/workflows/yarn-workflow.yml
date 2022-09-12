@@ -14,5 +14,5 @@ jobs:
           working-directory: |
             packages/backend/
       - name: Test
-        run: yarn test
+        run: npm run test
             
