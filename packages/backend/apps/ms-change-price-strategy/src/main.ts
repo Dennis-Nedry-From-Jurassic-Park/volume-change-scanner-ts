@@ -1,8 +1,8 @@
-import {ATR, ROC, SuperTrend, UniLevel} from '@debut/indicators';
+import {ATR, ROC, SuperTrend} from '@debut/indicators';
 import {api} from "../../ms-ti-base/api";
 import {instrumentsService} from "../../ms-ti-base/instruments.service";
 import moment from "moment";
-import {CandleInterval, GetCandlesResponse} from "tinkoff-invest-api/cjs/generated/marketdata";
+import {CandleInterval} from "tinkoff-invest-api/cjs/generated/marketdata";
 import {toNum} from "../../ms-ti-base/number";
 import assert from "assert";
 import {delay} from "../../ms-ti-base/wait";
@@ -10,6 +10,12 @@ import {prettyJSON} from "../../ms-ti-base/output";
 import {OperationState, OperationType} from "tinkoff-invest-api/cjs/generated/operations";
 import {ACCOUNT} from "../../ms-ti-base/users.service";
 import {HistoricCandle} from "tinkoff-invest-api/dist/generated/marketdata";
+import {get_historical_candles} from "../../ms-base/src/candles/candles";
+import {isHoliday} from "nyse-holidays";
+//import {moment_business_days} from "../../ms-trading-calendar/ms-trading-calendar";
+import mb from 'moment-business';
+import {getPreviousWorkday} from "../../ms-trading-calendar/ms-trading-calendar";
+
 
 interface OwnCandle {
     date: string[],
@@ -20,71 +26,16 @@ interface OwnCandle {
     volume: any[]
 }
 
-export const get_historical_candles = async (
-    ticker: string,
-    from: Date,
-    to: Date,
-    timeframe: CandleInterval,
-): Promise<GetCandlesResponse> => {
-    const share = await instrumentsService.get_share_by_ticker(ticker);
 
-    console.log(from)
-    console.log(to)
-
-    let candles = await api.marketdata.getCandles({
-        figi: share.figi,
-        from: from,
-        to: to,
-        interval: timeframe
-    })
-
-    candles.candles.sort(function (a: any, b: any) {
-        return a.time - b.time;
-    }) //return b.time - a.time;
-
-    candles.candles.filter((o: any) => {
-        return o.volume > 10000
-    })
-
-    // const date = candles.map((nc: any) => {
-    //     return moment(nc.time).format("YYYY-MM-DD hh:mm")
-    // });
-    // const high = candles.map((nc: any) => {
-    //     return toNum(nc.high)
-    // });
-    // const close = candles.map((nc: any) => {
-    //     return toNum(nc.close)
-    // });
-    // const low = candles.map((nc: any) => {
-    //     return toNum(nc.low)
-    // });
-    // const open = candles.map((nc: any) => {
-    //     return toNum(nc.open)
-    // });
-    // const volume = candles.map((nc: any) => {
-    //     return nc.volume
-    // });
-
-    // const json = {
-    //     date: date,
-    //    // high: undefined,
-    //     close: close,
-    //     low: low,
-    //     open: open,
-    //     volume: volume
-    // }
-
-    return candles
-}
-
-
-const validol = require('validol')
+//const validol = require('validol')
 
 
 const ticker = 'PATH'
 const from  = '08.08.2022'
 const to    = '09.08.2022' // moment().toDate()
 const interval = CandleInterval.CANDLE_INTERVAL_15_MIN
+
+
 
 const fromDate = moment(from, "DD/MM/YYYY").add(3, 'hour').toDate()
 const toDate = moment(to, "DD/MM/YYYY").subtract(1, 'second').toDate()
@@ -151,14 +102,13 @@ const main111 = async () => {
 const main = async () => {
 
     const candles = await get_historical_candles(
-        //'PATH',
-        ticker,
+        ticker, //'PATH',
         fromDate,
         toDate,
         interval
     );
 
-    const period = 5// candles.candles.length;
+    const period = 14// candles.candles.length;
     //console.log(candles);
 
     //const candles = await api.marketdata.getCandles()
@@ -198,8 +148,8 @@ const main = async () => {
         const nv_atr = atr.nextValue(high, low, close);
         const nv_roc = roc.nextValue(close);
         const nv_st = st.nextValue(high, low, close);
-        //console.log(`${moment(tick.time).format('YYYY-MM-DD HH:mm')} : ${high} : ${low} : ${close} : ${nv_atr} : ${nv_roc}% : ${nv_st}`)
-        console.log(`${moment(tick.time).format('YYYY-MM-DD HH:mm')} : ${high} : ${low} : ${close} : ${nv_st?.upper} : ${nv_st?.superTrend} : ${nv_st?.lower} : ${nv_st?.direction}`)
+        console.log(`${moment(tick.time).format('YYYY-MM-DD HH:mm')} : ${high} : ${low} : ${close} : ${nv_atr} : ${nv_roc}% : ${nv_st}`)
+            //console.log(`${moment(tick.time).format('YYYY-MM-DD HH:mm')} : ${high} : ${low} : ${close} : ${nv_st?.upper} : ${nv_st?.superTrend} : ${nv_st?.lower} : ${nv_st?.direction}`)
         atrs.push(nv_atr);
         rocs.push(nv_roc);
         super_trend.push(super_trend);
@@ -357,7 +307,7 @@ const main3 = async () => {
 
         //assert(item.figi === share.figi, `share ${share.figi} !== item ${item.figi}`)
 
-        if(item.type === 15){
+        if(item.type === OperationType.OPERATION_TYPE_BUY){
             for(const trade of item.tradesInfo?.trades!){
                 const $ = await get_$_currency_at_moment(trade.date!)
                 total_buy += toNum(trade.price)! * trade.quantity * toNum($.close!)!;
@@ -367,7 +317,7 @@ const main3 = async () => {
             countBuy += item.quantityDone;
         }
 
-        if(item.type === 22){
+        if(item.type === OperationType.OPERATION_TYPE_SELL){
             for(const trade of item.tradesInfo?.trades!){
                 const $ = await get_$_currency_at_moment(trade.date!)
                 total_sell += toNum(trade.price)! * trade.quantity * toNum($.close!)!;
@@ -397,7 +347,69 @@ const main3 = async () => {
     console.log(total_s - (total_b + Math.abs(total_buy_comissions) + Math.abs(total_sell_comissions) + add))
 }
 
-main_json();
+//main();
+
+//const isWeekDay()
+
+
+
+
+
+const exec3 = async () => {
+    let prev = moment().subtract(1, 'day')//.format('YYYY-MM-DD');
+    let prev_day: any = moment(prev.format('YYYY-MM-DD')).toDate();
+    if(isHoliday(prev_day)) {
+        prev_day = mb(prev).prevBusinessDay();
+    } else if(mb.isWeekendDay(prev)) {
+        prev_day = getPreviousWorkday(prev);
+    }
+    console.log(prev)
+    console.log(mb.isWeekendDay(prev))
+    console.log(prev_day)
+}
+const exec2 = async () => {
+   // const eth =
+    const timestamp = moment("2022-09-11T09:00:01.234Z").valueOf()
+    const timestamp2 = moment("2022-09-11T09:00:01.234Z").format("X")
+    const milliseconds = moment("2022-09-11T09:00:01.234Z").format("X")
+
+    // 1662886800000
+
+    const ts = Math.floor(timestamp / 1e3)
+    const ms = timestamp % 1e3
+
+    console.log(timestamp)
+    console.log(ts)
+    console.log(ms)
+
+    console.log(prettyJSON(timestamp2))
+    console.log(moment(timestamp).toISOString())
+
+    assert(timestamp === ts * 1e3 + ms, `${timestamp} != ${ts * 1e3 + ms}`);
+    console.log(moment(ts * 1e3 + ms).toISOString())
+    // "2022-09-11T09:00:00.000Z"
+}
+const exec = async () => {
+    const ticker = 'NVDA';
+
+    const format = 'DD.MM.YYYY';
+    const dateFrom = '05.09.2022';
+    const dateTo = moment(new Date()).format(format);
+
+    //const candlesLoader = new CandlesLoader(api, { cacheDir: '.cache.ti.api.gs.ru.shares.report' });
+
+    const share = await instrumentsService.get_share_by_ticker(ticker);
+        let {candles} = await api.marketdata.getCandles({
+            figi: share.figi,
+            from: moment(dateFrom, format).toDate(),
+            to: moment(dateTo, format).toDate(),
+            interval: CandleInterval.CANDLE_INTERVAL_HOUR
+            // ...api.helpers.fromTo('-5m'), // <- удобный хелпер для получения { from, to }
+        });
+        console.log(prettyJSON(candles))
+}
+exec2();
+//main_json();
 //main111();
 
 
