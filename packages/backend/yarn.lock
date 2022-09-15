@@ -3439,6 +3439,11 @@ combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
+command-exec@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/command-exec/-/command-exec-1.0.1.tgz#0f52897f0e1720ee983fb8be8a6d358719be7dee"
+  integrity sha512-0vftdg7wIxJ+4ve+GKFLiK4TveoXUcZyZ+N83ti+5CLZtKEiARtOjIThgLsL62tZRIqQpauSztUneJxTN+/27A==
+
 commander@4.1.1, commander@^4.0.1:
   version "4.1.1"
   resolved "https://registry.npmjs.org/commander/-/commander-4.1.1.tgz"

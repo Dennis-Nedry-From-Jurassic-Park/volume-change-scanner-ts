@@ -4,6 +4,41 @@ import {logger_clickhouse} from "../../logger/logger";
 import {prettyJSON} from "../../../../ms-ti-base/output";
 
 class ClickHouseExt extends ClickHouse {
+
+
+	constructor(
+		debug: boolean = true
+	){
+
+		super({
+			url: 'http://clickhouse', // http://localhost
+			port: 8123, // Port 9000 is for clickhouse-client program.
+			debug: debug,
+			basicAuth: {
+				username: 'default',
+				password: '',
+			},
+			usePost: true,
+			isUseGzip: false,
+			trimQuery: false,
+			format: 'json',
+			raw: false,
+			config: {
+				session_id                              : v4(),
+				session_timeout                         :  0,
+				output_format_json_quote_64bit_integers :  0,
+				enable_http_compression                 :  0,
+				database                                : '',
+				log_queries								:  1, // профилирование запросов, результат смотреть в system.log_queries
+				max_query_size: 1000000000,
+				max_parser_depth: 1000000000,
+				max_bytes_to_read: 1000000000,
+				max_rows_to_read: 1000000000,
+				http_max_field_value_size: 1000000000
+			}
+		});
+	}
+
 	query(query: String, reqParams?: object): QueryCursor {
 		try {
 			clickhouse.sessionId = v4();
@@ -36,32 +71,6 @@ class ClickHouseExt extends ClickHouse {
 	};
 }
 
-export const clickhouse = new ClickHouseExt({
-	url: 'http://clickhouse', // http://localhost
-	port: 8123, // Port 9000 is for clickhouse-client program.
-	debug: true,
-	basicAuth: {
-		username: 'default',
-		password: '',
-	},
-	usePost: true,
-	isUseGzip: false,
-	trimQuery: false,
-	format: 'json',
-	raw: false,
-	config: {
-		session_id                              : v4(),
-		session_timeout                         :  0,
-		output_format_json_quote_64bit_integers :  0,
-		enable_http_compression                 :  0,
-		database                                : '',
-		log_queries								:  1, // профилирование запросов, результат смотреть в system.log_queries
-		max_query_size: 1000000000,
-		max_parser_depth: 1000000000,
-		max_bytes_to_read: 1000000000,
-		max_rows_to_read: 1000000000,
-		http_max_field_value_size: 1000000000
-	}
-});
+export const clickhouse = new ClickHouseExt();
 
 export default clickhouse;

@@ -15,6 +15,7 @@ import {isHoliday} from "nyse-holidays";
 //import {moment_business_days} from "../../ms-trading-calendar/ms-trading-calendar";
 import mb from 'moment-business';
 import {getPreviousWorkday} from "../../ms-trading-calendar/ms-trading-calendar";
+import {exec} from "./algo";
 
 
 interface OwnCandle {
@@ -389,7 +390,7 @@ const exec2 = async () => {
     console.log(moment(ts * 1e3 + ms).toISOString())
     // "2022-09-11T09:00:00.000Z"
 }
-const exec = async () => {
+const exec1111 = async () => {
     const ticker = 'NVDA';
 
     const format = 'DD.MM.YYYY';
@@ -408,7 +409,8 @@ const exec = async () => {
         });
         console.log(prettyJSON(candles))
 }
-exec2();
+exec().then(r => r)
+//exec2();
 //main_json();
 //main111();
 

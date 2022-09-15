@@ -41,14 +41,14 @@ services:
       - grafana
       - clickhouse
     build:
-      context: .
-      dockerfile: docker/ms-app/Dockerfile
+      context: ..
+      dockerfile: ../docker/ms-app/Dockerfile
     ports:
       - '9200:9200'
     networks:
       - atr-net
     env_file:
-      - .env
+      - ../.env
   app_cron:
     container_name: app_cron
     entrypoint: [ "npm", "run", "start:ms:cron" ]
@@ -57,14 +57,14 @@ services:
       - clickhouse
     #      - grafana2
     build:
-      context: .
+      context: ..
       dockerfile: docker/ms-cron/Dockerfile
     ports:
       - '9201:9201'
     networks:
       - atr-net
     env_file:
-      - .env
+      - ../.env
     network_mode: bridge
   clickhouse:
     container_name: clickhouse

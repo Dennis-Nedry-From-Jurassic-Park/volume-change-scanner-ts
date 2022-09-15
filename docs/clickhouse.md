@@ -1,5 +1,46 @@
+perfomance:
+https://altinity.com/blog/2017/11/21/compression-in-clickhouse
+https://gist.github.com/sanchezzzhak/511fd140e8809857f8f1d84ddb937015
+
+So query results, for LZ4 compression:
+Cold run:
+7 rows in set. Elapsed: 19.131 sec. Processed 6.00 billion rows, 36.00 GB (313.63 million rows/s., 1.88 GB/s.)
+Hot run:
+7 rows in set. Elapsed: 4.531 sec. Processed 6.00 billion rows, 36.00 GB (1.32 billion rows/s., 7.95 GB/s.)
+
+For ZSTD compression:
+Cold run:
+7 rows in set. Elapsed: 20.990 sec. Processed 6.00 billion rows, 36.00 GB (285.85 million rows/s., 1.72 GB/s.)
+Hot run:
+7 rows in set. Elapsed: 7.965 sec. Processed 6.00 billion rows, 36.00 GB (753.26 million rows/s., 4.52 GB/s.)
+
+| CMethod |  Elapsed   |    Select query Cold |                           % faster/slower |
+|---------|:----------:|---------------------:|------------------------------------------:|
+| LZ4     | 19.131 sec |     313.63 mi rows/s | <span style="color:green">+8,85757</span> |
+| ZSTD    | 20.990 sec |     285.85 mi rows/s |   <span style="color:red">-8,85757</span> |
+|         |            |     Select query Hot |                                           |
+| LZ4     | 04.531 sec |      1.320 bi rows/s | <span style="color:green">+42,9545</span> |
+| ZSTD    | 07.965 sec |      0.753 bi rows/s |   <span style="color:red">-42,9545</span> |
+|         |            |    Compression Ratio |                                           |
+| LZ4     |            |                  3.7 | <span style="color:green">+26,0000</span> |
+| ZSTD    |            |                  5.0 |   <span style="color:red">-26,0000</span> |
+
+ZSDT is preferrable where I/O is the bottleneck in the queries with huge range scans.
+LZ4 is preferrable when I/O is fast enough so decompression speed becomes a bottleneck.
+For ultra fast disk subsystems, e.g. SSD NVMe arrays, even LZ4 may be slow, so ClickHouse has an option to specify ‘none’ compression.
+
+https://github.com/ClickHouse/ClickHouse/issues/8405#issuecomment-568958750
+
 https://stackoverflow.com/questions/55221803/clickhouse-datetime-with-milliseconds
 https://clickhouse.com/docs/ru/sql-reference/data-types/datetime64/
+
+--select count(*) from default.GetCandles WHERE toDate(time) = '2022-09-09'
+--SELECT toUInt64(toDateTime('2021-11-12 11:12:13'))
+--SELECT toDateTime64((1662886800000), 3, 'Europe/Moscow') -- 2022-09-11T09:00:00.000Z
+
+
+--SELECT FROM_UNIXTIME(1662886800000)
+SELECT CAST(1662886800 AS DateTime) AS datetime, timeSlot(toDateTime(1662886800000)) as timeslotBugged1
 
 
 2) 

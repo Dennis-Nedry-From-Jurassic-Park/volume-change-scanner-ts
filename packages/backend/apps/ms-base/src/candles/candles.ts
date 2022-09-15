@@ -1,6 +1,7 @@
 import {instrumentsService} from "../../../ms-ti-base/instruments.service";
 import {api} from "../../../ms-ti-base/api";
 import {CandleInterval} from "tinkoff-invest-api/cjs/generated/marketdata";
+import {GetCandlesResponse} from "tinkoff-invest-api/src/generated/marketdata";
 
 
 export const get_historical_candles = async (
@@ -8,7 +9,7 @@ export const get_historical_candles = async (
     from: Date,
     to: Date, // GetCandlesResponse
     timeframe: CandleInterval,
-): Promise<any> => {
+): Promise<GetCandlesResponse> => {
     const share = await instrumentsService.get_share_by_ticker(ticker);
 
     console.log(from)
