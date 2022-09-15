@@ -9,3 +9,5 @@ https://github.com/KonishchevDmitry/investments/blob/master/docs/brokers.md#tink
 | CANDLE_INTERVAL_15_MIN      |      от 15 минут до 1 дня |
 | CANDLE_INTERVAL_HOUR        |     от 1 часа до 1 недели |
 | CANDLE_INTERVAL_DAY         |        от 1 дня до 1 года |
+
+https://ru.tradingview.com/scripts/supportandresistance/
