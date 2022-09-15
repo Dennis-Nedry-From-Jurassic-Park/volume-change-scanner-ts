@@ -7,7 +7,7 @@ type Repo = {
 }
 
 ( async () => {
-    const repo_organization = 'LatticeX-Foundation';
+    const repo_organization = 'iotaledger';
     const limit = 1000;
     const repos: Repo[] = JSON.parse(await $cExec(`gh repo list ${repo_organization} --limit ${limit} --json diskUsage,name,url`));
     //console.log(repos);
