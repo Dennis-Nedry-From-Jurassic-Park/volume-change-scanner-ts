@@ -1,7 +1,12 @@
+import {getAppRootDir} from "./file";
+
 const path = require('path')
 
 import * as dotenv from 'dotenv'
-dotenv.config({ path: path.resolve(__dirname, '../../../../../../.env'), debug: true });
+
+const rootDir = getAppRootDir();
+
+dotenv.config({ path: rootDir+'/.env', debug: true });
 
 //
 // require('dotenv').config({ path: path.resolve(__dirname, '../../../../../.env') });
