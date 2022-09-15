@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  ms_price_change:
+    container_name: ms_price_change
+    #container_name: ms_cron_${IMAGES_TAG}
+    #image: ms_cron_image:${IMAGES_TAG}
+    networks:
+      - atr-net
+    entrypoint: [ "npm", "run", "start:ms:price:change" ]
+    depends_on:
+      #      - redis
+      - clickhouse
+    #      - grafana2
+    build:
+      context: ..
+      dockerfile: docker/ms.price.change.Dockerfile
+    #      args:
+    #        IMAGES_TAG: $IMAGES_TAG
+    ports:
+      - '9201:9201'
+    env_file:
+      - .env
+  clickhouse:
+    container_name: clickhouse
+    restart: always
+    networks:
+      - atr-net
+    image: clickhouse/clickhouse-server:22.8.1
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    expose:
+      - "9000" # client port
+      - "8123" # client port
+    volumes:
+      #- clickhouse_storage:/var/lib/clickhouse
+      - \\wsl$$\Ubuntu\clickhouse_data\data:/var/lib/clickhouse
+      - \\wsl$$\Ubuntu\clickhouse_data\log:/var/log/clickhouse-server
+volumes:
+  grafana_data: { }
+  app_cron_data: { }
+networks:
+  atr-net:
+    driver: bridge
