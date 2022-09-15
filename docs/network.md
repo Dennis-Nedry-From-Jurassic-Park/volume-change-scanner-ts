@@ -11,6 +11,6 @@ netsh int ipv4 set dynamic tcp start=49152 num=16384
 netsh int ipv4 set dynamic tcp start=9200 num=2
 
 
-net stop winnat
+```net stop winnat```
 docker start container_name
-net start winnat
+```net start winnat```
