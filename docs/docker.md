@@ -4,6 +4,7 @@ docker images -a | grep none | awk '{ print $3; }' | xargs docker rmi
 
 docker exec -i -t ms_cron ls -alF /app
 docker exec -i -t ms_cron ls -alF /atr/packages/backend
+docker run -it compiled:0.0.5 sh
 
 npm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"
 npm config delete script-shell
