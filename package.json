@@ -11,15 +11,23 @@
     ],
     "scripts": {
         "docker:run:stop:all": "docker stop $(docker ps -a -q)",
-        "docker:run:ms:app": "docker-compose -f docker-compose.yml up -d",
-        "docker:down:ms:cron": "docker-compose -f docker-compose-cron.yml down --remove-orphans",
+        "docker:run:ms:app": "docker-compose -f docker-compose/docker-compose.yml up -d",
+        "docker:down:ms:cron": "docker-compose -f docker-compose/ms-cron.yml down --remove-orphans",
 
     
         "docker:rm:none:images": "docker images -a | grep none | awk '{ print $3; }' | xargs docker rmi",
-        "docker:build:ms:cron": "docker build . --no-cache --quiet -f docker/ms-cron/Dependencies.Dockerfile",
-        "docker:tag:deps": "docker tag 848b7385e3ff97618d9d0612d15c79b5a736e19dfb442447cca302581aaf5e01 deps:0.0.14",
-        "docker:run:ms:cron": "docker-compose -f docker-compose-cron.yml up -d --quiet-pull --build ms_cron",
-    
+
+        "docker:build:deps": "docker build . --no-cache --quiet -f docker/Dependencies.Dockerfile",
+        "docker:tag:deps": "docker tag 040ee767a966b87b3be581eca944c8d1bf31632867dc3fc4003d3e7175762284 deps:0.0.1",
+
+        "docker:build:builder": "docker build . --no-cache -f docker/Compile.Dockerfile",
+        "docker:tag:builder": "docker tag c0eb7f8fe502c3ef12abe3c29d5bd137e392db091a10d6dab013bb1bb0c70263 builder:0.0.1",
+
+        "docker:tag:compiled": "docker tag 8aca10ec66fad5f2f0690f52570ad0d38da20953152c1590fc8617074bdf60eb compiled:0.0.6",
+        "docker:run:ms:cron": "docker-compose -f docker-compose-ms-cron.yml up -d --quiet-pull --build clickhouse --build ms_cron",
+        "docker:run:ms:price:change": "docker-compose -f docker-compose/ms-price-change.yml up -d --quiet-pull --build ms_price_change",
+
+
         "build:ms:atr": "yarn workspace @atr/backend build:ms:atr",
         "build:ms:cron": "yarn workspace @atr/backend build:ms:cron",
         "build:ms:prepare:candles:spbe:exchange:main:session": "yarn workspace @atr/backend build:ms:prepare:candles:spbe:exchange:main:session",
