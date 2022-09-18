@@ -1,3 +1,95 @@
+docker run -d -p 8080:80 spoonest/clickhouse-tabix-web-client
+http://localhost:8080
+
+https://kb.altinity.com/altinity-kb-queries-and-syntax/altinity-kb-optimize-vs-optimize-final/
+https://kb.altinity.com/altinity-kb-schema-design/codecs/altinity-kb-how-to-test-different-compression-codecs/
+https://kb.altinity.com/altinity-kb-useful-queries/altinity-kb-database-size-table-column-size/
+https://kb.altinity.com/altinity-kb-schema-design/ingestion-performance-and-formats/
+
+https://github.com/ClickHouse/ClickHouse/blob/master/docs/en/development/tests.md
+https://gist.github.com/sanchezzzhak/511fd140e8809857f8f1d84ddb937015
+https://gist.github.com/sanchezzzhak/511fd140e8809857f8f1d84ddb937015?permalink_comment_id=4011770
+
+```sql
+select concat(database, '.', table)                         as table,
+       formatReadableSize(sum(bytes))                       as size,
+       sum(rows)                                            as rows,
+       max(modification_time)                               as latest_modification,
+       sum(bytes)                                           as bytes_size,
+       any(engine)                                          as engine,
+       formatReadableSize(sum(primary_key_bytes_in_memory)) as primary_keys_size
+from system.parts
+where active
+group by database, table
+order by bytes_size desc;
+
+select concat(database, '.', table)                         as table,
+       formatReadableSize(sum(bytes))                       as size,
+       sum(rows)                                            as rows,
+       max(modification_time)                               as latest_modification,
+       sum(bytes)                                           as bytes_size,
+       any(engine)                                          as engine,
+       formatReadableSize(sum(primary_key_bytes_in_memory)) as primary_keys_size
+from system.parts
+where active
+group by database, table
+order by bytes_size desc
+
+SELECT table,
+    formatReadableSize(sum(bytes)) as size,
+    min(min_date) as min_date,
+    max(max_date) as max_date
+    FROM system.parts
+    WHERE active and table = 'test_codec_speed4'
+GROUP BY table
+
+select max(x) from test_codec_speed4 ;
+SELECT table, formatReadableSize(size) as size, rows, days, formatReadableSize(avgDaySize) as avgDaySize FROM (
+    SELECT
+        table,
+        sum(bytes) AS size,
+        sum(rows) AS rows,
+        min(min_date) AS min_date,
+        max(max_date) AS max_date,
+        (max_date - min_date) AS days,
+        size / (max_date - min_date) AS avgDaySize
+    FROM system.parts
+    WHERE active and table = 'test_codec_speed4'
+    GROUP BY table
+    ORDER BY rows DESC
+)
+```
+
+CREATE TABLE nested_test
+(
+`id` UInt8,
+`Attrs` Nested(    Key String,     Value UInt8) CODEC(Gorilla)
+)
+ENGINE = MergeTree()
+ORDER BY id
+
+
+DESCRIBE TABLE nested_test
+
+┌─name────────┬─type──────────┬─default_type─┬─default_expression─┬─comment─┬─codec_expression─┬─ttl_expression─┐
+│ id          │ UInt8         │              │                    │         │                  │                │
+│ Attrs.Key   │ Array(String) │              │                    │         │ Gorilla          │                │
+│ Attrs.Value │ Array(UInt8)  │              │                    │         │ Gorilla          │                │
+└─────────────┴───────────────┴──────────────┴────────────────────┴─────────┴──────────────────┴────────────────┘
+
+CREATE TABLE nested_test
+(
+`id` UInt8,
+`Attrs.Key` Array(String),
+`Attrs.Value` UInt8 CODEC(Gorilla)
+)
+ENGINE = MergeTree()
+ORDER BY id
+
+
+
+https://altinity.com/blog/2019/7/new-encodings-to-improve-clickhouse
+
 perfomance:
 https://altinity.com/blog/2017/11/21/compression-in-clickhouse
 https://gist.github.com/sanchezzzhak/511fd140e8809857f8f1d84ddb937015
@@ -24,6 +116,29 @@ Hot run:
 |         |            |    Compression Ratio |                                           |
 | LZ4     |            |                  3.7 | <span style="color:green">+26,0000</span> |
 | ZSTD    |            |                  5.0 |   <span style="color:red">-26,0000</span> |
+
+https://github.com/ClickHouse/ClickHouse/issues/36428
+
+Linear data increment (uniformly) :
+1) UInt32 | Int32 = CODEC(Delta, ZSDT(1))
+2) UInt64 | Int64 = CODEC(Delta(8), ZSTD(6|1)) +37,5% speed select or CODEC(DoubleDelta, LZ4HC(1))
+3) Float32        = CODEC(Delta, ZSDT(1))
+4) Float64        = CODEC(Delta(8), ZSTD(3)) or CODEC(DoubleDelta, LZ4HC(1))
+5) LowCardinality(String) without codec 8192 Int32 compression
+6) DateTime       = CODEC(Delta(4), ZSTD(3))
+7) DateTime64     = CODEC(Delta(8), ZSTD(3))
+
+Nested = Gorilla 
+
+Random data (inconsistently) :
+1) UInt32 | Int32 = CODEC(T64, ZSTD(3)) or CODEC(Gorilla)
+2) UInt64 | Int64 = CODEC(Gorilla)
+3) Float32        = CODEC(Delta, ZSDT(1))
+4) Float64        = CODEC(Gorilla)
+5) LowCardinality(String) without codec 8192 Int32 compression
+6) DateTime       = CODEC(T64, ZSTD(1))  or CODEC(Gorilla)
+7) DateTime64     = CODEC(T64, LZ4HC(3)) or CODEC(T64, LZ4HC(3))
+
 
 ZSDT is preferrable where I/O is the bottleneck in the queries with huge range scans.
 LZ4 is preferrable when I/O is fast enough so decompression speed becomes a bottleneck.

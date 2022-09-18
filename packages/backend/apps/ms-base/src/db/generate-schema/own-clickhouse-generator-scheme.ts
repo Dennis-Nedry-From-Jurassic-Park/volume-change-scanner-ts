@@ -371,6 +371,19 @@ function isValidDate(date:any) {
     return date && Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date);
 }
 
+export const insert_into_table_multiple_n
+    = async (tableName: string, rows: any): Promise<string> => {
+    let create_table = 'INSERT INTO ' + tableName + ' (n) VALUES ';
+    let all_values = '';
+
+    rows.forEach((row:any) => {
+        //console.log('row = ' + prettyJSON(row));
+        all_values += '(' + row + '),'
+    });
+    create_table += all_values.slice(0, -1) + '),';
+    return create_table.slice(0, -2).replace(/(\r\n|\n|\r)/gm, "") + ';'; //  settings max_block_size=100000
+}
+
 export const insert_into_table_multiple
     = async (tableName: string, rows: any): Promise<string> => {
     let create_table = 'INSERT INTO ' + tableName + ' (*) VALUES ';
