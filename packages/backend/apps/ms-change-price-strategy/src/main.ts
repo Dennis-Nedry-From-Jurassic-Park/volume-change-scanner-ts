@@ -370,11 +370,17 @@ const exec3 = async () => {
 }
 const exec2 = async () => {
    // const eth =
-    const timestamp = moment("2022-09-11T09:00:01.234Z").valueOf()
+    const timestamp = moment("9999-12-29T09:00:01.234Z").valueOf()
     const timestamp2 = moment("2022-09-11T09:00:01.234Z").format("X")
     const milliseconds = moment("2022-09-11T09:00:01.234Z").format("X")
 
     // 1662886800000
+    253402074001
+    9223372036854775807
+    4294967295
+    2147483647
+    1662886800
+    4294967295
 
     const ts = Math.floor(timestamp / 1e3)
     const ms = timestamp % 1e3
@@ -386,8 +392,12 @@ const exec2 = async () => {
     console.log(prettyJSON(timestamp2))
     console.log(moment(timestamp).toISOString())
 
+
     assert(timestamp === ts * 1e3 + ms, `${timestamp} != ${ts * 1e3 + ms}`);
     console.log(moment(ts * 1e3 + ms).toISOString())
+    console.log(moment(ts * 1e3 + ms).toISOString())
+
+    console.log(moment(4294967294).toISOString())
     // "2022-09-11T09:00:00.000Z"
 }
 const exec1111 = async () => {
@@ -409,7 +419,7 @@ const exec1111 = async () => {
         });
         console.log(prettyJSON(candles))
 }
-exec().then(r => r)
+exec2().then(r => r)
 //exec2();
 //main_json();
 //main111();
