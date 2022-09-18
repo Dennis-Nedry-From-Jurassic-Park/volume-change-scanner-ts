@@ -4,14 +4,16 @@ import {logger_clickhouse} from "../../logger/logger";
 import {prettyJSON} from "../../../../ms-ti-base/output";
 
 class ClickHouseExt extends ClickHouse {
-
-
 	constructor(
-		debug: boolean = true
+		url: string = 'clickhouse',
+		debug: boolean = true,
+		raw: boolean = false,
+
+
 	){
 
 		super({
-			url: 'http://clickhouse', // http://localhost
+			url: `http://${url}`, // http://localhost:8123
 			port: 8123, // Port 9000 is for clickhouse-client program.
 			debug: debug,
 			basicAuth: {
@@ -22,7 +24,7 @@ class ClickHouseExt extends ClickHouse {
 			isUseGzip: false,
 			trimQuery: false,
 			format: 'json',
-			raw: false,
+			raw: raw,
 			config: {
 				session_id                              : v4(),
 				session_timeout                         :  0,
@@ -30,11 +32,18 @@ class ClickHouseExt extends ClickHouse {
 				enable_http_compression                 :  0,
 				database                                : '',
 				log_queries								:  1, // профилирование запросов, результат смотреть в system.log_queries
-				max_query_size: 1000000000,
-				max_parser_depth: 1000000000,
-				max_bytes_to_read: 1000000000,
-				max_rows_to_read: 1000000000,
-				http_max_field_value_size: 1000000000
+				//max_execution_time: 300,
+				max_query_size: 10000000000000,
+				max_parser_depth: 10000000000000,
+				max_bytes_to_read: 10000000000000,
+				max_rows_to_read: 10000000000000,
+				http_max_field_value_size: 10000000000000,
+				//min_insert_block_size_rows: 100000,
+				max_insert_block_size : 100000,
+				//read_backoff_max_throughput: 1000000000
+				// read_backoff_min_latency_ms: 100000
+				// max_insert_threads: 8,
+				// max_threads: 8,
 			}
 		});
 	}
@@ -71,6 +80,7 @@ class ClickHouseExt extends ClickHouse {
 	};
 }
 
-export const clickhouse = new ClickHouseExt();
+const clickhouse = new ClickHouseExt();
+export const clickhouse_localhost = new ClickHouseExt('localhost', false, true);
 
 export default clickhouse;
