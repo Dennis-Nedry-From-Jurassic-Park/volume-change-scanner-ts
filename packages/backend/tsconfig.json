@@ -1,14 +1,16 @@
-{
-  "compilerOptions": {
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "alwaysStrict": true,
-    "checkJs": false,
-    "declaration": true,
+{ /* https://www.typescriptlang.org/tsconfig */
+  "compileOnSave": false,                           /* Setting a top-level property compileOnSave signals to the IDE to generate all files for a given tsconfig.json upon saving. */
+  "compilerOptions": {                              /* https://www.typescriptlang.org/tsconfig */
+    "allowJs": true,                                /* Allow javascript files to be compiled. */
+    "allowSyntheticDefaultImports": true,           /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
+    "alwaysStrict": true,                           /* Parse in strict mode and emit "use strict" for each source file. */
+    "checkJs": false,                               /* Report errors in .js files. */
+    "declaration": true,                            /* Generates corresponding '.d.ts' file. */
     "diagnostics": false,
+    "extendedDiagnostics": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "preserve",
+    "jsx": "preserve",                              /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
     "lib": [
       "es2019.array",
       "dom.iterable",
@@ -20,25 +22,25 @@
       "es6"
     ],
     "resolveJsonModule": true,
-    "removeComments": true,
-    "isolatedModules": false,
-    "incremental": true,
-    "importHelpers": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    "noEmit": false,
-    "noImplicitAny": false,
-    "noImplicitThis": false,
-    "skipLibCheck": true,
-    "strict": true,
-    "strictNullChecks": true,
+    "removeComments": true,                         /* Do not emit comments to output. */
+    "isolatedModules": false,                       /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
+    "incremental": true,                            /* Tells TypeScript to save information about the project graph from the last compilation to files stored on disk. This creates a series of .tsbuildinfo files in the same folder as your compilation output. */
+    "importHelpers": true,                          /* Import emit helpers from 'tslib'. */
+    "outDir": "./dist",                             /* Redirect output structure to the directory. */
+    "baseUrl": "./",                                /* Base directory to resolve non-absolute module names. */
+    "emitDecoratorMetadata": true,                  /* Enables experimental support for emitting type metadata for decorators. */
+    "experimentalDecorators": true,                 /* Enables experimental support for ES7 decorators. */
+    "module": "CommonJS",                           /* Specify module code generation: 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
+    "moduleResolution": "node",                     /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+    "noEmit": false,                                /* Do not emit outputs. */
+    "noImplicitAny": false,                         /* Raise error on expressions and declarations with an implied 'any' type. */
+    "noImplicitThis": false,                        /* Raise error on 'this' expressions with an implied 'any' type. */
+    "skipLibCheck": true,                           /* Skip type checking of declaration files. */
+    "strict": true,                                 /* Enable all strict type-checking options. */
+    "strictNullChecks": true,                       /* Enable strict null checks. */
     "strictFunctionTypes": true,
-    "sourceMap": true,
-    "target": "esnext",
+    "sourceMap": true,                              /* Generates corresponding '.map' file. */
+    "target": "esnext",                             /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
     "types": [
       "node",
       "@types/jest"
@@ -80,6 +82,9 @@
     ],
     "@ms-prepare-candles-spbe-exchange-main-session/*": [
       "apps/ms-change-price-strategy/src/*"
+    ],
+    "@ms-trading-calendar/*": [
+      "apps/ms-trading-calendar/src/*"
     ]
   }
 }
