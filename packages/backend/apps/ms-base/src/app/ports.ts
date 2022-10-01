@@ -1,2 +1,4 @@
 export const PORT_MAIN_ROBOT = 9200
-export const PORT_CRON_ROBOT = 9201
+export const PORT_CRON_ROBOT = 9205
+export const PORT_CRON_ROBOT2 = 9216
+export const PORT_TRADING_CALENDAR_ROBOT = 9212
