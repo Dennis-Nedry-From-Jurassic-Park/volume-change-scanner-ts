@@ -1,4 +1,4 @@
-import clickhouse from "../../ms-base/src/db/clickhouse/clickhouse";
+import clickhouse, {clickhouse_localhost} from "../../ms-base/src/db/clickhouse/clickhouse";
 import {CandleInterval} from "tinkoff-invest-api/cjs/generated/marketdata";
 import {insert_into_table_multiple} from "../../ms-base/src/db/generate-schema/own-clickhouse-generator-scheme";
 import assert from "assert";
@@ -9,7 +9,7 @@ import {api} from "../../ms-ti-base/api";
 import {bottleneck} from "../../ms-base/src/bottleneck/bottleneck";
 import {logger_candles} from "../../ms-base/src/logger/logger";
 import Bottleneck from "bottleneck";
-import {getPreviousWorkday} from "../../ms-trading-calendar/ms-trading-calendar";
+import {getPreviousWorkday} from "../../ms-trading-calendar/src/ms-trading-calendar";
 import {DAY} from "../../ms-base/src/constants/date.time.formats";
 import {isHoliday} from "nyse-holidays";
 import moment from "moment";
@@ -32,7 +32,7 @@ export const bottleneck_candles = new Bottleneck({
 //     }
 // });
 
-const insert_candles = async (
+export const insert_candles = async (
     tickers: string[],
     from: string,
     to: string,
@@ -168,7 +168,7 @@ const insert_candles = async (
 
     const queries: any[] = [query];
 
-    await clickhouse.logQueries(queries)
+    await clickhouse_localhost.logQueries(queries)
 }
 
 export const prepare_candles = async (tickers: string[]) => {

@@ -12,8 +12,8 @@ export const get_historical_candles = async (
 ): Promise<GetCandlesResponse> => {
     const share = await instrumentsService.get_share_by_ticker(ticker);
 
-    console.log(from)
-    console.log(to)
+    //console.log(from)
+    //console.log(to)
 
     let candles = await api.marketdata.getCandles({
         figi: share.figi,
