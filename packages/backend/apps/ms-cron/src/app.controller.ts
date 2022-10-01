@@ -11,7 +11,10 @@ import {prepare_candles} from "../../ms-change-price-strategy/src/prepare-candle
 import {tickers} from "../../ms-ti-base/tickers";
 import {prepare_candles_moex_exchange} from "../../ms-change-price-strategy/src/prepare-candles-moex-exchange";
 import {SCHEDULE_SERVICE, ScheduleService} from "./app.service";
-//import {SCHEDULE_SERVICE, ScheduleService} from "./app.shedule.service";
+import {TradingScheduleModule} from "./app.module";
+import {SchedulerRegistry} from "@nestjs/schedule";
+import {jsonShedule} from "./s";
+//import {Schedule} from "nest-schedule/index";
 //import {exec_portfolio_balance_update} from "./portfolio.service";
 
 export const prepare_trading_day_shedules = (shedules: JSON) => {
@@ -74,57 +77,30 @@ export const prepare_candles_spbe_exchange_morning_session_ = async () => {
         });
 }
 
-@Controller('cron22')
-@ApiBearerAuth('token')
-export class PortfolioController {
-    constructor() {}
 
-    @Get('/exec-portfolio-balance-update')
-    async exec_portfolio_balance_update() {
-        //return await exec_portfolio_balance_update();
-    }
-    @Get('/health')
-    @Header('content-type', 'application/json')
-    async get_health() {
-        const obj = await health.get_health();
-        return obj// JSON.stringify(obj)
-        //JSON.parse(prettyJSON(health.get_health()));
-    }
-
-    // @Get('/trading-shedule/today')
-    // @Header('content-type', 'application/json')
-    // async get_trading_shedule() {
-    //     const response: any = await this.httpService!.get('http://localhost:9202/trading-shedule/today');
-    //     const json = JSON.parse(response.body)
-    //     console.log(json)
-    //
-    //
-    //
-    //     const obj = await health.get_health();
-    //     return obj// JSON.stringify(obj)
-    //     //JSON.parse(prettyJSON(health.get_health()));
-    // }
-    @Get('/add_cron_job')
-    @Header('content-type', 'application/json')
-    async add_cron_job() {
-        //this.add_cron_job()
-        const obj = await health.get_health();
-        return obj// JSON.stringify(obj)
-        //JSON.parse(prettyJSON(health.get_health()));
-    }
-
+function getScheduleService() {
 
 }
+
 @Controller('cron')
 @ApiBearerAuth('token')
-export class PortfolioController2 {
+export class ScheduleController {
+
     constructor(
         private readonly httpService: HttpService,
         @Inject(SCHEDULE_SERVICE)
-        private readonly scheduleService: ScheduleService,
+        public scheduleService: ScheduleService,
+        //public schedulerRegistry: SchedulerRegistry,
+
     ) {
-        //scheduleService = new ScheduleService()
+        // this.scheduleService = new ScheduleService(new Schedule())
+        // SchedulerRegistry
+        // function getScheduleService(): ScheduleService {
+        //     return this.scheduleService
+        // }
     }
+
+
 
     @Get('/exec-portfolio-balance-update')
     async exec_portfolio_balance_update() {
@@ -174,6 +150,10 @@ export class PortfolioController2 {
         const response: any = await this.httpService.get('http://0.0.0.0:9202/trading-shedule/today').toPromise();
         const shedules = JSON.parse(prettyJSON(response.data));
 
+        jsonShedule.set(shedules)
+
+
+
 
         //prepare_trading_day_shedules(shedules);
 
@@ -186,10 +166,13 @@ export class PortfolioController2 {
                 if(exchange === Exchange.MOEX) {
                     const job_name = 'prepare_candles_for_'+exchange+'_exchange';
 
-                    this.scheduleService.create_timeout_job(job_name, 0, () => {
-                        prepare_candles_moex_exchange_().then(() => console.log(`executed timeout job ` + job_name));
-                        return false;
-                    })
+                    //this.scheduleService.add_job(job_name);
+                    //this.scheduleService.run_job(job_name);
+
+                        // .create_timeout_job(job_name, 0, () => {
+                        // prepare_candles_moex_exchange_().then(() => console.log(`executed timeout job ` + job_name));
+                        // return false;
+
                 } else if(exchange === Exchange.SPB_MORNING){
                     // const job_name = 'prepare_candles_for_'+exchange+'_exchange';
                     // this.create_timeout_job(job_name, 0, () => {
@@ -224,13 +207,13 @@ export class PortfolioController2 {
         //     });
         //
         // return resp;
-      //  console.log(response)
-      //  console.log(response.body)
+        //  console.log(response)
+        //  console.log(response.body)
 
 
 
         //const obj = await health.get_health();
-       // return obj// JSON.stringify(obj)
+        // return obj// JSON.stringify(obj)
         //JSON.parse(prettyJSON(health.get_health()));
     }
     @Get('/add_cron_job')

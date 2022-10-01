@@ -14,7 +14,7 @@ import {get_historical_candles} from "../../ms-base/src/candles/candles";
 import {isHoliday} from "nyse-holidays";
 //import {moment_business_days} from "../../ms-trading-calendar/ms-trading-calendar";
 import mb from 'moment-business';
-import {getPreviousWorkday} from "../../ms-trading-calendar/ms-trading-calendar";
+import {getPreviousWorkday} from "../../ms-trading-calendar/src/ms-trading-calendar";
 import {exec} from "./algo";
 
 

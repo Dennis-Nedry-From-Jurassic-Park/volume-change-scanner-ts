@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+  ms_trading_calendar:
+    container_name: ms_trading_calendar
+    networks:
+      - atr-net
+    depends_on:
+      - clickhouse
+    build:
+      context: .
+      dockerfile: docker/ms.cron.Dockerfile
+      args:
+        BUILDER_TAG: 0.0.1
+    ports:
+      - '9201:9201'
+    env_file:
+      - .env
+  clickhouse:
+    container_name: clickhouse
+    restart: always
+    networks:
+      - atr-net
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "clickhouse:127.0.0.1"
+    image: clickhouse/clickhouse-server:22.8.1
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    expose:
+      - "9000" # client port
+      - "8123" # client port
+    volumes:
+      - \\wsl$$\Ubuntu\clickhouse_data\data:/var/lib/clickhouse
+      - \\wsl$$\Ubuntu\clickhouse_data\log:/var/log/clickhouse-server
+volumes:
+  #clickhouse_storage: {}
+  redis_data: {}
+  grafana_data: {}
+  app_cron_data: {}
+networks:
+  atr-net:
+    driver: bridge

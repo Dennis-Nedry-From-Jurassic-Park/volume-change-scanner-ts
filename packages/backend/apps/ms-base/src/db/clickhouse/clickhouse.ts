@@ -5,13 +5,11 @@ import {prettyJSON} from "../../../../ms-ti-base/output";
 
 class ClickHouseExt extends ClickHouse {
 	constructor(
-		url: string = 'clickhouse',
-		debug: boolean = true,
+		url: string = 'localhost', // clickhouse
+		debug: boolean = false,
 		raw: boolean = false,
 
-
 	){
-
 		super({
 			url: `http://${url}`, // http://localhost:8123
 			port: 8123, // Port 9000 is for clickhouse-client program.
@@ -31,7 +29,7 @@ class ClickHouseExt extends ClickHouse {
 				output_format_json_quote_64bit_integers :  0,
 				enable_http_compression                 :  0,
 				database                                : '',
-				log_queries								:  1, // профилирование запросов, результат смотреть в system.log_queries
+				log_queries								:  0, // профилирование запросов, результат смотреть в system.log_queries
 				//max_execution_time: 300,
 				max_query_size: 10000000000000,
 				max_parser_depth: 10000000000000,
@@ -81,6 +79,6 @@ class ClickHouseExt extends ClickHouse {
 }
 
 const clickhouse = new ClickHouseExt();
-export const clickhouse_localhost = new ClickHouseExt('localhost', false, true);
+export const clickhouse_localhost = new ClickHouseExt('localhost', false, false);
 
 export default clickhouse;

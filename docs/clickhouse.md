@@ -10,6 +10,18 @@ https://github.com/ClickHouse/ClickHouse/blob/master/docs/en/development/tests.m
 https://gist.github.com/sanchezzzhak/511fd140e8809857f8f1d84ddb937015
 https://gist.github.com/sanchezzzhak/511fd140e8809857f8f1d84ddb937015?permalink_comment_id=4011770
 
+
+https://observablehq.com/@stas-sl/clickhouse-playground
+https://kb.altinity.com/altinity-kb-schema-design/codecs/codecs-speed/
+https://kb.altinity.com/altinity-kb-schema-design/codecs/altinity-kb-how-to-test-different-compression-codecs/
+http://devdoc.net/database/ClickhouseDocs_19.4.1.3-docs/query_language/create/
+https://presentations.clickhouse.com/meetup26/new_features/
+https://observablehq.com/@stas-sl/clickhouse-playground
+https://altinity.com/blog/2019/7/new-encodings-to-improve-clickhouse
+https://github.com/ClickHouse/ClickHouse/issues/7917
+
+
+
 ```sql
 select concat(database, '.', table)                         as table,
        formatReadableSize(sum(bytes))                       as size,
@@ -120,6 +132,7 @@ Hot run:
 https://github.com/ClickHouse/ClickHouse/issues/36428
 
 Linear data increment (uniformly) :
+data less 10mi rows - Delta, > DoubleDelta
 1) UInt32 | Int32 = CODEC(Delta, ZSDT(1))
 2) UInt64 | Int64 = CODEC(Delta(8), ZSTD(6|1)) +37,5% speed select or CODEC(DoubleDelta, LZ4HC(1))
 3) Float32        = CODEC(Delta, ZSDT(1))
@@ -138,6 +151,19 @@ Random data (inconsistently) :
 5) LowCardinality(String) without codec 8192 Int32 compression
 6) DateTime       = CODEC(T64, ZSTD(1))  or CODEC(Gorilla)
 7) DateTime64     = CODEC(T64, LZ4HC(3)) or CODEC(T64, LZ4HC(3))
+
+```sql
+SELECT
+table AS Table,
+name AS c,
+formatReadableSize(data_uncompressed_bytes) AS Uncompressed,
+formatReadableSize(data_compressed_bytes) AS Compressed,
+round(data_uncompressed_bytes / data_compressed_bytes, 0) AS Ratio
+FROM system.columns
+WHERE ((table = 'codec_test1_seq') OR (table = 'test2')) --AND (name = 'a')
+order by Ratio desc
+```
+
 
 
 ZSDT is preferrable where I/O is the bottleneck in the queries with huge range scans.

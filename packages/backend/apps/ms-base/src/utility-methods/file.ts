@@ -1,10 +1,11 @@
-import {promises as fsPromises} from 'fs';
+import {createWriteStream, promises as fsPromises} from 'fs';
 import {join} from 'path';
 
 const fs = require('fs');
 
 import zip from 'yauzl';
 import path from 'path';
+import axios from "axios";
 
 export const isValidZipFile = (filePath:any) => {
     return zip.open(filePath, { lazyEntries: true }, (err:any, stream:any ) => {
@@ -83,7 +84,7 @@ export async function asyncWriteFile(filename: string, data: any) {
             join(__dirname, filename),
             'utf-8',
         );
-        console.log(contents);
+        //console.log(contents);
 
         return contents;
     } catch (err) {
@@ -106,4 +107,38 @@ export async function asyncReadFile(filename: string) {
         console.log(err);
         return 'Something went wrong'
     }
+}
+
+export async function downloadFile(fileUrl: string, outputLocationPath: string, headers: any) {
+    console.log(fileUrl)
+
+    const writer = createWriteStream(outputLocationPath);
+
+    return axios({
+        method: 'get',
+        url: fileUrl,
+        headers: headers,
+        responseType: 'stream',
+    }).then(response => {
+
+        //ensure that the user can call `then()` only when the file has
+        //been downloaded entirely.
+
+        return new Promise((resolve, reject) => {
+            response.data.pipe(writer);
+            let error: any = null;
+            writer.on('error', err => {
+                error = err;
+                writer.close();
+                reject(err);
+            });
+            writer.on('close', () => {
+                if (!error) {
+                    resolve(true);
+                }
+                //no need to call the reject here, as it will have been called in the
+                //'error' stream;
+            });
+        });
+    });
 }

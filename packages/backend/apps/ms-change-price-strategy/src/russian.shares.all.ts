@@ -9,6 +9,8 @@ import {instrumentsService} from "../../ms-ti-base/instruments.service";
 export const price_change_rus_shares = async () => {
     const rus_shares = await instrumentsService.get_all_russian_shares();
     const tickers = rus_shares.map((it:Share) => { return it.ticker } );
+    //console.log(tickers)
+    //await delay(6000000)
     await get_price_change(Exchange.MOEX, tickers, CandleInterval.CANDLE_INTERVAL_DAY);
 }
 

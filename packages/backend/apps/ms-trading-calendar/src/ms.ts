@@ -1,9 +1,9 @@
 import moment from "moment";
 import assert from "assert";
-import {TinkoffInvestmentsDatabase} from "../ms-base/src/db/clickhouse/dto/tinkoff.investments.database";
-import {insert_into_table_multiple} from "../ms-base/src/db/generate-schema/own-clickhouse-generator-scheme";
-import {api} from "../ms-ti-base/api";
-import {prettyJSON} from "../ms-ti-base/output";
+import {TinkoffInvestmentsDatabase} from "../../ms-base/src/db/clickhouse/dto/tinkoff.investments.database";
+import {insert_into_table_multiple} from "../../ms-base/src/db/generate-schema/own-clickhouse-generator-scheme";
+import {api} from "../../ms-ti-base/api";
+import {prettyJSON} from "../../ms-ti-base/output";
 
 const fill_tradings_day_table = async (exchanges: string[]) => {
     const from = moment('2022-08-01').toDate()

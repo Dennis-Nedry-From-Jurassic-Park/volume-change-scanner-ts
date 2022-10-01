@@ -146,38 +146,78 @@ const cancel_stoporders_deal = async (
 //deal('MOMO', 0.56, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
 //deal('FSLY', 0.56, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
 //deal('EAR', 2.15, 25, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_LIMIT, ACCOUNT.IIS)
-//deal('EAR', 2.15, 5, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
+//deal('MTLR', 121.85, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
 
 //('ENDP', 0.37, 10, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
 
 
 
-//deal('LIFE', 2.4, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
-//deal('MTLR', 127.5, 3, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_LIMIT, ACCOUNT.BROKERAGE)
-//deal('MOMO', 2.5, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
+//deal('MTSS', 2.4, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
+
+
+
+//deal('FSLY', 1, 3, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
+//deal('TATNP', 2, 5, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
+//deal('EAR', 1.08, 10, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_LIMIT, ACCOUNT.IIS)
+//deal('YNDX', 448, 1, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
 
 // stop_deal(
-//     'SMLT',
-//     3144,
-//     3146,
+//     'FSLY',
+//     8.88,
+//     8.88,
+//     3,
+//     StopOrderDirection.STOP_ORDER_DIRECTION_SELL,
+//     StopOrderExpirationType.STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_CANCEL,
+//     StopOrderType.STOP_ORDER_TYPE_STOP_LOSS,
+//     ACCOUNT.BROKERAGE
+// )
+
+//deal('TSN', 1, 3, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.IIS)
+
+
+//deal('MTLR', 127.5, 3, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_LIMIT, ACCOUNT.BROKERAGE)
+//deal('YNDX', 448, 1, OrderDirection .ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_MARKET, ACCOUNT.BROKERAGE)
+
+// stop_deal(
+//     'WBD',
+//     11.9,
+//     11.9,
 //     2,
 //     StopOrderDirection.STOP_ORDER_DIRECTION_SELL,
 //     StopOrderExpirationType.STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_CANCEL,
-//     StopOrderType.STOP_ORDER_TYPE_STOP_LIMIT,
+//     StopOrderType.STOP_ORDER_TYPE_STOP_LOSS,
 //     ACCOUNT.IIS
 // )
 
 
+/********************************  IIS  ****************************************************************/
+//deal('EAR', 1.08, 10, OrderDirection.ORDER_DIRECTION_BUY, OrderType.ORDER_TYPE_LIMIT, ACCOUNT.IIS)
+
+
+
+
+
 
 
 // stop_deal(
-//     'MOMO',
-//     5.15,
-//     5.18,
-//     33,
+//     'YNDX',
+//     2000,
+//     2008,
+//     1,
 //     StopOrderDirection.STOP_ORDER_DIRECTION_SELL,
 //     StopOrderExpirationType.STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_CANCEL,
-//     StopOrderType.STOP_ORDER_TYPE_STOP_LIMIT,
+//     StopOrderType.STOP_ORDER_TYPE_STOP_LOSS,
+//     ACCOUNT.IIS
+// )
+
+// stop_deal(
+//     'TATNP',
+//     384,
+//     384,
+//     1,
+//     StopOrderDirection.STOP_ORDER_DIRECTION_SELL,
+//     StopOrderExpirationType.STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_CANCEL,
+//     StopOrderType.STOP_ORDER_TYPE_STOP_LOSS,
 //     ACCOUNT.BROKERAGE
 // )
 

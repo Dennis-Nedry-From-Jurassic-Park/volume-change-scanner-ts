@@ -1,12 +1,14 @@
 import {CandleInterval, LastPrice} from "tinkoff-invest-api/cjs/generated/marketdata";
-import {is_trading_day, moment_business_days} from "../../ms-trading-calendar/ms-trading-calendar";
+import {is_trading_day, moment_business_days} from "../../ms-trading-calendar/src/ms-trading-calendar";
 import moment from "moment";
 import {DAY} from "../../ms-base/src/constants/date.time.formats";
-import clickhouse from "../../ms-base/src/db/clickhouse/clickhouse";
+import clickhouse, {clickhouse_localhost} from "../../ms-base/src/db/clickhouse/clickhouse";
 import {toNum} from "../../ms-ti-base/number";
 import {instrumentsService} from "../../ms-ti-base/instruments.service";
 import {api} from "../../ms-ti-base/api";
 import assert from "assert";
+import {syncAppendToFile} from "../../ms-base/src/utility-methods/file";
+import {rootDir} from "../../ms-base/src/path/path";
 
 export const get_price_change = async (
     exchange: string,
@@ -44,7 +46,8 @@ export const get_price_change = async (
     for(let row of prev_day_prices_as_rows) {
         figies.push(row['figi'])
     }
-    const lastPrices = await api.marketdata.getLastPrices({ figi: figies})
+
+    const lastPrices = await api.marketdata.getLastPrices({ figi: figies })
 
     let merged = lastPrices.lastPrices
         .map( (lastPrice: LastPrice) => {
@@ -68,6 +71,14 @@ export const get_price_change = async (
     let table = make_array_objects_unique(merged).filter( (obj:any) => { return obj.change >= 2.5 || obj.change <= -2.5 })
         table.sort( (a:any,b:any) => b.change - a.change );
     console.table(table);
+
+    let asTable = require ('as-table').configure({ delimiter: ' | ', right: true })
+    const t=asTable(table)
+
+    const today = moment().format('YYYY-MM-DD')
+
+    await syncAppendToFile(rootDir + `\\${today}-price-change.log`, t)
+    await syncAppendToFile(rootDir + `\\${today}-price=change.log`, '\n')
 
     return table
 }

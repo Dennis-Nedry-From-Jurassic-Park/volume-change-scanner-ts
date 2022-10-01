@@ -22,6 +22,10 @@ npm cache clean --force
 npx arkit src/ -o arkit.svg
 ```
 
+https://www.positronx.io/node-js-get-total-and-available-system-memory-tutorial/
+https://dev.to/melvin2016/how-to-get-the-total-memory-of-a-system-using-node-js-3af4
+
+
 https://www.npmjs.com/search?ranking=maintenance&q=keywords%3Aretry
 
 https://www.npmjs.com/package/delayed-promise-retry

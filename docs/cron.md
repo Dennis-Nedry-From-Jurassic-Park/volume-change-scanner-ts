@@ -1,3 +1,5 @@
+https://crontab.guru/monday-to-friday
+
 run configuration (webstorm|intelij idea):
 Arguments: TS_NODE=true
 Node Options: -r ts-node/register
