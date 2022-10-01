@@ -1,7 +1,7 @@
 import moment from "moment";
 import assert from "assert";
 import {TradingSchedule} from "tinkoff-invest-api/src/generated/instruments";
-import {api} from "../ms-ti-base/api";
+import {api} from "../../ms-ti-base/api";
 // https://stackoverflow.com/questions/36606153/get-previous-business-day-with-moment-js
 export const moment_business_days = require('moment-business-days');
 
