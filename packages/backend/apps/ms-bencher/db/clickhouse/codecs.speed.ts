@@ -42,7 +42,7 @@ const mapToArray = (arr: any[] = []) => {
 
 const exec = async () => {
     const rows = 100000;
-    const table_name = 'test_codec_speed_1'; // DROP TABLE default.test_codec_speed_1
+    const table_name = 'test_codec_speed_111'; // DROP TABLE default.test_codec_speed_1
     const column = 'n';
     const type = 'UInt32'; // Int32 UInt32 Float32 Float64 DateTime64 DateTime
 
@@ -203,7 +203,7 @@ const exec = async () => {
        // console.log();
 
         const rootDir = getAppRootDir();
-        const filename = rootDir+'/benchmark/'+type+'.log';
+        const filename = rootDir+'/benchmark/'+type+'111.log';
         await asyncAppendToFile(
             filename,
             '************************************************************************'
