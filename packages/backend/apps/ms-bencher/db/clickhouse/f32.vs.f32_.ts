@@ -14,10 +14,21 @@ const exec = async () => {
     const measure = 1;
 
     const codecs = [
+        // for linear data
+        /********************** only codecs without compressions ****************/
+        'DoubleDelta',
+        'Gorilla',
+        'LZ4',
+        'ZSTD(3)',
+        'ZSTD(1)',
         'Delta, ZSTD(1)',
         'Delta, ZSTD(3)',
         'DoubleDelta, ZSTD(1)',
         'DoubleDelta, ZSTD(3)',
+        'DoubleDelta, LZ4HC(1)',
+        'DoubleDelta, LZ4HC(3)',
+        'DoubleDelta, LZ4',
+        'Delta(4), LZ4',
     ]
 
     for (const codec of codecs) { // for first order
