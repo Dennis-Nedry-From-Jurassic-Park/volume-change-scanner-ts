@@ -10,6 +10,7 @@ https://github.com/ClickHouse/ClickHouse/blob/master/docs/en/development/tests.m
 https://gist.github.com/sanchezzzhak/511fd140e8809857f8f1d84ddb937015
 https://gist.github.com/sanchezzzhak/511fd140e8809857f8f1d84ddb937015?permalink_comment_id=4011770
 
+https://clickhouse.com/docs/en/sql-reference/table-functions/generate/
 
 https://observablehq.com/@stas-sl/clickhouse-playground
 https://kb.altinity.com/altinity-kb-schema-design/codecs/codecs-speed/
@@ -19,7 +20,6 @@ https://presentations.clickhouse.com/meetup26/new_features/
 https://observablehq.com/@stas-sl/clickhouse-playground
 https://altinity.com/blog/2019/7/new-encodings-to-improve-clickhouse
 https://github.com/ClickHouse/ClickHouse/issues/7917
-
 
 
 ```sql
