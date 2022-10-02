@@ -120,6 +120,7 @@
         "reflect-metadata": "^0.1.13",
         "rxjs": "^7.5.6",
         "safe-mock": "^0.2.11",
+        "six-sigma-control-limits": "^1.1.2",
         "star-ratings": "^1.0.0",
         "stats-analysis": "^2.0.0",
         "strong-mock": "^7.3.0",

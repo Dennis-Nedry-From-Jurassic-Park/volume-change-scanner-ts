@@ -3,24 +3,38 @@ import assert from "assert";
 import {prettyJSON} from "../../../ms-ti-base/output";
 import {asyncWriteFile, getAppRootDir} from "../../../ms-base/src/utility-methods/file";
 import boxplot from '@sgratzl/boxplots';
+import { v4 as uuid } from 'uuid';
 
 
 const exec = async () => {
     const table_name = 'quotation_2_int';
     const table_name_f32 = 'quotation_1_f32';
 
+    const codec_Int64 = 'DoubleDelta, ZSTD(1)'
+    const codec_Int32 = 'Delta, ZSTD(1)'
+    const codec_F32 = 'Delta, ZSTD(1)'
+
+    const to = 100;
+    const measure = 1;
+
     await clickhouse_localhost.query(`DROP TABLE IF EXISTS ${table_name};`).toPromise();
     await clickhouse_localhost.query(`DROP TABLE IF EXISTS ${table_name_f32};`).toPromise();
 
+    // 1
+    // -- CODEC(DoubleDelta, LZ4HC(1)),
+    // Codec(DoubleDelta, LZ4)
+    // vs
+    //
+
+    // 2 CODEC(DoubleDelta, ZSTD(3))
     const create_table_2_int = `
         CREATE TABLE ${table_name} (
             n Int32,
 
             /* LZ4 compression */
-            l_n64_doubledelta Int64 default n CODEC(DoubleDelta, LZ4HC(1)),
-            l_n32_doubledelta Int32 default n Codec(DoubleDelta, LZ4)
- 
-     
+            l_n64_doubledelta Int64 default n CODEC(${codec_Int64}),
+            l_n32_doubledelta Int32 default n CODEC(${codec_Int32})
+
         ) Engine = MergeTree
         PARTITION BY tuple() ORDER BY tuple();
     `;
@@ -30,7 +44,7 @@ const exec = async () => {
             n Int32,
 
             /* LZ4 compression */
-            z_f32_delta Float32 default n CODEC(Delta, ZSTD(1))
+            z_f32_delta Float32 default n CODEC(${codec_F32})
             
         ) Engine = MergeTree
         PARTITION BY tuple() ORDER BY tuple();
@@ -63,32 +77,39 @@ const exec = async () => {
      */
 
     let jsonObject: any = {
-        'res_sel_2ints': [],
-        'res_sel_1_f32': [],
-        'res_ins_2ints': [],
-        'res_ins_1_f32': [],
-
         'bp_res_sel_2ints': {},
         'bp_res_sel_1_f32': {},
         'bp_res_ins_2ints': {},
         'bp_res_ins_1_f32': {},
 
+        'res_sel_2ints': [],
+        'res_sel_1_f32': [],
+        'res_ins_2ints': [],
+        'res_ins_1_f32': [],
+
     };
-
-
+    // for first order
+    jsonObject['bp_res_sel_2ints'] = {}
+    jsonObject['bp_res_sel_1_f32'] = {}
+    jsonObject['bp_res_ins_2ints'] = {}
+    jsonObject['bp_res_ins_1_f32'] = {}
 
     let Epochjs = require('epochjs'),
         epochjs = new Epochjs(),
         epochjs2 = new Epochjs();
 
-    const to = 100;
-    const measure = 1;
+
 
     for (const num of range(1, to, 1)) {
         epochjs.start();
 
+        // for(const type of ['int', 'f32']){
+        //
+        // }
+
         const insert_q = // 100000000
-            `insert into ${table_name} (n) select number from numbers(10000000) settings max_block_size=1000000;`
+            `insert into ${table_name} (n) select round(number * rand() / 4294967295, 2) as number from numbers(10000000) settings max_block_size=1000000`
+            //`insert into ${table_name} (n) select number from numbers(10000000) settings max_block_size=1000000;`
 
         resp = await clickhouse_localhost.query(insert_q).toPromise();
         assert(resp['r'] === 1, `not ok. insert to table ${table_name} failed.`)
@@ -133,17 +154,18 @@ const exec = async () => {
 
     //console.log(prettyJSON(jsonObject))
 
-    await asyncWriteFile(`mean_f32_vs_(int64_plus_int32)_all_${to}_${measure}.log`, prettyJSON(jsonObject))
+    await asyncWriteFile(
+        `F32_(${codec_F32})_vs_Int64(${codec_Int64})_plus_int32(${codec_Int32})_${to}_${measure}_${uuid()}.log`,
+        prettyJSON(jsonObject)
+    );
 
     await clickhouse_localhost.query(`DROP TABLE IF EXISTS ${table_name};`).toPromise();
     await clickhouse_localhost.query(`DROP TABLE IF EXISTS ${table_name_f32};`).toPromise();
-
 
     // l_n32_delta          1.38 1.40 0.06 0.05 0.06
     // z_n32_delta          1.38 1.40 0.66 0.06 0.09
     // z_n32_doubledelta    0.12 0.12 1.63 0.12 0.12
     // l_n32_doubledelta    0.10 0.12 0.11 0.11 0.11
-
 }
 
 const range = (from, to, step): any[] =>
